@@ -1,2 +1,6 @@
 14.1.2012	Maanantai
-	40min	Dokumentointia, git:n opettelua, valmistelevia toimia
+	1h	Dokumentointia, git:n opettelua, valmistelevia toimia
+
+	1h	Neatbeansin troubleshoottaamista ("<no main classes found>")
+		ja lis‰‰ git:n opettelua.
+		
