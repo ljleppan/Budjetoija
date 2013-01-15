@@ -4,6 +4,9 @@
  */
 package budjetoija;
 
+import budjetoija.logiikka.Tilitapahtuma;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author Loezi
@@ -14,6 +17,7 @@ public class Budjetoija {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("budjetoija");
+        Tilitapahtuma a = new Tilitapahtuma("testi", 1000, new GregorianCalendar());
+        System.out.println(a);
     }
 }
