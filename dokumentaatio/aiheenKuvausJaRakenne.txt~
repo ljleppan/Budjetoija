@@ -1,9 +1,7 @@
 Aihe: opiskelijan talouden seurantajärjestelmä ("budjetoija")
 
 Toteutetaan ohjelma, jonka avulla opiskelija (tai muu pientalous) voi seurata omaa
-rahankäyttöään. Järjestelmä ei erottele käyttäjien välillä, mutta tukee useamman "tilin" käsittelyä eri tiedostojen muodossa. 
-
-Tilille lisätään tilitapahtumia (menoja ja tuloja), jotka voivat olla joko yksittäistapauksia tai vuokran kaltaisia toistuvia tapahtumia. Käyttäjä voi tarkastella tilitapahtumiaan erilaisissa aikakehyksissä, esim. kuukausittain.
+rahankäyttöään. Järjestelmä ei erottele käyttäjien välillä, mutta tukee useamman "tilin" käsittelyä eri tiedostojen muodossa.
 
 Käyttäjät: käyttäjä
 
