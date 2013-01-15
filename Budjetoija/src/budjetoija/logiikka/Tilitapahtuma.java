@@ -7,7 +7,7 @@ public class Tilitapahtuma {
     private double summa;
     private Calendar aikaleima;
     
-    public Tilitapahtuma(String kuvaus, int summa, Calendar aikaleima){
+    public Tilitapahtuma(String kuvaus, double summa, Calendar aikaleima){
         this.kuvaus = kuvaus;
         this.summa = summa;
         this.aikaleima = aikaleima;
