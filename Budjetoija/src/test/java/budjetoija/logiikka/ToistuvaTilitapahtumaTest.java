@@ -1,6 +1,7 @@
-package budjetoija.budjetoija;
+package budjetoija.logiikka;
 
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -44,7 +45,7 @@ public class ToistuvaTilitapahtumaTest {
     @Test
     public void ToistuvaTilitapahtumaKorjaaVaarinOlevanAikaleiman(){
         ToistuvaTilitapahtuma v = new ToistuvaTilitapahtuma("virhe", 100, new GregorianCalendar(2014,0,1), new GregorianCalendar(2013,0,1));
-        assertTrue(!v.getAlkupvm().after(v.getLoppupvm()));
+        assertFalse(v.getAlkupvm().after(v.getLoppupvm()));
     }   
     
     @Test
@@ -61,25 +62,25 @@ public class ToistuvaTilitapahtumaTest {
     
     @Test
     public void ToistuvaTilitapahtumaSetAlkupvmToimiiValidillaAikaleimalla(){
-        t.setAlkupvm(new GregorianCalendar(2013,1,1));
+        assertTrue(t.setAlkupvm(new GregorianCalendar(2013,1,1)));
         assertTrue(t.getAlkupvm().equals(new GregorianCalendar(2013,1,1)));
     }
     
     @Test
     public void ToistuvaTilitapahtumaSetAlkupvmHylkaaEpavalidinAikaleiman(){
-        assertTrue(!t.setAlkupvm(new GregorianCalendar(3000,0,1)));
+        assertFalse(t.setAlkupvm(new GregorianCalendar(3000,0,1)));
         assertTrue(t.getAlkupvm().equals(new GregorianCalendar(2013,0,15)));
     }
     
     @Test
     public void ToistuvaTilitapahtumaSetLoppupvmToimiiValidillaAikaleimalla(){
-        t.setLoppupvm(new GregorianCalendar(2014,1,1));
+        assertTrue(t.setLoppupvm(new GregorianCalendar(2014,1,1)));
         assertTrue(t.getLoppupvm().equals(new GregorianCalendar(2014,1,1)));
     }
     
     @Test
     public void ToistuvatilitapahtumaSetLoppupvmHylkaaEpavalidinAikaleiman(){
-        assertTrue(!t.setLoppupvm(new GregorianCalendar(1,0,1)));
+        assertFalse(t.setLoppupvm(new GregorianCalendar(1,0,1)));
         assertTrue(t.getLoppupvm().equals(new GregorianCalendar(2014,0,15)));
     }
     
@@ -90,7 +91,7 @@ public class ToistuvaTilitapahtumaTest {
     
     @Test
     public void ToistuvaTilitapahtumaMaksukerratOikeinKunAlkuJaLoppuSamanaVuonna(){
-        assertTrue(t.maksukerratAikavalilla(new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,5,15)) == 6);
+        assertTrue(t.maksukerratAikavalilla(new GregorianCalendar(2013,3,15), new GregorianCalendar(2013,6,15)) == 4);
     }
     
     @Test
@@ -99,8 +100,13 @@ public class ToistuvaTilitapahtumaTest {
     }
     
     @Test
-    public void ToistuvaTilitapahtumaMaksukertojaEiOleJosTapahtumaAikarajojenUlkopuolella(){
+    public void ToistuvaTilitapahtumaMaksukertojaEiOleJosTapahtumaEnnenAikaAluetta(){
         assertTrue(t.maksukerratAikavalilla(new GregorianCalendar(2002,0,15), new GregorianCalendar(2003,0,15)) == 0);
+    }
+    
+    @Test
+    public void ToistuvaTilitapahtumaMaksukertojaEiOleJosTapahtumaAikaAlueenJalkeen(){
+        assertTrue(t.maksukerratAikavalilla(new GregorianCalendar(2020,0,15), new GregorianCalendar(2021,0,15)) == 0);
     }
     
     @Test
@@ -115,5 +121,10 @@ public class ToistuvaTilitapahtumaTest {
         assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new GregorianCalendar(2013,1,15)).size() == 2);
         assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new GregorianCalendar(2014,0,15)).size() == 13);
         assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new GregorianCalendar(2015,1,15)).size() == 13);
+    }
+    
+    @Test
+    public void ToistuvaTilitapahtumaKonvertoiOikeinAikaleimoin(){
+        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new GregorianCalendar(2013,2,15)).get(2).getAikaleima().get(Calendar.MONTH) == 2);
     }
 }

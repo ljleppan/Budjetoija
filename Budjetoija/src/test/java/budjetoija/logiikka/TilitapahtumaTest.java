@@ -1,4 +1,4 @@
-package budjetoija.budjetoija;
+package budjetoija.logiikka;
 
 import budjetoija.logiikka.Tilitapahtuma;
 import java.util.Calendar;
@@ -40,6 +40,24 @@ public class TilitapahtumaTest {
         assertTrue(t.getKuvaus().equals("kuvaus"));
         assertTrue(t.getSumma() == 1000);
         assertTrue(t.getAikaleima().equals(new GregorianCalendar(2013,0,15)));
+    }
+    
+    @Test
+    public void TilitapahtumaSetKuvausToimii(){
+        t.setKuvaus("testi");
+        assertTrue(t.getKuvaus().equals("testi"));
+    }
+    
+    @Test
+    public void TilitapahtumaSetSummaToimii(){
+        t.setSumma(100);
+        assertTrue(t.getSumma() == 100);
+    }
+    
+    @Test
+    public void TilitapahtumaSetAikaleimaToimii(){
+        t.setAikaleima(new GregorianCalendar (2000,0,1));
+        assertTrue(t.getAikaleima().equals(new GregorianCalendar (2000,0,1)));
     }
     
     @Test
