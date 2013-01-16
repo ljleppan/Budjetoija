@@ -23,15 +23,15 @@ public class Tili {
         this.nimi = nimi;
     }
     
-    public ArrayList<Tilitapahtuma> getTapahtumat(){
+    public ArrayList<Tilitapahtuma> getTilitapahtumat(){
         return this.tapahtumat;
     }
     
-    public ArrayList<ToistuvaTilitapahtuma> getToistuvatTapahtumat(){
+    public ArrayList<ToistuvaTilitapahtuma> getToistuvatTilitapahtumat(){
         return this.toistuvatTapahtumat;
     }
     
-    public ArrayList<Tilitapahtuma> getTapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
+    public ArrayList<Tilitapahtuma> getTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList<>();
         for (Tilitapahtuma t : tapahtumat){
             //Negaation avulla alkupvm:n ja loppupvm:n tapahtumat mukaan
@@ -54,17 +54,18 @@ public class Tili {
         return palautettava;
     }
     
-    public ArrayList<Tilitapahtuma> getKaikkiTapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
-        ArrayList<Tilitapahtuma> palautettava = getTapahtumatAjalta(alkupvm, loppupvm);
+    public ArrayList<Tilitapahtuma> getKaikkiTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
+        ArrayList<Tilitapahtuma> palautettava = new ArrayList<>();
+        palautettava.addAll(getTilitapahtumatAjalta(alkupvm, loppupvm));
         palautettava.addAll(getToistuvatTilitapahtumatAjalta(alkupvm, loppupvm));
         return palautettava;
     }
     
-    public void lisaaTapahtuma(Tilitapahtuma tapahtuma){
+    public void lisaaTilitapahtuma(Tilitapahtuma tapahtuma){
         this.tapahtumat.add(tapahtuma);
     }
     
-    public boolean poistaTapahtuma(Tilitapahtuma tapahtuma){
+    public boolean poistaTilitapahtuma(Tilitapahtuma tapahtuma){
         if (this.tapahtumat.contains(tapahtuma)){
             this.tapahtumat.remove(tapahtuma);
             return true;
@@ -72,7 +73,7 @@ public class Tili {
         return false;
     }
     
-    public void lisaaToistuvaTapahtuma(ToistuvaTilitapahtuma tapahtuma){
+    public void lisaaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma){
         this.toistuvatTapahtumat.add(tapahtuma);
     }
 

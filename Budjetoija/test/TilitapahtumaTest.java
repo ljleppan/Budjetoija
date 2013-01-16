@@ -3,6 +3,10 @@
  * and open the template in the editor.
  */
 
+import budjetoija.logiikka.Tilitapahtuma;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,6 +19,8 @@ import static org.junit.Assert.*;
  * @author ljleppan
  */
 public class TilitapahtumaTest {
+    
+    Tilitapahtuma t;
     
     public TilitapahtumaTest() {
     }
@@ -29,14 +35,24 @@ public class TilitapahtumaTest {
     
     @Before
     public void setUp() {
+        t = new Tilitapahtuma("kuvaus", 1000, new GregorianCalendar(2013,0,15));
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void TilitapahtumaAlustuuOikein(){
+        assertTrue(t.getKuvaus().equals("kuvaus"));
+        assertTrue(t.getSumma() == 1000);
+        assertTrue(t.getAikaleima().equals(new GregorianCalendar(2013,0,15)));
+    }
+    
+    @Test
+    public void TilitapahtumaTulostuuOikein(){
+        assertTrue(t.toString().equals("kuvaus                      1000,00      2013.1.15"));
+    }
+    
+    
 }
