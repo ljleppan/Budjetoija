@@ -1,0 +1,187 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import budjetoija.logiikka.Tili;
+import budjetoija.logiikka.Tilitapahtuma;
+import budjetoija.logiikka.ToistuvaTilitapahtuma;
+import java.util.GregorianCalendar;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author ljleppan
+ */
+public class TiliTest {
+    Tili tili;
+    Tilitapahtuma tapahtuma1;
+    Tilitapahtuma tapahtuma2;
+    ToistuvaTilitapahtuma toistuvaTapahtuma1;
+    ToistuvaTilitapahtuma toistuvaTapahtuma2;
+    
+    public TiliTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+        tili = new Tili("Testitili");
+        tapahtuma1 = new Tilitapahtuma("Tilitapahtuma 1", 100, new GregorianCalendar(2013,0,15));
+        tapahtuma2 = new Tilitapahtuma("Tilitapahtuma 2", 1000, new GregorianCalendar(2013,5,15));
+        toistuvaTapahtuma1 = new ToistuvaTilitapahtuma("Toistuva tilitapahtuma 1", 100, new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,11,31));
+        toistuvaTapahtuma2 = new ToistuvaTilitapahtuma("Toistuva tilitapahtuma 2", 1000, new GregorianCalendar(2014,0,15), new GregorianCalendar(2014,11,31));
+    }
+    
+    @After
+    public void tearDown() {
+    }
+
+    @Test
+    public void TiliAlustuuOikein(){
+        assertTrue(tili.getNimi().equals("Testitili"));
+    }
+    
+    @Test
+    public void TiliOnAlustettaessaTyhja(){
+        assertTrue(tili.getTilitapahtumat().isEmpty());
+        assertTrue(tili.getToistuvatTilitapahtumat().isEmpty());
+    }
+    
+    @Test
+    public void TiliSetNimiToimii(){
+        tili.setNimi("testi");
+        assertTrue(tili.getNimi().equals("testi"));
+    }
+    
+    @Test
+    public void TilitapahtumanLisaaminenToimii(){
+        tili.lisaaTilitapahtuma(tapahtuma1);
+        assertTrue(tili.getTilitapahtumat().size() == 1);
+    }
+    
+    @Test
+    public void TilitapahtumanPoistaminenToimiiValidillaTilitapahtumalla(){
+        tili.lisaaTilitapahtuma(tapahtuma1);
+        assertTrue(tili.poistaTilitapahtuma(tapahtuma1));
+        assertTrue(tili.getTilitapahtumat().isEmpty());
+    }
+    
+    @Test
+    public void TilitapahtumanPoistaminenEiToimiValidillaTilitapahtumalla(){
+        tili.lisaaTilitapahtuma(tapahtuma1);
+        assertTrue(!tili.poistaTilitapahtuma(tapahtuma2));
+        assertTrue(tili.getTilitapahtumat().size() == 1);
+    }
+        
+    @Test
+    public void TilitapahtumienHakeminenAjallaPalauttaaAjanjaksonTapahtumat(){
+        tili.lisaaTilitapahtuma(tapahtuma1);
+        assertTrue(tili.getTilitapahtumatAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,31)).size() == 1);
+    }
+    
+    @Test
+    public void TilitapahtumienHakeminenAjallaEiPalautaAjanjaksonUlkopuolisiaTapahtumia(){
+        tili.lisaaTilitapahtuma(tapahtuma1);
+        tili.lisaaTilitapahtuma(tapahtuma2);
+        assertTrue(tili.getTilitapahtumatAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,31)).size() == 1);
+    }
+    
+    @Test
+    public void TilitapahtumienHakeminenAjallaPalauttaaAloituspaivanTilitapahtumat(){
+        tili.lisaaTilitapahtuma(tapahtuma1);
+        assertTrue(tili.getTilitapahtumatAjalta(new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,0,31)).size() == 1);
+    }
+    
+    @Test
+    public void TilitapahtumienHakeminenAjallaPalauttaaLopetuspaivanTilitapahtumat(){
+        tili.lisaaTilitapahtuma(tapahtuma1);
+        assertTrue(tili.getTilitapahtumatAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,15)).size() == 1);
+    }
+    
+    @Test
+    public void ToistuvienTilitapahtumienLisaaminenToimii(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        assertTrue(tili.getToistuvatTilitapahtumat().size() == 1);
+    }
+    
+    @Test
+    public void ToistuvienTilitapahtuminenPoistaminenToimiiValidillaTapahtumalla(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        assertTrue(tili.poistaToistuvaTilitapahtuma(toistuvaTapahtuma1));
+        assertTrue(tili.getToistuvatTilitapahtumat().isEmpty());
+    }
+    
+    @Test
+    public void ToistuvienTilitapahtumienPoistaminenEiToimiEpavalidillaTapahtumalla(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        assertTrue(!tili.poistaToistuvaTilitapahtuma(toistuvaTapahtuma2));
+        assertTrue(tili.getToistuvatTilitapahtumat().size() == 1);
+    }
+    
+    @Test
+    public void ToistuvienTilitapahtumienHakeminenAjallaPalauttaaOikeanMaaranYksittaisiaTapahtumia(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        assertTrue(tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,31)).size() == 1);
+        assertTrue(tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2012,0,1), new GregorianCalendar(2014,0,31)).size() == 12);
+    }
+    
+    @Test
+    public void ToistuvienTilitapahtuminenHakeminenAjallaPalauttaaAloituspaivanTapahtumat(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        assertTrue(tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,0,31)).size() == 1);
+    }
+    
+    @Test
+    public void ToistuvienTilitapahtumienHakeminenAjallaPalauttaaLopetuspaivanTapahtumat(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        assertTrue(tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,15)).size() == 1);
+    }
+    
+    @Test
+    public void ToistuvanTilitapahtumanKonvertointiJaPoistoPoistaaToistuvanTilitapahtuman(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        assertTrue(tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new GregorianCalendar(2013,0,1)));
+        assertTrue(tili.getToistuvatTilitapahtumat().isEmpty());
+    }
+    
+    @Test
+    public void ToistuvanTilitapahtumanKonvertointiJaPoistoEiPoistaOlematontaTilitapahtumaa(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        assertTrue(!tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma2, new GregorianCalendar(2013,0,1)));
+        assertTrue(tili.getToistuvatTilitapahtumat().size() == 1);
+    }
+    
+    @Test
+    public void ToistuvanTilitapahtumanKonvertointiJaPoistoToimiiKunRajaEnnenAlkupvm(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new GregorianCalendar(2013,0,1));
+        assertTrue(tili.getTilitapahtumat().isEmpty());
+    }
+    
+    @Test
+    public void ToistuvanTilitapahtumanKonvertointiJaPoistoLuoYksittaisenTilitapahtumanJosRajanaOnToistuvanTapahtumanAlkupvm(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new GregorianCalendar(2013,0,15));
+        assertTrue(tili.getTilitapahtumat().size() == 1);
+    }
+    
+    @Test
+    public void ToistuvanTilitapahtumanKonvertointiJaPoistoLuoYksittaisenTilitapahtumanJosRajanaOnToistuvanTapahtumanLoppupvm(){
+        tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
+        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new GregorianCalendar(2013,11,31));
+        assertTrue(tili.getTilitapahtumat().size() == 12);
+    }    
+}

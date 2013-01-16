@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import budjetoija.logiikka.Tilitapahtuma;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -14,10 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author ljleppan
- */
 public class TilitapahtumaTest {
     
     Tilitapahtuma t;

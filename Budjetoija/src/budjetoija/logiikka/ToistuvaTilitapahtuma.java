@@ -1,6 +1,8 @@
 package budjetoija.logiikka;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ToistuvaTilitapahtuma{
     private String kuvaus;
@@ -11,8 +13,13 @@ public class ToistuvaTilitapahtuma{
     public ToistuvaTilitapahtuma(String kuvaus, double summa, Calendar alkupvm, Calendar loppupvm){
         this.kuvaus = kuvaus;
         this.summa = summa;
-        this.alkupvm = alkupvm;
-        this.loppupvm = loppupvm;
+        if (!alkupvm.after(loppupvm)){
+            this.alkupvm = alkupvm;
+            this.loppupvm = loppupvm;
+        } else {
+            this.alkupvm = loppupvm;
+            this.loppupvm = alkupvm;
+        }
     }
     
     public String getKuvaus(){
@@ -35,16 +42,24 @@ public class ToistuvaTilitapahtuma{
         return this.alkupvm;
     }
     
-    public void setAlkupvm(Calendar alkupvm){
+    public boolean setAlkupvm(Calendar alkupvm){
+        if (alkupvm.after(this.loppupvm)){
+            return false;
+        }
         this.alkupvm = alkupvm;
+        return true;
     }
     
     public Calendar getLoppupvm(){
         return this.loppupvm;
     }
 
-    public void setLoppupvm(Calendar loppupvm){
+    public boolean setLoppupvm(Calendar loppupvm){
+        if (loppupvm.before(this.alkupvm)){
+            return false;
+        }
         this.loppupvm = loppupvm;
+        return true;
     }
     
     public int maksukerratAikavalilla(Calendar alaraja, Calendar ylaraja){
@@ -76,5 +91,32 @@ public class ToistuvaTilitapahtuma{
             return (taysiaVuosia * 12) + (alku.get(Calendar.MONTH) + 1);
         }
         
+    }
+    
+    public ArrayList<Tilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Calendar loppupvm){
+        ArrayList<Tilitapahtuma> palautettava = new ArrayList<>();
+        
+        int maksukerrat = maksukerratAikavalilla(alkupvm, loppupvm);
+            for (int i = 0; i < maksukerrat; i++){
+                Calendar aikaleima = new GregorianCalendar(this.alkupvm.get(Calendar.YEAR), this.alkupvm.get(Calendar.MONTH) + i, this.alkupvm.get(Calendar.DAY_OF_MONTH));
+                palautettava.add(new Tilitapahtuma(this.kuvaus, this.summa, aikaleima));
+            }
+        
+        return palautettava;
+    }
+    
+    @Override
+    public String toString(){
+        String tuloste = String.format("%-25s   %-10.2f   %s.%s.%s - %s.%s.%s", 
+                this.kuvaus, 
+                this.summa, 
+                this.alkupvm.get(Calendar.YEAR), 
+                this.alkupvm.get(Calendar.MONTH)+1, 
+                this.alkupvm.get(Calendar.DAY_OF_MONTH),
+                this.loppupvm.get(Calendar.YEAR), 
+                this.loppupvm.get(Calendar.MONTH)+1, 
+                this.loppupvm.get(Calendar.DAY_OF_MONTH)
+                );
+        return tuloste;
     }
 }

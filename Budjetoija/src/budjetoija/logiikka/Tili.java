@@ -76,5 +76,21 @@ public class Tili {
     public void lisaaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma){
         this.toistuvatTapahtumat.add(tapahtuma);
     }
-
+    
+    public boolean konvertoiJaPoistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma, Calendar loppupvm){
+        if (!poistaToistuvaTilitapahtuma(tapahtuma)){
+            return false;
+        }
+        ArrayList<Tilitapahtuma> konvertoitu = tapahtuma.konvertoiYksittaisiksiTapahtumiksi(loppupvm);
+        this.tapahtumat.addAll(konvertoitu);       
+        return true;
+    }
+    
+    public boolean poistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma){
+        if (this.toistuvatTapahtumat.contains(tapahtuma)){
+            this.toistuvatTapahtumat.remove(tapahtuma);
+            return true;
+        }
+        return false;
+    }
 }
