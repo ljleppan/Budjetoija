@@ -24,14 +24,14 @@ public class Tiedostonkasittelija {
         this.tiedostopolku = tiedostopolku;
     }
     
-    public ArrayList<String> lueTiedosto(String tiedostopolku){
+    public ArrayList<String> lue(){
         ArrayList<String> data = new ArrayList();
         
-        if(!tiedostoOnOlemassa(tiedostopolku)){
+        if(!tiedostoOlemassa()){
             return data;
         }
         try{
-            BufferedReader lukija = new BufferedReader(new FileReader(tiedostopolku));
+            BufferedReader lukija = new BufferedReader(new FileReader(this.tiedostopolku));
             String rivi;
             while ((rivi = lukija.readLine()) != null){
                 data.add(rivi);
@@ -45,13 +45,13 @@ public class Tiedostonkasittelija {
         return data;
     }
 
-    public boolean tallennaTiedosto(String tiedostopolku, String data){
-        if(!tiedostoOnOlemassa(tiedostopolku)){
-            luoTiedosto(tiedostopolku);
-        }
+    public boolean tallenna(ArrayList<String> data){
         try{
-            BufferedWriter kirjoittaja = new BufferedWriter(new FileWriter(tiedostopolku));
-            kirjoittaja.write(data);
+            BufferedWriter kirjoittaja = new BufferedWriter(new FileWriter(this.tiedostopolku));
+            for (String rivi : data){
+                kirjoittaja.write(rivi);
+                kirjoittaja.newLine();
+            }
             kirjoittaja.close();
             return true;
         }
@@ -61,9 +61,9 @@ public class Tiedostonkasittelija {
         }
     }
 
-    public boolean luoTiedosto(String tiedostopolku) {
+    public boolean luoTiedosto() {
         try{
-            File tiedosto = new File(tiedostopolku);
+            File tiedosto = new File(this.tiedostopolku);
             tiedosto.createNewFile();
             return true;
         }
@@ -73,8 +73,8 @@ public class Tiedostonkasittelija {
         }
     }
 
-    public boolean tiedostoOnOlemassa(String tiedostopolku) {
-        File tiedosto = new File(tiedostopolku);
+    public boolean tiedostoOlemassa() {
+        File tiedosto = new File(this.tiedostopolku);
         return tiedosto.exists();
     }
 }
