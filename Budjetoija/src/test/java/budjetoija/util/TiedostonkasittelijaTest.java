@@ -14,6 +14,7 @@ import org.junit.rules.TemporaryFolder;
 
 public class TiedostonkasittelijaTest {
     Tiedostonkasittelija kasittelija;
+    ArrayList<String> testiArray;
     
     public TiedostonkasittelijaTest() {
     }
@@ -29,6 +30,8 @@ public class TiedostonkasittelijaTest {
     @Before
     public void setUp() {
         kasittelija = new Tiedostonkasittelija("/tiedosto.txt");
+        testiArray = new ArrayList();
+        testiArray.add("testi");
     }
     
     @After
@@ -50,22 +53,25 @@ public class TiedostonkasittelijaTest {
     }
     
     @Test
-    public void tiedostoOnOlemassaLoytaaOlemassaOlevanTiedoston() throws IOException{
+    public void tiedostoOlemassaLoytaaOlemassaOlevanTiedoston() throws IOException{
         File tiedosto = kansio.newFile("testi.txt");
         String polku = kansio.getRoot() + "/testi.txt";
-        assertTrue(kasittelija.tiedostoOnOlemassa(polku));
+        kasittelija.setTiedostopolku(polku);
+        assertTrue(kasittelija.tiedostoOlemassa());
     }
     
     @Test
-    public void tiedostoOnOlemassaEiLoydaOlematontaTiedostoa(){
-        assertFalse(kasittelija.tiedostoOnOlemassa("testi.txt"));
+    public void tiedostoOlemassaEiLoydaOlematontaTiedostoa(){
+        kasittelija.setTiedostopolku("testi.txt");
+        assertFalse(kasittelija.tiedostoOlemassa());
     }
     
     @Test
     public void luoTiedostoLuoKasketynTiedoston() throws IOException{
         String polku = kansio.getRoot() + "/testi.txt";
-        assertTrue(kasittelija.luoTiedosto(polku));
-        assertTrue(kasittelija.tiedostoOnOlemassa(polku));
+        kasittelija.setTiedostopolku(polku);
+        assertTrue(kasittelija.luoTiedosto());
+        assertTrue(kasittelija.tiedostoOlemassa());
     }
     
 //    @Test
@@ -75,14 +81,16 @@ public class TiedostonkasittelijaTest {
     
     @Test
     public void lueTiedostoPalauttaaTyhjanJosTiedostoaEiOleOlemassa(){
-        assertTrue(kasittelija.lueTiedosto("testi.txt").isEmpty());
+        kasittelija.setTiedostopolku("testi.txt");
+        assertTrue(kasittelija.lue().isEmpty());
     }
     
     @Test
     public void lueTiedostoPalauttaaTiedostonSisallonValidistaTiedostosta(){
         String polku = kansio.getRoot() + "/testi.txt";
-        assertTrue(kasittelija.tallennaTiedosto(polku, "testi"));
-        assertTrue(kasittelija.lueTiedosto(polku).get(0).equals("testi"));
+        kasittelija.setTiedostopolku(polku);
+        assertTrue(kasittelija.tallenna(testiArray));
+        assertTrue(kasittelija.lue().get(0).equals("testi"));
     }
     
 //    @Test
@@ -93,24 +101,28 @@ public class TiedostonkasittelijaTest {
     @Test
     public void tallennaTiedostoLuoTiedostonJosSeEiOleJoOlemassa(){
         String polku = kansio.getRoot() + "/testi.txt";
-        assertFalse(kasittelija.tiedostoOnOlemassa(polku));
-        assertTrue(kasittelija.tallennaTiedosto(polku, "testi"));
-        assertTrue(kasittelija.tiedostoOnOlemassa(polku));
+        kasittelija.setTiedostopolku(polku);
+        assertFalse(kasittelija.tiedostoOlemassa());
+        assertTrue(kasittelija.tallenna(testiArray));
+        assertTrue(kasittelija.tiedostoOlemassa());
     }
     
     @Test
     public void tallennaTiedostoKirjoittaaDatanOikeinTyhjaanTiedostoon(){
         String polku = kansio.getRoot() + "/testi.txt";
-        assertTrue(kasittelija.tallennaTiedosto(polku, "testi"));
-        assertTrue(kasittelija.lueTiedosto(polku).get(0).equals("testi"));
+        kasittelija.setTiedostopolku(polku);
+        assertTrue(kasittelija.tallenna(testiArray));
+        assertTrue(kasittelija.lue().get(0).equals("testi"));
     }
     
     @Test
     public void tallennaTiedostoYlikirjoittaaOlemassaOlevanTiedoston(){
         String polku = kansio.getRoot() + "/testi.txt";
-        kasittelija.tallennaTiedosto(polku, "testi1");
-        kasittelija.tallennaTiedosto(polku, "testi2");
-        ArrayList<String> rivit = kasittelija.lueTiedosto(polku);
+        kasittelija.setTiedostopolku(polku);
+        kasittelija.tallenna(testiArray);
+        testiArray.set(0, "testi2");
+        kasittelija.tallenna(testiArray);
+        ArrayList<String> rivit = kasittelija.lue();
         assertTrue(rivit.size() == 1);
         assertTrue(rivit.get(0).equals("testi2"));
     }
