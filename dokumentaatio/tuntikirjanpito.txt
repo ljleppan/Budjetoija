@@ -26,14 +26,15 @@
 |	15min	Ydinluokkien testeill‰ 100% kattavuus (branch ja line)
 |	15min	Ydinluokkien testeill‰ 100% kattavuus mutaatiotesteiss‰
 |	15min	Aloitettu Tiedostonk‰sittelij‰n testien tekeminen	
+|	60min	Perehtymist‰ Swing:iin k‰ytt‰liittym‰‰ valmistellen	
 |
 |	P‰iv‰	Projekti
-|	245min	625min
+|	305min	685min
 |----------------------------------------------------------------------------
 |18.01.2012	Perjantai
 |	130min	Lis‰tty util-pakettiin TallentajaLataaja sek‰ Konvertoija
 |		-luokat.
 |
 |	P‰iv‰	Projekti
-|	130min	755min
+|	130min	815min
 \----------------------------------------------------------------------------
