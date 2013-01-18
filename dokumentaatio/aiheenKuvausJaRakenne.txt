@@ -1,52 +1,52 @@
-/----------------------------------------------------------------------------
+﻿/----------------------------------------------------------------------------
 |	Javalabra		Aiheen kuvaus			syksy 2013
-|	Leo Lepp�nen			
+|	Leo Leppänen			
 |----------------------------------------------------------------------------
-|	Opiskelijan talouden seurantaj�rjestelm� ("budjetoija")
+|	Opiskelijan talouden seurantajärjestelmä ("budjetoija")
 |----------------------------------------------------------------------------
 | 	Aihekuvaus
 |----------------------------------------------------------------------------
 | Toteutetaan ohjelma, jonka avulla opiskelija (tai muu pientalous) voi
-| seurata omaa rahank�ytt���n. J�rjestelm� ei erottele k�ytt�jien v�lill�, 
-| mutta tukee useamman "tilin" k�sittely� eri tiedostojen muodossa.
+| seurata omaa rahankäyttöään. Järjestelmä ei erottele käyttäjien välillä, 
+| mutta tukee useamman "tilin" käsittelyä eri tiedostojen muodossa.
 |
-| Tilille lis�t��n tilitapahtumia (menoja ja tuloja), jotka voivat olla joko
-| yksitt�istapauksia tai vuokran kaltaisia toistuvia tapahtumia. K�ytt�j� voi
-| tarkastella tilitapahtumiaan erilaisissa aikakehyksiss�, esim.
+| Tilille lisätään tilitapahtumia (menoja ja tuloja), jotka voivat olla joko
+| yksittäistapauksia tai vuokran kaltaisia toistuvia tapahtumia. Käyttäjä voi
+| tarkastella tilitapahtumiaan erilaisissa aikakehyksissä, esim.
 | kuukausittain.
 |
 |----------------------------------------------------------------------------
-|	K�ytt�tapaukset (listaus)
+|	Käyttötapaukset (listaus)
 |----------------------------------------------------------------------------
-| K�ytt�j�t: k�ytt�j�
+| Käyttäjät: käyttäjä
 | 
-| K�ytt�j�n toiminnot:
-| - tilin k�sittely
+| Käyttäjän toiminnot:
+| - tilin käsittely
 |   - uuden tilin luominen
 |   - tilin tallentaminen tiedostoon
 |   - tallennetun tilin avaaminen tiedostosta
-| - yksitt�isten tilitapahtumien k�sittely
-|   - uuden tilitapahtuman lis��minen
+| - yksittäisten tilitapahtumien käsittely
+|   - uuden tilitapahtuman lisääminen
 |   - tilitapahtuman muokkaaminen
 |   - tilitapahtuman poistaminen
-| - toistuvien tilitapahtumien k�sittely (vuokra jne.)
-|   - uuden toistuvan tilitapahtuman lis��minen
+| - toistuvien tilitapahtumien käsittely (vuokra jne.)
+|   - uuden toistuvan tilitapahtuman lisääminen
 |   - toistuvan tilitapahtuman muokkaaminen
 |   - toistuvan tilitapahtuman poistaminen
 | - talouden seuranta
-|   - tilitapahtumien tarkastelu erilaisilla aikav�leill�
+|   - tilitapahtumien tarkastelu erilaisilla aikaväleillä
 |   - tilin tietojen tarkastelu
 |----------------------------------------------------------------------------
 |	Sovelluksen luokat (alustava listaus)
 |----------------------------------------------------------------------------
 | Budjetoija
-|	P��luokka, josta ohjelma k�ynnistyy.
+|	Pääluokka, josta ohjelma käynnistyy.
 |----------------------------------------------------------------------------
 | logiikka.Tilitapahtuma
-|	Yksitt�inen tilin tapahtuma, kuten otto tai pano.
+|	Yksittäinen tilin tapahtuma, kuten otto tai pano.
 |----------------------------------------------------------------------------
 | logiikka.ToistuvaTilitapahtuma
-|	Tilitapahtuma, joka toistuu kerran kuussa m��ritellyll� aikav�lill�.
+|	Tilitapahtuma, joka toistuu kerran kuussa määritellyllä aikavälillä.
 |	Esimerkiksi vuokra, opintotuki tai kuukausipalkka.
 |----------------------------------------------------------------------------
 | logiikka.Tili
@@ -54,13 +54,13 @@
 |----------------------------------------------------------------------------
 | util.Tiedostonkasittelija
 |	Tallentaa ja lataa tiedostoista csv-muotoista dataa arraylistiin.
-|	Rajapinta sovelluksen ja tiedostoj�rjestelm�n v�lill�.
+|	Rajapinta sovelluksen ja tiedostojärjestelmän välillä.
 |----------------------------------------------------------------------------
 | util.Konvertoija
-|	Konvertoi tilej� muotoon, jota tiedostonk�sittelij� ymm�rt��, sek�
-| 	toisin p�in.
+|	Konvertoi tilejä muotoon, jota tiedostonkäsittelijä ymmärtää, sekä
+| 	toisin päin.
 |----------------------------------------------------------------------------
 | util.TallentajaLataaja
-|	K�ytt�� konvertoijaa ja tiedostonk�sittelij�� tallentamaan ja lataa-
-|	maan k�ytt�j�n tilin tiedostoon/tiedostosta.
+|	Käyttää konvertoijaa ja tiedostonkäsittelijää tallentamaan ja lataa-
+|	maan käyttäjän tilin tiedostoon/tiedostosta.
 \----------------------------------------------------------------------------
