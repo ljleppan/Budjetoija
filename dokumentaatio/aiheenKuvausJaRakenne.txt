@@ -1,26 +1,66 @@
-Aihe: opiskelijan talouden seurantaj‰rjestelm‰ ("budjetoija")
-
-Toteutetaan ohjelma, jonka avulla opiskelija (tai muu pientalous) voi seurata omaa
-rahank‰yttˆ‰‰n. J‰rjestelm‰ ei erottele k‰ytt‰jien v‰lill‰, mutta tukee useamman "tilin" k‰sittely‰ eri tiedostojen muodossa. 
-
-Tilille lis‰t‰‰n tilitapahtumia (menoja ja tuloja), jotka voivat olla joko yksitt‰istapauksia tai vuokran kaltaisia toistuvia tapahtumia. K‰ytt‰j‰ voi tarkastella tilitapahtumiaan erilaisissa aikakehyksiss‰, esim. kuukausittain.
-
-K‰ytt‰j‰t: k‰ytt‰j‰
-
-K‰ytt‰j‰n toiminnot:
- - tilin k‰sittely
-   - uuden tilin luominen
-   - tilin tallentaminen tiedostoon
-   - tallennetun tilin avaaminen tiedostosta
- - yksitt‰isten tilitapahtumien k‰sittely
-   - uuden tilitapahtuman lis‰‰minen
-   - tilitapahtuman muokkaaminen
-   - tilitapahtuman poistaminen
- - toistuvien tilitapahtumien k‰sittely (vuokra jne.)
-   - uuden toistuvan tilitapahtuman lis‰‰minen
-   - toistuvan tilitapahtuman muokkaaminen
-   - toistuvan tilitapahtuman poistaminen
- - talouden seuranta
-   - tilitapahtumien tarkastelu erilaisilla aikav‰leill‰
-   - tilin tietojen tarkastelu
-
+/----------------------------------------------------------------------------
+|	Javalabra		Aiheen kuvaus			syksy 2013
+|	Leo Lepp‰nen			
+|----------------------------------------------------------------------------
+|	Opiskelijan talouden seurantaj‰rjestelm‰ ("budjetoija")
+|----------------------------------------------------------------------------
+| 	Aihekuvaus
+|----------------------------------------------------------------------------
+| Toteutetaan ohjelma, jonka avulla opiskelija (tai muu pientalous) voi
+| seurata omaa rahank‰yttˆ‰‰n. J‰rjestelm‰ ei erottele k‰ytt‰jien v‰lill‰, 
+| mutta tukee useamman "tilin" k‰sittely‰ eri tiedostojen muodossa.
+|
+| Tilille lis‰t‰‰n tilitapahtumia (menoja ja tuloja), jotka voivat olla joko
+| yksitt‰istapauksia tai vuokran kaltaisia toistuvia tapahtumia. K‰ytt‰j‰ voi
+| tarkastella tilitapahtumiaan erilaisissa aikakehyksiss‰, esim.
+| kuukausittain.
+|
+|----------------------------------------------------------------------------
+|	K‰yttˆtapaukset (listaus)
+|----------------------------------------------------------------------------
+| K‰ytt‰j‰t: k‰ytt‰j‰
+| 
+| K‰ytt‰j‰n toiminnot:
+| - tilin k‰sittely
+|   - uuden tilin luominen
+|   - tilin tallentaminen tiedostoon
+|   - tallennetun tilin avaaminen tiedostosta
+| - yksitt‰isten tilitapahtumien k‰sittely
+|   - uuden tilitapahtuman lis‰‰minen
+|   - tilitapahtuman muokkaaminen
+|   - tilitapahtuman poistaminen
+| - toistuvien tilitapahtumien k‰sittely (vuokra jne.)
+|   - uuden toistuvan tilitapahtuman lis‰‰minen
+|   - toistuvan tilitapahtuman muokkaaminen
+|   - toistuvan tilitapahtuman poistaminen
+| - talouden seuranta
+|   - tilitapahtumien tarkastelu erilaisilla aikav‰leill‰
+|   - tilin tietojen tarkastelu
+|----------------------------------------------------------------------------
+|	Sovelluksen luokat
+|----------------------------------------------------------------------------
+| Budjetoija
+|	P‰‰luokka, josta ohjelma k‰ynnistyy.
+|----------------------------------------------------------------------------
+| logiikka.Tilitapahtuma
+|	Yksitt‰inen tilin tapahtuma, kuten otto tai pano.
+|----------------------------------------------------------------------------
+| logiikka.ToistuvaTilitapahtuma
+|	Tilitapahtuma, joka toistuu kerran kuussa m‰‰ritellyll‰ aikav‰lill‰.
+|	Esimerkiksi vuokra, opintotuki tai kuukausipalkka.
+|----------------------------------------------------------------------------
+| logiikka.Tili
+|	Tilitapahtumien listaus.
+|----------------------------------------------------------------------------
+| util.Tiedostonkasittelija
+|	Tallentaa ja lataa tiedostoista csv-muotoista dataa arraylistiin.
+|	Rajapinta sovelluksen ja tiedostoj‰rjestelm‰n v‰lill‰.
+|----------------------------------------------------------------------------
+| util.Konvertoija
+|	Konvertoi tilej‰ muotoon, jota tiedostonk‰sittelij‰ ymm‰rt‰‰, sek‰
+| 	toisin p‰in.
+|----------------------------------------------------------------------------
+| util.TallentajaLataaja
+|	K‰ytt‰‰ konvertoijaa ja tiedostonk‰sittelij‰‰ tallentamaan ja lataa-
+|	maan k‰ytt‰j‰n tilin tiedostoon/tiedostosta.
+\----------------------------------------------------------------------------
