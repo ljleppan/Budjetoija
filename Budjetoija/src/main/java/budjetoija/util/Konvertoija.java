@@ -27,7 +27,7 @@ public class Konvertoija {
     }
     
     public String toistuvaTilitapahtuma2csv(ToistuvaTilitapahtuma tapahtuma){
-        String csv = null;
+        String csv = "";
         csv = csv.concat(tapahtuma.getKuvaus()+";");
         csv = csv.concat(tapahtuma.getSumma()+";");
         csv = csv.concat(tapahtuma.getAlkupvm().get(Calendar.YEAR)+";");
@@ -40,7 +40,7 @@ public class Konvertoija {
     }
     
     public String tilitapahtuma2csv(Tilitapahtuma tapahtuma){
-        String csv = null;
+        String csv = "";
         csv = csv.concat(tapahtuma.getKuvaus()+";");
         csv = csv.concat(tapahtuma.getSumma()+";");
         csv = csv.concat(tapahtuma.getAikaleima().get(Calendar.YEAR)+";");
@@ -56,20 +56,30 @@ public class Konvertoija {
         
         for (String rivi : csv){
             if (toistuvatKesken){
-                if(!rivi.equals("-\n")){
-                    tili.lisaaToistuvaTilitapahtuma(rivi2toistuvaTilitapahtuma(rivi));
+                if(!rivi.equals("-")){
+                    ToistuvaTilitapahtuma tt = csv2toistuvaTilitapahtuma(rivi);
+                    if (tt != null){
+                        tili.lisaaToistuvaTilitapahtuma(tt);
+                    }
                 } else {
                     toistuvatKesken = false;
                 }
             } else {
-                tili.lisaaTilitapahtuma(rivi2tilitapahtuma(rivi));
+                Tilitapahtuma t = csv2tilitapahtuma(rivi);
+                if (t != null){
+                    tili.lisaaTilitapahtuma(t);
+                }
             }
         }
         return tili;
     }
     
-    public ToistuvaTilitapahtuma rivi2toistuvaTilitapahtuma(String rivi){
+    public ToistuvaTilitapahtuma csv2toistuvaTilitapahtuma(String rivi){
         String[] riviPalasina = rivi.split(";");
+        
+        if (riviPalasina.length != 8){
+            return null;
+        }
                 
         String kuvaus = riviPalasina[0];
         Summa summa = new Summa(riviPalasina[1]);
@@ -88,8 +98,12 @@ public class Konvertoija {
         return new ToistuvaTilitapahtuma(kuvaus, summa, alkupvm, loppupvm);
     }
     
-    public Tilitapahtuma rivi2tilitapahtuma(String rivi){
+    public Tilitapahtuma csv2tilitapahtuma(String rivi){
         String[] riviPalasina = rivi.split(";");
+        
+        if (riviPalasina.length != 5){
+            return null;
+        }
                 
         String kuvaus = riviPalasina[0];
         Summa summa = new Summa(riviPalasina[1]);
