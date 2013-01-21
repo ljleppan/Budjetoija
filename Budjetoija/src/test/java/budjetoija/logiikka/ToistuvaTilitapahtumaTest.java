@@ -27,7 +27,7 @@ public class ToistuvaTilitapahtumaTest {
     
     @Before
     public void setUp() {
-        t = new ToistuvaTilitapahtuma("kuvaus", 1000, new GregorianCalendar(2013,0,15), new GregorianCalendar(2014,0,15));
+        t = new ToistuvaTilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15), new GregorianCalendar(2014,0,15));
     }
     
     @After
@@ -37,14 +37,14 @@ public class ToistuvaTilitapahtumaTest {
     @Test
     public void ToistuvaTilitapahtumaAlustuuOikein(){
         assertTrue(t.getKuvaus().equals("kuvaus"));
-        assertTrue(t.getSumma() == 1000);
+        assertTrue(t.getSumma().getSummaInt() == 1000);
         assertTrue(t.getAlkupvm().equals(new GregorianCalendar(2013,0,15)));
         assertTrue(t.getLoppupvm().equals(new GregorianCalendar(2014,0,15)));
     }
     
     @Test
     public void ToistuvaTilitapahtumaKorjaaVaarinOlevanAikaleiman(){
-        ToistuvaTilitapahtuma v = new ToistuvaTilitapahtuma("virhe", 100, new GregorianCalendar(2014,0,1), new GregorianCalendar(2013,0,1));
+        ToistuvaTilitapahtuma v = new ToistuvaTilitapahtuma("virhe", new Summa(100), new GregorianCalendar(2014,0,1), new GregorianCalendar(2013,0,1));
         assertFalse(v.getAlkupvm().after(v.getLoppupvm()));
     }   
     
@@ -56,8 +56,8 @@ public class ToistuvaTilitapahtumaTest {
     
     @Test
     public void ToistuvaTilitapahtumaSetSummaToimii(){
-        t.setSumma(1001);
-        assertTrue(t.getSumma() == 1001);
+        t.setSumma(new Summa(1001));
+        assertTrue(t.getSumma().getSummaInt() == 1001);
     }
     
     @Test
@@ -111,7 +111,7 @@ public class ToistuvaTilitapahtumaTest {
     
     @Test
     public void ToistuvaTilitapahtumaTulostuuOikein(){
-        assertTrue(t.toString().equals("kuvaus                      1000,00      2013.1.15 - 2014.1.15"));
+        assertTrue(t.toString().equals("kuvaus                      10,00        2013.1.15 - 2014.1.15"));
     }
     
     @Test

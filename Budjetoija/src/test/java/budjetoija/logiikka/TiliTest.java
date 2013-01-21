@@ -43,10 +43,10 @@ public class TiliTest {
     @Before
     public void setUp() {
         tili = new Tili("Testitili");
-        tapahtuma1 = new Tilitapahtuma("Tilitapahtuma 1", 100, new GregorianCalendar(2013,0,15));
-        tapahtuma2 = new Tilitapahtuma("Tilitapahtuma 2", 1000, new GregorianCalendar(2013,5,15));
-        toistuvaTapahtuma1 = new ToistuvaTilitapahtuma("Toistuva tilitapahtuma 1", 100, new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,11,31));
-        toistuvaTapahtuma2 = new ToistuvaTilitapahtuma("Toistuva tilitapahtuma 2", 1000, new GregorianCalendar(2014,0,15), new GregorianCalendar(2014,11,31));
+        tapahtuma1 = new Tilitapahtuma("Tilitapahtuma 1", new Summa(100), new GregorianCalendar(2013,0,15));
+        tapahtuma2 = new Tilitapahtuma("Tilitapahtuma 2", new Summa(1000), new GregorianCalendar(2013,5,15));
+        toistuvaTapahtuma1 = new ToistuvaTilitapahtuma("Toistuva tilitapahtuma 1", new Summa(100), new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,11,31));
+        toistuvaTapahtuma2 = new ToistuvaTilitapahtuma("Toistuva tilitapahtuma 2", new Summa(1000), new GregorianCalendar(2014,0,15), new GregorianCalendar(2014,11,31));
     }
     
     @After

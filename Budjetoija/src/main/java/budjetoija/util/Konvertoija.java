@@ -1,5 +1,6 @@
 package budjetoija.util;
 
+import budjetoija.logiikka.Summa;
 import budjetoija.logiikka.Tili;
 import budjetoija.logiikka.Tilitapahtuma;
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
@@ -71,7 +72,7 @@ public class Konvertoija {
         String[] riviPalasina = rivi.split(";");
                 
         String kuvaus = riviPalasina[0];
-        double summa = Double.parseDouble(riviPalasina[1]);
+        Summa summa = new Summa(riviPalasina[1]);
 
         Calendar alkupvm = new GregorianCalendar();
         alkupvm.set(Calendar.YEAR, Integer.parseInt(riviPalasina[2]));
@@ -91,7 +92,7 @@ public class Konvertoija {
         String[] riviPalasina = rivi.split(";");
                 
         String kuvaus = riviPalasina[0];
-        double summa = Double.parseDouble(riviPalasina[1]);
+        Summa summa = new Summa(riviPalasina[1]);
 
         Calendar aikaleima = new GregorianCalendar();
         aikaleima.set(Calendar.YEAR, Integer.parseInt(riviPalasina[2]));

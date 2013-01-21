@@ -4,10 +4,10 @@ import java.util.Calendar;
 
 public class Tilitapahtuma {
     private String kuvaus;
-    private double summa;
+    private Summa summa;
     private Calendar aikaleima;
     
-    public Tilitapahtuma(String kuvaus, double summa, Calendar aikaleima){
+    public Tilitapahtuma(String kuvaus, Summa summa, Calendar aikaleima){
         this.kuvaus = kuvaus;
         this.summa = summa;
         this.aikaleima = aikaleima;
@@ -21,11 +21,11 @@ public class Tilitapahtuma {
         this.kuvaus = kuvaus;
     }
     
-    public double getSumma(){
+    public Summa getSumma(){
         return this.summa;
     }
     
-    public void setSumma(double summa){
+    public void setSumma(Summa summa){
         this.summa = summa;
     }
     
@@ -39,7 +39,7 @@ public class Tilitapahtuma {
     
     @Override
     public String toString(){
-        return String.format("%-25s   %-10.2f   %s.%s.%s", this.kuvaus, this.summa, this.aikaleima.get(Calendar.YEAR), this.aikaleima.get(Calendar.MONTH)+1, this.aikaleima.get(Calendar.DAY_OF_MONTH));
+        return String.format("%-25s   %-10s   %s.%s.%s", this.kuvaus, this.summa, this.aikaleima.get(Calendar.YEAR), this.aikaleima.get(Calendar.MONTH)+1, this.aikaleima.get(Calendar.DAY_OF_MONTH));
     }
     
     

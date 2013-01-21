@@ -6,11 +6,11 @@ import java.util.GregorianCalendar;
 
 public class ToistuvaTilitapahtuma{
     private String kuvaus;
-    private double summa;
+    private Summa summa;
     private Calendar alkupvm;
     private Calendar loppupvm;
     
-    public ToistuvaTilitapahtuma(String kuvaus, double summa, Calendar alkupvm, Calendar loppupvm){
+    public ToistuvaTilitapahtuma(String kuvaus, Summa summa, Calendar alkupvm, Calendar loppupvm){
         this.kuvaus = kuvaus;
         this.summa = summa;
         if (!alkupvm.after(loppupvm)){
@@ -30,11 +30,11 @@ public class ToistuvaTilitapahtuma{
         this.kuvaus = kuvaus;
     }
     
-    public double getSumma(){
+    public Summa getSumma(){
         return this.summa;
     }
     
-    public void setSumma(double summa){
+    public void setSumma(Summa summa){
         this.summa = summa;
     }
     
@@ -107,7 +107,7 @@ public class ToistuvaTilitapahtuma{
     
     @Override
     public String toString(){
-        String tuloste = String.format("%-25s   %-10.2f   %s.%s.%s - %s.%s.%s", 
+        String tuloste = String.format("%-25s   %-10s   %s.%s.%s - %s.%s.%s", 
                 this.kuvaus, 
                 this.summa, 
                 this.alkupvm.get(Calendar.YEAR), 

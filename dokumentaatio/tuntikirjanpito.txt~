@@ -2,7 +2,7 @@
 |	Javalabra		Tuntikirjanpito			syksy 2013
 |	Leo Lepp‰nen			
 |----------------------------------------------------------------------------
-|14.01.2013	Maanantai		
+|14.01.2012	Maanantai		
 |	60min	Dokumentointia, git:n opettelua, valmistelevia toimia
 |	60min	Neatbeansin troubleshoottaamista ("<no main classes found>")
 |		ja lis‰‰ git:n opettelua.
@@ -10,7 +10,7 @@
 |	P‰iv‰	Projekti
 |	120min	120min
 |----------------------------------------------------------------------------
-|15.01.2013	Tiistai
+|15.01.2012	Tiistai
 |	120min	Logiikkaluokkien aloittelua, GregorianCalendariin hajoilua
 |	10min	M‰‰rittelyvaiheen luokkakaavio
 |	60min	Yritys integroida Cobertura projektiin (ep‰onnistui)
@@ -19,7 +19,7 @@
 |	P‰iv‰	Projekti
 |	250min	380min
 |----------------------------------------------------------------------------
-|16.01.2013	Keskiviikko
+|16.01.2012	Keskiviikko
 |	180min	Testien kirjoittelua, tiedostok‰sittelij‰n perustoiminnalli-
 |		suuden luomista
 |	20min	Siirtyminen Maven-projektiin
@@ -31,18 +31,10 @@
 |	P‰iv‰	Projekti
 |	305min	685min
 |----------------------------------------------------------------------------
-|18.01.2013	Perjantai
+|18.01.2012	Perjantai
 |	130min	Lis‰tty util-pakettiin TallentajaLataaja sek‰ Konvertoija
 |		-luokat.
 |
 |	P‰iv‰	Projekti
 |	130min	815min
-|----------------------------------------------------------------------------
-|21.01.2013	Maanantai
-|	140min	Lis‰tty Summa-luokka, muokattu vanha koodi k‰ytt‰m‰‰n sit‰,
-|		muokattu vanhojen luokkien testit yhteensopiviksi sek‰
-|		luotu Summalle testit (100% cobertura, 100% pit)
-|
-|	P‰iv‰	Projekti
-|	140min	955min
 \----------------------------------------------------------------------------

@@ -28,7 +28,7 @@ public class TilitapahtumaTest {
     
     @Before
     public void setUp() {
-        t = new Tilitapahtuma("kuvaus", 1000, new GregorianCalendar(2013,0,15));
+        t = new Tilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15));
     }
     
     @After
@@ -38,7 +38,7 @@ public class TilitapahtumaTest {
     @Test
     public void TilitapahtumaAlustuuOikein(){
         assertTrue(t.getKuvaus().equals("kuvaus"));
-        assertTrue(t.getSumma() == 1000);
+        assertTrue(t.getSumma().getSummaInt() == 1000);
         assertTrue(t.getAikaleima().equals(new GregorianCalendar(2013,0,15)));
     }
     
@@ -50,8 +50,8 @@ public class TilitapahtumaTest {
     
     @Test
     public void TilitapahtumaSetSummaToimii(){
-        t.setSumma(100);
-        assertTrue(t.getSumma() == 100);
+        t.setSumma(new Summa(100));
+        assertTrue(t.getSumma().getSummaInt() == 100);
     }
     
     @Test
@@ -62,7 +62,7 @@ public class TilitapahtumaTest {
     
     @Test
     public void TilitapahtumaTulostuuOikein(){
-        assertTrue(t.toString().equals("kuvaus                      1000,00      2013.1.15"));
+        assertTrue(t.toString().equals("kuvaus                      10,00        2013.1.15"));
     }
     
     
