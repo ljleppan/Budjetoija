@@ -42,7 +42,8 @@
 |	140min	Lis‰tty Summa-luokka, muokattu vanha koodi k‰ytt‰m‰‰n sit‰,
 |		muokattu vanhojen luokkien testit yhteensopiviksi sek‰
 |		luotu Summalle testit (100% cobertura, 100% pit)
+|	90min	Luotu testit Konvertoija-luokalle (100% coberture, 100% pit)
 |
 |	P‰iv‰	Projekti
-|	140min	955min
+|	230min	1045min
 \----------------------------------------------------------------------------
