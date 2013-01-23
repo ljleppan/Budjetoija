@@ -46,4 +46,10 @@
 |
 |	Päivä	Projekti
 |	230min	1045min
+|----------------------------------------------------------------------------
+|23.01.2013	Keskiviikko
+|	45min	Refaktoroitu Summa, tehty testit TallentajaLataajalle
+|
+|	Päivä	Projekti
+|	45min	1090min
 \----------------------------------------------------------------------------
