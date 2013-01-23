@@ -40,27 +40,45 @@ public class Summa {
             return false;
         }
         summa = summa.replace('.', ',');
-        if (summa.matches("[0-9]*[,][0-9]{2,}$")){
-            String[] summaOsissa = summa.split(",");
-            this.summa = Integer.parseInt(summaOsissa[0] + summaOsissa[1].subSequence(0, 2));
-            return true;
-        }
-        if (summa.matches("[0-9]*[,][0-9]$")){
-            String[] summaOsissa = summa.split(",");
-            this.summa = Integer.parseInt(summaOsissa[0] + summaOsissa[1] + "0");
-            return true;
-        }
-        if (summa.matches("[0-9]+[,]?$")){
-            summa = summa.replaceAll("[,]", "");
-            this.summa = Integer.parseInt(summa + "00");
-            return true;
-        }
+        if (kaksiTaiEnemmanDesimaalia(summa))return true;
+        if (yksiDesimaali(summa))return true;
+        if (eiDesimaaleja(summa))return true;
         return false;
     }
     
     @Override
     public String toString(){
         return getSummaString();
+    }
+
+    private boolean kaksiTaiEnemmanDesimaalia(String summa) throws NumberFormatException {
+        // 0-* numeroa, pilkku, 2-* numeroa, EOL
+        if (summa.matches("[0-9]*[,][0-9]{2,}$")) {
+            String[] summaOsissa = summa.split(",");
+            this.summa = Integer.parseInt(summaOsissa[0] + summaOsissa[1].subSequence(0, 2));
+            return true;
+        }
+        return false;
+    }
+
+    private boolean yksiDesimaali(String summa) throws NumberFormatException {
+        // 0-* numeroa, pilkku, numero, EOL
+        if (summa.matches("[0-9]*[,][0-9]$")) {
+            String[] summaOsissa = summa.split(",");
+            this.summa = Integer.parseInt(summaOsissa[0] + summaOsissa[1] + "0");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean eiDesimaaleja(String summa) throws NumberFormatException {
+        // 0-* numeroa, 0-1 pilkku, EOL
+        if (summa.matches("[0-9]+[,]?$")) {
+            summa = summa.replaceAll("[,]", "");
+            this.summa = Integer.parseInt(summa + "00");
+            return true;
+        }
+        return false;
     }
     
 }
