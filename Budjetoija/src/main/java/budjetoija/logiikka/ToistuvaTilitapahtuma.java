@@ -27,7 +27,7 @@ public class ToistuvaTilitapahtuma{
     }
     
     public void setKuvaus(String kuvaus){
-        this.kuvaus = kuvaus;
+        this.kuvaus = kuvaus.replaceAll(";", "");
     }
     
     public Summa getSumma(){
