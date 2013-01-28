@@ -52,4 +52,11 @@
 |
 |	Päivä	Projekti
 |	45min	1090min
+|----------------------------------------------------------------------------
+|28.01.2013	Maanantai
+|	10min	Pientä logiikkaluokkien refaktorointa
+|	180min	Käyttöliittymän aloitus
+|
+|	Päivä	Projekti
+|	190min	1280min
 \----------------------------------------------------------------------------

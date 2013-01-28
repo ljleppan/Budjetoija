@@ -89,4 +89,9 @@
 |	maan käyttäjän tilin tiedostoon/tiedostosta.
 |
 |	Testikattavuus: 0 : 0 : 0
+|----------------------------------------------------------------------------
+| kayttoliittyma.GUI
+|	Ohjelman käyttöliittymä
+|
+|	Testikattavuus: 0 : 0 : 0
 \----------------------------------------------------------------------------
