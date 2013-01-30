@@ -65,4 +65,11 @@
 |
 |	Päivä	Projekti
 |	10min	1290min
+|----------------------------------------------------------------------------
+|30.01.2013	Keskiviikko
+|	270min	Käyttöliittymän jatkamista, sekalaista logiikkaluokkien
+|		hifistelyä
+|
+|	Päivä	Projekti
+|	270min	1560min
 \----------------------------------------------------------------------------
