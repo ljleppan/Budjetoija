@@ -2,6 +2,7 @@ package budjetoija.logiikka;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 public class Tili {
@@ -23,41 +24,70 @@ public class Tili {
         this.nimi = nimi;
     }
     
+    public Tilitapahtuma getTilitapahtuma(Tilitapahtuma tilitapahtuma){
+        for (Tilitapahtuma t : this.tapahtumat){
+            if (t.equals(tilitapahtuma)){
+                return t;
+            }
+        }
+        return null;
+    }
+    
     public ArrayList<Tilitapahtuma> getTilitapahtumat(){
+        Collections.sort(tapahtumat, new TilitapahtumaComparator());
         return this.tapahtumat;
     }
     
     public ArrayList<ToistuvaTilitapahtuma> getToistuvatTilitapahtumat(){
+        Collections.sort(toistuvatTapahtumat, new ToistuvaTilitapahtumaComparator());
         return this.toistuvatTapahtumat;
     }
     
     public ArrayList<Tilitapahtuma> getTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
-        ArrayList<Tilitapahtuma> palautettava = new ArrayList();
+        
+        ArrayList<Tilitapahtuma> palautettava = new ArrayList();     
+        alkupvm.add(Calendar.DAY_OF_MONTH, -1);
+        loppupvm.add(Calendar.DAY_OF_MONTH, 1);
         for (Tilitapahtuma t : tapahtumat){
-            //Negaation avulla alkupvm:n ja loppupvm:n tapahtumat mukaan
-            if (!t.getAikaleima().after(loppupvm) && !t.getAikaleima().before(alkupvm)){
+            if (t.getAikaleima().after(alkupvm) && t.getAikaleima().before(loppupvm)){
                 palautettava.add(t);
             }
         }        
+        Collections.sort(palautettava, new TilitapahtumaComparator());
         return palautettava;
     }
     
-    public ArrayList<Tilitapahtuma> getToistuvatTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
+    public ArrayList<Tilitapahtuma> getToistuvatTilitapahtumatTilitapahtuminaAjalta(Calendar alkupvm, Calendar loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
+        alkupvm.add(Calendar.DAY_OF_MONTH, -1);
         for (ToistuvaTilitapahtuma tt : this.toistuvatTapahtumat){
             int maksukerrat = tt.maksukerratAikavalilla(alkupvm, loppupvm);
             for (int i = 0; i < maksukerrat; i++){
                 Calendar aikaleima = new GregorianCalendar(tt.getAlkupvm().get(Calendar.YEAR), tt.getAlkupvm().get(Calendar.MONTH) + i, tt.getAlkupvm().get(Calendar.DAY_OF_MONTH));
                 palautettava.add(new Tilitapahtuma(tt.getKuvaus(), tt.getSumma(), aikaleima));
             }
-        } 
+        }
+        Collections.sort(palautettava, new TilitapahtumaComparator());
+        return palautettava;
+    }
+    
+    public ArrayList<ToistuvaTilitapahtuma> getToistuvatTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
+        ArrayList<ToistuvaTilitapahtuma> palautettava = new ArrayList();
+        alkupvm.add(Calendar.DAY_OF_MONTH, -1);
+        for (ToistuvaTilitapahtuma tt : this.toistuvatTapahtumat){
+            if (tt.getAlkupvm().after(alkupvm) && tt.getAlkupvm().before(loppupvm)){
+                palautettava.add(tt);
+            }
+        }
+        Collections.sort(palautettava, new ToistuvaTilitapahtumaComparator());
         return palautettava;
     }
     
     public ArrayList<Tilitapahtuma> getKaikkiTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
         palautettava.addAll(getTilitapahtumatAjalta(alkupvm, loppupvm));
-        palautettava.addAll(getToistuvatTilitapahtumatAjalta(alkupvm, loppupvm));
+        palautettava.addAll(getToistuvatTilitapahtumatTilitapahtuminaAjalta(alkupvm, loppupvm));
+        Collections.sort(palautettava, new TilitapahtumaComparator());
         return palautettava;
     }
     

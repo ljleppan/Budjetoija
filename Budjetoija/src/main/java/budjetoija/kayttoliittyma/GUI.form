@@ -22,7 +22,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,63,0,0,3,66"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,63,0,0,3,70"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -48,7 +48,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="sivuPalkki" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -82,6 +82,14 @@
               <Properties>
                 <Property name="selectionMode" type="int" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listausListValueChanged"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JList(tapahtumat.toArray())"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Calendar alku = (Calendar)alkuPvm.clone();&#xa;Calendar loppu = (Calendar)loppuPvm.clone();&#xa;ArrayList&lt;Object&gt; tapahtumat = new ArrayList();&#xa;        tapahtumat.addAll(tili.getToistuvatTilitapahtumatAjalta(alku, loppu));&#xa;        tapahtumat.add(&quot;--&quot;);&#xa;        tapahtumat.addAll(tili.getTilitapahtumatAjalta(alku, loppu));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="listausList.setFont(new Font(&quot;Monospaced&quot;, Font.PLAIN, 12));"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -91,40 +99,47 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nakymaKuukausiLabel" min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Component id="nakymaKuukausiSpinner" min="-2" pref="50" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="nakymaVuosiSpinner" pref="75" max="32767" attributes="0"/>
-                                  <Component id="nakymaVuosiLabel" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="nakymaMeneButton" min="-2" pref="80" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="nakymaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="81" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="uusiTiliButton" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nakymaAlkuPaivaSpinner" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="nakymaLoppuPaivaSpinner" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tallennaTiliButton" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="nakymaLoppuKuukausiSpinner" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="nakymaLoppuVuosiSpinner" min="-2" pref="75" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="nakymaAlkuKuukausiSpinner" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="nakymaAlkuVuosiSpinner" min="-2" pref="75" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lataaTiliButton" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="nakymaMeneButton" min="-2" pref="85" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="nakymaLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="uusiTiliButton" min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tallennaTiliButton" min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lataaTiliButton" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                           <Component id="hallitseTiliaLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lisaaTilitapahtumaButton" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="lisaaTilitapahtumaButton" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="poistaTilitapahtumaButton" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="poistaTilitapahtumaButton" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                           <Component id="hallitseTilitapahtumiaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -134,42 +149,50 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="lataaTiliButton" pref="56" max="32767" attributes="0"/>
+                              <Component id="lataaTiliButton" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="hallitseTilitapahtumiaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="hallitseTiliaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nakymaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="hallitseTiliaLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lisaaTilitapahtumaButton" max="32767" attributes="0"/>
                                   <Component id="uusiTiliButton" alignment="0" max="32767" attributes="0"/>
                                   <Component id="tallennaTiliButton" max="32767" attributes="0"/>
-                                  <Component id="poistaTilitapahtumaButton" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nakymaMeneButton" alignment="1" min="-2" pref="54" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="nakymaKuukausiLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="nakymaVuosiLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nakymaAlkuKuukausiSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nakymaAlkuVuosiSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nakymaAlkuPaivaSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="nakymaKuukausiSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="nakymaVuosiSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nakymaLoppuKuukausiSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nakymaLoppuVuosiSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="nakymaLoppuPaivaSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="nakymaMeneButton" alignment="1" min="-2" pref="54" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="nakymaLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="hallitseTilitapahtumiaLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lisaaTilitapahtumaButton" max="32767" attributes="0"/>
+                                  <Component id="poistaTilitapahtumaButton" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -223,19 +246,9 @@
                 <Property name="text" type="java.lang.String" value="Uusi"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="nakymaKuukausiLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="kk"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="nakymaVuosiLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="vuosi"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="nakymaLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xe4;kym&#xe4;"/>
+                <Property name="text" type="java.lang.String" value="Aikav&#xe4;li"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JToggleButton" name="nakymaMeneButton">
@@ -246,21 +259,52 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nakymaMeneButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JSpinner" name="nakymaKuukausiSpinner">
+            <Component class="javax.swing.JSpinner" name="nakymaAlkuKuukausiSpinner">
               <Properties>
-                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="1" maximum="12" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.SpinnerNumberModel(this.alkuPvm.get(Calendar.MONTH + 1), 1, 12, 1)" type="code"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSpinner" name="nakymaVuosiSpinner">
+            <Component class="javax.swing.JSpinner" name="nakymaAlkuVuosiSpinner">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.SpinnerNumberModel(Integer.valueOf(this.paivamaara.get(Calendar.YEAR)), Integer.valueOf(0), null, Integer.valueOf(1))" type="code"/>
+                  <Connection code="new javax.swing.SpinnerNumberModel(Integer.valueOf(this.alkuPvm.get(Calendar.YEAR)), Integer.valueOf(0), null, Integer.valueOf(1))" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="nakymaVuosiSpinner.setEditor(new JSpinner.NumberEditor(nakymaVuosiSpinner, &quot;#&quot;));"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="nakymaAlkuVuosiSpinner.setEditor(new JSpinner.NumberEditor(nakymaAlkuVuosiSpinner, &quot;#&quot;));"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="nakymaAlkuPaivaSpinner">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="1" maximum="31" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="nakymaLoppuPaivaSpinner">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="31" maximum="31" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="nakymaLoppuKuukausiSpinner">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.SpinnerNumberModel(this.loppuPvm.get(Calendar.MONTH) + 1, 1, 12, 1)" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="nakymaLoppuVuosiSpinner">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.SpinnerNumberModel(Integer.valueOf(this.loppuPvm.get(Calendar.YEAR)), Integer.valueOf(0), null, Integer.valueOf(1))" type="code"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="nakymaLoppuVuosiSpinner.setEditor(new JSpinner.NumberEditor(nakymaLoppuVuosiSpinner, &quot;#&quot;));"/>
               </AuxValues>
             </Component>
           </SubComponents>

@@ -20,6 +20,7 @@ public class ToistuvaTilitapahtuma{
             this.alkupvm = loppupvm;
             this.loppupvm = alkupvm;
         }
+        siistiAikaleimat();
     }
     
     public String getKuvaus(){
@@ -47,6 +48,7 @@ public class ToistuvaTilitapahtuma{
             return false;
         }
         this.alkupvm = alkupvm;
+        siistiAikaleimat();
         return true;
     }
     
@@ -59,6 +61,7 @@ public class ToistuvaTilitapahtuma{
             return false;
         }
         this.loppupvm = loppupvm;
+        siistiAikaleimat();
         return true;
     }
     
@@ -98,7 +101,10 @@ public class ToistuvaTilitapahtuma{
         
         int maksukerrat = maksukerratAikavalilla(alkupvm, loppupvm);
             for (int i = 0; i < maksukerrat; i++){
-                Calendar aikaleima = new GregorianCalendar(this.alkupvm.get(Calendar.YEAR), this.alkupvm.get(Calendar.MONTH) + i, this.alkupvm.get(Calendar.DAY_OF_MONTH));
+                Calendar aikaleima = new GregorianCalendar(
+                        this.alkupvm.get(Calendar.YEAR), 
+                        this.alkupvm.get(Calendar.MONTH) + i, 
+                        this.alkupvm.get(Calendar.DAY_OF_MONTH));
                 palautettava.add(new Tilitapahtuma(this.kuvaus, this.summa, aikaleima));
             }
         
@@ -107,16 +113,27 @@ public class ToistuvaTilitapahtuma{
     
     @Override
     public String toString(){
-        String tuloste = String.format("%-25s   %-10s   %s.%s.%s - %s.%s.%s", 
+        String tuloste = String.format("%-35s   %-15s   %s.%s.%s - %s.%s.%s", 
                 this.kuvaus, 
                 this.summa, 
-                this.alkupvm.get(Calendar.YEAR), 
-                this.alkupvm.get(Calendar.MONTH)+1, 
                 this.alkupvm.get(Calendar.DAY_OF_MONTH),
-                this.loppupvm.get(Calendar.YEAR), 
+                this.alkupvm.get(Calendar.MONTH)+1, 
+                this.alkupvm.get(Calendar.YEAR), 
+                this.loppupvm.get(Calendar.DAY_OF_MONTH),
                 this.loppupvm.get(Calendar.MONTH)+1, 
-                this.loppupvm.get(Calendar.DAY_OF_MONTH)
+                this.loppupvm.get(Calendar.YEAR)
                 );
         return tuloste;
+    }
+
+    private void siistiAikaleimat() {
+        this.alkupvm.clear(Calendar.HOUR);
+        this.alkupvm.clear(Calendar.MINUTE);
+        this.alkupvm.clear(Calendar.SECOND);
+        this.alkupvm.clear(Calendar.MILLISECOND);
+        this.loppupvm.clear(Calendar.HOUR);
+        this.loppupvm.clear(Calendar.MINUTE);
+        this.loppupvm.clear(Calendar.SECOND);
+        this.loppupvm.clear(Calendar.MILLISECOND);
     }
 }

@@ -87,4 +87,23 @@ public class Summa {
         return false;
     }
     
+    @Override
+    public boolean equals(Object o){
+        if (this == o){ return true;}
+        if (!(o instanceof Summa)){ return false;}
+        
+        Summa s = (Summa)o;
+        if (s.summa == this.summa){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + this.summa;
+        return hash;
+    }
+    
 }

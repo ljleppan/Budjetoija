@@ -62,7 +62,7 @@ public class TilitapahtumaTest {
     
     @Test
     public void TilitapahtumaTulostuuOikein(){
-        assertTrue(t.toString().equals("kuvaus                      10,00        2013.1.15"));
+        assertTrue(t.toString().equals("kuvaus                      10,00        15.1.2013"));
     }
     
     

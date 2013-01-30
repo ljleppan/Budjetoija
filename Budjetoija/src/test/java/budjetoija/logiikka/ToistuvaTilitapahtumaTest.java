@@ -111,7 +111,7 @@ public class ToistuvaTilitapahtumaTest {
     
     @Test
     public void ToistuvaTilitapahtumaTulostuuOikein(){
-        assertTrue(t.toString().equals("kuvaus                      10,00        2013.1.15 - 2014.1.15"));
+        assertTrue(t.toString().equals("kuvaus                      10,00        15.1.2013 - 15.1.2014"));
     }
     
     @Test

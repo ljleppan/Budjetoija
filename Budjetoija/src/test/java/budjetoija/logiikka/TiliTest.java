@@ -143,28 +143,28 @@ public class TiliTest {
     }
     
     @Test
-    public void ToistuvienTilitapahtumienHakeminenAjallaPalauttaaOikeanMaaranYksittaisiaTapahtumia(){
+    public void ToistuvienTilitapahtumienHakeminenTilitapahtuminaAjallaPalauttaaOikeanMaaranYksittaisiaTapahtumia(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        assertTrue(tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,31)).size() == 1);
-        assertTrue(tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2012,0,1), new GregorianCalendar(2014,0,31)).size() == 12);
+        assertTrue(tili.getToistuvatTilitapahtumatTilitapahtuminaAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,31)).size() == 1);
+        assertTrue(tili.getToistuvatTilitapahtumatTilitapahtuminaAjalta(new GregorianCalendar(2012,0,1), new GregorianCalendar(2014,0,31)).size() == 12);
     }
     
     @Test
     public void ToistuvienTilitapahtuminenHakeminenAjallaPalauttaaAloituspaivanTapahtumat(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        assertTrue(tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,0,31)).size() == 1);
+        assertTrue(tili.getToistuvatTilitapahtumatTilitapahtuminaAjalta(new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,0,31)).size() == 1);
     }
     
     @Test
     public void ToistuvienTilitapahtumienHakeminenAjallaPalauttaaLopetuspaivanTapahtumat(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        assertTrue(tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,15)).size() == 1);
+        assertTrue(tili.getToistuvatTilitapahtumatTilitapahtuminaAjalta(new GregorianCalendar(2013,0,1), new GregorianCalendar(2013,0,15)).size() == 1);
     }
     
     @Test
     public void ToistuvienTilitapahtumienHakeminenAjallaKonvertoiTilitapahtumilleOikeatAikaleimat(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        ArrayList<Tilitapahtuma> t = tili.getToistuvatTilitapahtumatAjalta(new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,2,31));
+        ArrayList<Tilitapahtuma> t = tili.getToistuvatTilitapahtumatTilitapahtuminaAjalta(new GregorianCalendar(2013,0,15), new GregorianCalendar(2013,2,31));
         assertTrue(t.get(2).getAikaleima().get(Calendar.MONTH) == 2);
     }
     
