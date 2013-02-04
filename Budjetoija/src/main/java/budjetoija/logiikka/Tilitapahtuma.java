@@ -3,6 +3,11 @@ package budjetoija.logiikka;
 import java.util.Calendar;
 import java.util.Collections;
 
+/**
+ * Kuvaa yksittäistä, sellaisenaan toistumatonta tilitapahtumaa, kuten kauppakäyntiä.
+ * 
+ */
+
 public class Tilitapahtuma {
     private String kuvaus;
     private Summa summa;
@@ -19,6 +24,13 @@ public class Tilitapahtuma {
         return this.kuvaus;
     }
     
+    /**
+     * Asettaa tapahtumalle uuden kuvauksen poistaen laittomat merkit.
+     * 
+     * Syötteestä poistetaan kaikki puolipisteet, jotta mahdollinen csv-muunnos onnistuu.
+     * 
+     * @param   kuvaus  tapahtuman uusi kuvaus.
+     */    
     public void setKuvaus(String kuvaus){
         this.kuvaus = kuvaus.replaceAll(";", "");
     }
@@ -34,7 +46,14 @@ public class Tilitapahtuma {
     public Calendar getAikaleima(){
         return this.aikaleima;
     }
-    
+
+    /**
+     * Asettaa tilitapahtumalle uuden aikaleiman.
+     * 
+     * Uudesta aikaleimasta poistetaan kaikki tunteja ja niitä pienempiä aikayksiköitä koskeva tieto.
+     * 
+     * @param   aikaleima   tapahtuman uusi aikaleima.
+     */    
     public void setAikaleima(Calendar aikaleima){
         this.aikaleima = aikaleima;
         siistiAikaleima();
@@ -73,6 +92,11 @@ public class Tilitapahtuma {
         return hash;
     }
 
+    /**
+     * Poistaa tilitapahtuman aikaleimasta tarpeettoman tiedon.
+     * 
+     * Aikaleimasta poistetaan kaikki tunteja, minuutteja, sekunteja ja millisekunteja koskeva tieto.
+     */
     private void siistiAikaleima() {
         this.aikaleima.clear(Calendar.HOUR);
         this.aikaleima.clear(Calendar.MINUTE);

@@ -8,6 +8,11 @@ import budjetoija.logiikka.ToistuvaTilitapahtuma;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * Budjetoijan main-luokka, josta ohjelma itsessään käynnistyy.
+ * 
+ */
+
 public class Budjetoija {
 
     public static void main(String[] args) {
@@ -40,6 +45,9 @@ public class Budjetoija {
 //        for (Tilitapahtuma t : tili.getTilitapahtumatAjalta(alkuPvm, loppuPvm)){
 //            System.out.println(t);
 //        }
+        
+        System.out.println(new Tilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15)));
+        System.out.println(new ToistuvaTilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15), new GregorianCalendar(2014,0,15)));
         
         GUI ui = new GUI(tili);
         java.awt.EventQueue.invokeLater(ui);

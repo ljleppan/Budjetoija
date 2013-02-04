@@ -11,6 +11,10 @@ import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 
+/**
+ * Budjetoijan käyttöliittymä.
+ */
+
 public class GUI extends javax.swing.JFrame implements Runnable{
 
     Tili tili;
@@ -702,9 +706,9 @@ public class GUI extends javax.swing.JFrame implements Runnable{
         
         listausList.setListData(tapahtumat.toArray());
         
-        for (Object o : tapahtumat){
-            System.out.println(o);
-        }
+//        for (Object o : tapahtumat){
+//            System.out.println(o);
+//        }
     }
 
     private void vaihdaToistuvuusCheckBoxValinta() {

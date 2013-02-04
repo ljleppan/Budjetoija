@@ -62,7 +62,29 @@ public class TilitapahtumaTest {
     
     @Test
     public void TilitapahtumaTulostuuOikein(){
-        assertTrue(t.toString().equals("kuvaus                      10,00        15.1.2013"));
+        assertTrue(t.toString().equals("kuvaus                                10,00             15.1.2013"));
+    }
+    
+    @Test
+    public void equalsPalauttaaTrueJosObjektitOvatSamat(){
+        assertTrue(t.equals(t));
+    }
+    
+    @Test
+    public void equalsPalauttaaFalseJosSyoteEiOleTyyppiaTilitapahtuma(){
+        assertFalse(t.equals("asd"));
+    }
+    
+    @Test
+    public void equalsTarkistaaKaikkiVertailtavatOminaisuudet(){
+        assertFalse(t.equals(new Tilitapahtuma("väärä kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15))));
+        assertFalse(t.equals(new Tilitapahtuma("kuvaus", new Summa(1001), new GregorianCalendar(2013,0,15))));
+        assertFalse(t.equals(new Tilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,1,15))));
+    }
+    
+    @Test
+    public void equalsHyvaksyyEriObjektinJollaSamatOminaisuudet(){
+        assertTrue(t.equals(new Tilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15))));
     }
     
     

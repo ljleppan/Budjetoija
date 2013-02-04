@@ -7,8 +7,7 @@ package budjetoija.util;
 import budjetoija.logiikka.Tili;
 
 /**
- *
- * @author ljleppan
+ * Tallentaa ja lataa tilitietoja tiedostoon ja takaisin.
  */
 public class TallentajaLataaja {
     private Konvertoija konvertoija;
@@ -35,11 +34,22 @@ public class TallentajaLataaja {
         this.kasittelija = kasittelija;
     }
     
+    /**
+     * Tallentaa tili tiedostoon.
+     * @param tili Tallennettava tili.
+     * @param tiedostopolku Tiedosto johon tili tallennetaan.
+     * @return Onnistumista kuvaava boolean.
+     */
     public boolean tallennaTili(Tili tili, String tiedostopolku){
         kasittelija.setTiedostopolku(tiedostopolku);
         return kasittelija.tallenna(konvertoija.tili2csv(tili));
     }
     
+    /**
+     * Lataa tilin tiedostosta.
+     * @param tiedostopolku Tiedosto josta tili ladataan.
+     * @return Ladattu tili.
+     */
     public Tili lataaTili(String tiedostopolku){
         kasittelija.setTiedostopolku(tiedostopolku);
         return konvertoija.csv2tili(kasittelija.lue());

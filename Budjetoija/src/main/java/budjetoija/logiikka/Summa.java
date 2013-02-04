@@ -1,5 +1,9 @@
 package budjetoija.logiikka;
 
+/**
+ * Rahasummaa kuvaava luokka
+ * 
+ */
 
 public class Summa {
     int summa;
@@ -21,7 +25,13 @@ public class Summa {
     public void setSummaInt(int summa){
         this.summa = summa;
     }
-    
+
+    /**
+     * 
+     * Palauttaa summan kuvaaman rahasumma String-muotoisena.
+     * 
+     * @return rahasumman String-muotoisena.
+     */
     public String getSummaString(){
         String summaStr = ""+this.summa;
         if (summaStr.length() > 2){
@@ -34,7 +44,12 @@ public class Summa {
         }
         return "0,0" + summaStr;
     }
-    
+
+    /**
+     * Vaihtaa rahasumman String-muotoisena annetun syötteen mukaiseksi.
+     * 
+     * @param   summa   String-muotoinen kuvaus summasta.
+     */
     public boolean setSummaString(String summa){
         if (summa == null){
             return false;
@@ -57,8 +72,15 @@ public class Summa {
         return getSummaString();
     }
 
+    /**
+     * Tarkistaa onko syöte muodoltaan kaksi tai enemmän desimaaleja sisältävä numeraali.
+     * Hyväksyy syötteen joka on muotoa "* numeroa, pilkku, 2-* numeroa, EOL".
+     * 
+     * @param   summa   Tarkistettava String-muotoinen syöte.
+     * 
+     * @return  Syötteen täsmäävyys
+     */
     private boolean kaksiTaiEnemmanDesimaalia(String summa) throws NumberFormatException {
-        // * numeroa, pilkku, 2-* numeroa, EOL
         if (summa.matches("[0-9]*[,][0-9]{2,}$")) {
             String[] summaOsissa = summa.split(",");
             this.summa = Integer.parseInt(summaOsissa[0] + summaOsissa[1].subSequence(0, 2));
@@ -66,9 +88,16 @@ public class Summa {
         }
         return false;
     }
-
+    
+    /**
+     * Tarkistaa onko syöte muodoltaan yhden desimaalin sisältävä numeraali.
+     * Hyväksyy syötteen joka on muotoa "* numeroa, pilkku, numero, EOL".
+     * 
+     * @param   summa   Tarkistettava String-muotoinen syöte.
+     * 
+     * @return  Syötteen täsmäävyys
+     */
     private boolean yksiDesimaali(String summa) throws NumberFormatException {
-        // * numeroa, pilkku, numero, EOL
         if (summa.matches("[0-9]*[,][0-9]$")) {
             String[] summaOsissa = summa.split(",");
             this.summa = Integer.parseInt(summaOsissa[0] + summaOsissa[1] + "0");
@@ -76,9 +105,16 @@ public class Summa {
         }
         return false;
     }
-
+    
+    /**
+     * Tarkistaa onko syöte muodoltaan desimaaleja sisältämätön numeraali.
+     * Hyväksyy syötteen joka on muotoa "* numeroa, 0-1 pilkku, EOL".
+     * 
+     * @param   summa   Tarkistettava String-muotoinen syöte.
+     * 
+     * @return  Syötteen täsmäävyys
+     */
     private boolean eiDesimaaleja(String summa) throws NumberFormatException {
-        // * numeroa, 0-1 pilkku, EOL
         if (summa.matches("[0-9]+[,]?$")) {
             summa = summa.replaceAll("[,]", "");
             this.summa = Integer.parseInt(summa + "00");

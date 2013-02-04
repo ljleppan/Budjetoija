@@ -9,10 +9,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+* Tallentaa ja lataa tekstimuotoista tietoa käyttäjän spesifioimasta tiedostosta.
+*/
+
 public class Tiedostonkasittelija {
     private String tiedostopolku;
 
     public Tiedostonkasittelija(String tiedostopolku){
+        
         this.tiedostopolku = tiedostopolku;
     }
     
@@ -24,6 +29,10 @@ public class Tiedostonkasittelija {
         this.tiedostopolku = tiedostopolku;
     }
     
+    /**
+     * Lukee tiedoston rivit ArrayList-muotoiseen listaan.
+     * @return ArrayList-muotoinen listaus tiedoston riveistä.
+     */
     public ArrayList<String> lue(){
         ArrayList<String> data = new ArrayList();
         
@@ -45,6 +54,12 @@ public class Tiedostonkasittelija {
         return data;
     }
 
+    /**
+     * Tallentaa annetut rivit.
+     * Tallennuskohde on tiedostonkäsittelijälle toisaalla määritelty tiedostopolku.
+     * @param data Tallennettavat rivit ArrayList-muotoisessa listauksessa.
+     * @return Onnistumista kuvaava boolean.
+     */
     public boolean tallenna(ArrayList<String> data){
         try{
             BufferedWriter kirjoittaja = new BufferedWriter(new FileWriter(this.tiedostopolku));
@@ -61,6 +76,10 @@ public class Tiedostonkasittelija {
         }
     }
 
+    /**
+     * Luo tiedoston, mikäli sitä ei ole olemassa.
+     * @return Onnistumista kuvaava boolean.
+     */
     public boolean luoTiedosto() {
         try{
             File tiedosto = new File(this.tiedostopolku);
@@ -73,6 +92,10 @@ public class Tiedostonkasittelija {
         }
     }
 
+    /**
+     * Tarkistaa onko tiedosto olemassa.
+     * @return Tiedoston olemassaoloa kuvaavan booleanin.
+     */
     public boolean tiedostoOlemassa() {
         File tiedosto = new File(this.tiedostopolku);
         return tiedosto.exists();

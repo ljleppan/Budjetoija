@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package budjetoija.logiikka;
 
 import java.util.Comparator;
 
 /**
  *
- * @author ljleppan
+ * Toteuttaa Comparator -luokan Tilitapahtuma-luokan ilmentymille.
  */
 public class TilitapahtumaComparator implements Comparator<Tilitapahtuma> {
 

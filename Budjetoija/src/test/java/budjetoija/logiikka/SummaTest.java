@@ -146,4 +146,28 @@ public class SummaTest {
         Summa summa = new Summa(1234);
         assertFalse(summa.setSummaString("asd"));
     }
+    
+    @Test
+    public void equalsPalauttaaTrueJosObjektitOvatSamat(){
+        Summa summa = new Summa(1234);
+        assertTrue(summa.equals(summa));
+    }
+    
+    @Test
+    public void equalsPalauttaaFalseJosSyoteEiOleTyyppiaTilitapahtuma(){
+        Summa summa = new Summa(1234);
+        assertFalse(summa.equals("asd"));
+    }
+    
+    @Test
+    public void equalsTarkistaaVertailtavatOminaisuudet(){
+        Summa summa = new Summa(1234);
+        assertFalse(summa.equals(new Summa(234)));
+    }
+    
+    @Test
+    public void equalsHyvaksyyEriObjektinJollaSamatOminaisuudet(){
+        Summa summa = new Summa(1234);
+        assertTrue(summa.equals(new Summa(1234)));
+    }
 }

@@ -5,6 +5,11 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 
+/**
+ * Kuvaa tiliä, jonka muodostavat erilaiset toistuvat ja yksittäiset tilitapahtumat.
+ * 
+ */
+
 public class Tili {
     private String nimi;
     private ArrayList<Tilitapahtuma> tapahtumat;
@@ -24,6 +29,13 @@ public class Tili {
         this.nimi = nimi;
     }
     
+    /**
+     * Palauttaa tiliin tallennetun tilitapahtuman joka on funktionaalisesti identtinen syötteen kanssa.
+     * 
+     * @param tilitapahtuma Tilitapahtuma jonka kanssa funktionaalisesti identtistä tilitapahtumaa etsitään.
+     * 
+     * @return Viittaus löydettyyn tilitapahtumaan tai null, mikäli vastaavaa tilitapahtumaa ei löytynyt.
+     */
     public Tilitapahtuma getTilitapahtuma(Tilitapahtuma tilitapahtuma){
         for (Tilitapahtuma t : this.tapahtumat){
             if (t.equals(tilitapahtuma)){
@@ -33,18 +45,35 @@ public class Tili {
         return null;
     }
     
+    /**
+     * Järjestelee yksittäiset tilitapahtumat aikaleiman mukaan ja palauttaa viittauksen niiden listaukseen.
+     * 
+     * @return ArrayList -muotoinen listaus tilitapahtumista aikaleiman mukaan järjestettynä.
+     */
     public ArrayList<Tilitapahtuma> getTilitapahtumat(){
         Collections.sort(tapahtumat, new TilitapahtumaComparator());
         return this.tapahtumat;
     }
     
+    /**
+     * Järjestelee toistuvat tilitapahtumat alkuajankohdan mukaan ja palauttaa viittauksen niiden listaukseen.
+     * 
+     * @return ArrayList -muotoinen listaust toistuvista tilitapahtumista aikaleiman mukaan järjestettynä.
+     */
     public ArrayList<ToistuvaTilitapahtuma> getToistuvatTilitapahtumat(){
         Collections.sort(toistuvatTapahtumat, new ToistuvaTilitapahtumaComparator());
         return this.toistuvatTapahtumat;
     }
     
+    /**
+     * Palauttaa listauksen tiettyjen päivämäärien välille sijoittuvista tilitapahtumista.
+     * 
+     * @param alkupvm   Alhaisin hyväksyttävä päivämäärä.
+     * @param loppupvm  Viimeisin hyväksyttävä päivämäärä.
+     * 
+     * @return ArrayList -muotoinen listaus tilitapahtumista.
+     */
     public ArrayList<Tilitapahtuma> getTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
-        
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();     
         alkupvm.add(Calendar.DAY_OF_MONTH, -1);
         loppupvm.add(Calendar.DAY_OF_MONTH, 1);
@@ -57,6 +86,16 @@ public class Tili {
         return palautettava;
     }
     
+   /**
+    * Palauttaa päivämäärien sisään jäävien toistuvien tilitapahtumien tapahtumakerrat yksittäisiksi tilitapahtumiksi muutettuina.
+    * 
+    * Järjestää palautettavan listan tapahtumat aikajärjestykseen.
+    * 
+    * @param alkupvm   Aikaisin hyväksyttävä päivämäärä.
+    * @param loppupvm  Viimeisin hyväksyttävä päivämäärä.
+    * 
+    * @return ArrayList -muotoinen listaus, jossa jokainen toistuvan tilitapahtuman toistumakerta yksittäisenä tilitapahtumana.
+    */
     public ArrayList<Tilitapahtuma> getToistuvatTilitapahtumatTilitapahtuminaAjalta(Calendar alkupvm, Calendar loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
         alkupvm.add(Calendar.DAY_OF_MONTH, -1);
@@ -71,11 +110,22 @@ public class Tili {
         return palautettava;
     }
     
+    /**
+     * Palauttaa edes osittain annetun päivämäärävälin sisään jäävät toistuvat tilitapahtumat listana.
+     * 
+     * Järjestää palautettavan listan toistuvien tilitapahtumien alkupäivämäärien mukaan.
+     * 
+     * @param   alkupvm     Ensimmäinen hyväksyttävä päivämäärä.
+     * @param   loppupvm    Viimeinen hyväksyttävä päivämäärä.
+     * 
+     * @return ArrayList -muotoinen listaus tilitapahtumista.
+     */
     public ArrayList<ToistuvaTilitapahtuma> getToistuvatTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
         ArrayList<ToistuvaTilitapahtuma> palautettava = new ArrayList();
         alkupvm.add(Calendar.DAY_OF_MONTH, -1);
         for (ToistuvaTilitapahtuma tt : this.toistuvatTapahtumat){
-            if (tt.getAlkupvm().after(alkupvm) && tt.getAlkupvm().before(loppupvm)){
+            if ((tt.getAlkupvm().after(alkupvm) && tt.getAlkupvm().before(loppupvm))
+                    || tt.getLoppupvm().after(alkupvm) && tt.getLoppupvm().before(loppupvm)){
                 palautettava.add(tt);
             }
         }
@@ -83,6 +133,19 @@ public class Tili {
         return palautettava;
     }
     
+    /**
+     * Palauttaa kaikkien tiettyjen päivämäärien välillä tapahtuvien tilitapahtumien listauksen.
+     * 
+     * Palauttaa kaikkien tiettyjen päivämäärien välillä tapahtuvien tilitapahtumien listauksen, joka sisältää
+     * kaikki aikavälin yksittäiset tilitapahtumat sekä toistuvien tilitapahtumien aikavälin sisään jäävät
+     * kerrat yksittäisinä tilitapahtumina.
+     * Listaus on järjestetty tapahtumien päivämäärien mukaan.
+     * 
+     * @param   alkupvm     Ensimmäinen hyväksyttävä päivämäärä.
+     * @param   loppupvm    Viimeinen hyväksyttävä päivämäärä.
+     * 
+     * @return  ArrayList -muotoinen listaus tilitapahtumista.
+     */
     public ArrayList<Tilitapahtuma> getKaikkiTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
         palautettava.addAll(getTilitapahtumatAjalta(alkupvm, loppupvm));
@@ -91,10 +154,22 @@ public class Tili {
         return palautettava;
     }
     
+    /**
+     * Lisää tilille syötteenä annetun tilitapahtuman
+     * 
+     * @param tapahtuma tilille lisättävä tilitapahtuma.
+     */
     public void lisaaTilitapahtuma(Tilitapahtuma tapahtuma){
         this.tapahtumat.add(tapahtuma);
     }
     
+    /**
+     * Poistaa tililtä syötteenä annettua tapahtumaa vastaavan tapahtuman.
+     * 
+     * @param   tapahtuma   poistettava tilitapahtuma.
+     * 
+     * @return  Suorituksen onnistumista kuvaava boolean.
+     */    
     public boolean poistaTilitapahtuma(Tilitapahtuma tapahtuma){
         if (this.tapahtumat.contains(tapahtuma)){
             this.tapahtumat.remove(tapahtuma);
@@ -103,10 +178,27 @@ public class Tili {
         return false;
     }
     
+   /**
+    * Lisää tilille toistuvan tilitapahtuman.
+    * 
+    * @param tapahtuma tilille lisättävä toistuva tilitapahtuma.
+    */   
     public void lisaaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma){
         this.toistuvatTapahtumat.add(tapahtuma);
     }
     
+    /**
+     * Muuntaa tilitapahtumiksi ja poistaa toistuvan tilitapahtuman.
+     * 
+     * Muuntaa syötteenä annetun toistuvan tilitapahtuman ennen loppupäivämäärä 
+     * sijoittuvat tapahtumakerrat yksittäisiksi tilitapahtumiksi ja poistaa
+     * toistuvan tilitapahtuman.
+     * 
+     * @param   tapahtuma   Muunnettava ja poistettava toistuva tilitapahtuma.
+     * @param   loppupvm    Päivämäärä jonka jälkeisiä toistuvan tilitapahtuman tapahtumakertoja ei kovenvertoida.
+     * 
+     * @return  Suorituksen onnistumista kuvaava boolean.
+     */
     public boolean konvertoiJaPoistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma, Calendar loppupvm){
         if (!poistaToistuvaTilitapahtuma(tapahtuma)){
             return false;
@@ -115,7 +207,14 @@ public class Tili {
         this.tapahtumat.addAll(konvertoitu);       
         return true;
     }
-    
+
+    /**
+     * Poistaa toistuvan tilitapahtuman tililtä.
+     * 
+     * @param   tapahtuma   Poistettava tapahtuma.
+     * 
+     * @return Suorituksen onnistumista kuvaava boolean.
+     */
     public boolean poistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma){
         if (this.toistuvatTapahtumat.contains(tapahtuma)){
             this.toistuvatTapahtumat.remove(tapahtuma);

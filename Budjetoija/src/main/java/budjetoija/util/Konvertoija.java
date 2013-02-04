@@ -7,12 +7,23 @@ import budjetoija.logiikka.ToistuvaTilitapahtuma;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
+/**
+* Konvertoi tili-muotoista dataa csv-muotoiseksi ja toisin päin.
+* 
+*/
 public class Konvertoija {
+    
     
     public Konvertoija(){
     }
     
+    
+    /**
+     * Muuntaa annetun tilin csv-muotoon.
+     * Muunnossa tili sekä sen kaikki yksittäiset ja toistuvat tilitapahtumat muunnetaan csv-muotoisiksi stringeiksi, jotka palautetaan ArrayList-muodossa.
+     * @param tili Muunnettava tili.
+     * @return ArrayList-muotoinen csv-rivien kokoelma.
+     */
     public ArrayList<String> tili2csv(Tili tili){
         ArrayList<String> csv = new ArrayList();
         csv.add(tili.getNimi());        
@@ -26,6 +37,11 @@ public class Konvertoija {
         return csv;
     }
     
+    /**
+     * Muuntaa annetun toistuvan tilitapahtuman csv-muotoon.
+     * @param tapahtuma Muunnettava toistuva tilitapahtuma.
+     * @return csv-muotoinen string.
+     */
     public String toistuvaTilitapahtuma2csv(ToistuvaTilitapahtuma tapahtuma){
         String csv = "";
         csv = csv.concat(tapahtuma.getKuvaus()+";");
@@ -39,6 +55,11 @@ public class Konvertoija {
         return csv;
     }
     
+    /**
+     * Muuntaa annetun tilitapahtuman csv-muotoon.
+     * @param tapahtuma Muunnettava tilitapahtuma.
+     * @return csv-muotoinen string.
+     */
     public String tilitapahtuma2csv(Tilitapahtuma tapahtuma){
         String csv = "";
         csv = csv.concat(tapahtuma.getKuvaus()+";");
@@ -49,6 +70,12 @@ public class Konvertoija {
         return csv;
     }
     
+    /**
+     * Muuntaa syötteenä saadun csv-datan tiliksi.
+     * Muunnossa luodaan csv-muotoisen datan pohjalta tili sekä sen yksittäisen ja toistuvat tilitapahtumat.
+     * @param csv ArrayList-muotoinen listaus csv-muotoisista stringeistä.
+     * @return Palautettu tili.
+     */
     public Tili csv2tili(ArrayList<String> csv){        
         Tili tili = new Tili(csv.get(0));
         
@@ -74,6 +101,11 @@ public class Konvertoija {
         return tili;
     }
     
+    /**
+     * Muuntaa csv-muotoisen stringin toistuvaksi tilitapahtumaksi.
+     * @param rivi  Muunnettava csv-muotoinen string.
+     * @return  Muunnettu toistuva tilitapahtuma.
+     */
     public ToistuvaTilitapahtuma csv2toistuvaTilitapahtuma(String rivi){
         String[] riviPalasina = rivi.split(";");
         
@@ -98,6 +130,11 @@ public class Konvertoija {
         return new ToistuvaTilitapahtuma(kuvaus, summa, alkupvm, loppupvm);
     }
     
+    /**
+     * Muuntaa csv-muotoisen stringin tilitapahtumaksi.
+     * @param rivi Muunnettava csv-muotoinen string.
+     * @return Muunnettu tilitapahtuma.
+     */
     public Tilitapahtuma csv2tilitapahtuma(String rivi){
         String[] riviPalasina = rivi.split(";");
         

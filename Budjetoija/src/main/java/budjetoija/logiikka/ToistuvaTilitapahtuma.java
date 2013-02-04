@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * Kuvaa kerran kuussa toteutuvaa vakiosummaista tilitapahtumaa kuten vuokra tai palkka.
+ * 
+ */
+
 public class ToistuvaTilitapahtuma{
     private String kuvaus;
     private Summa summa;
@@ -27,6 +32,11 @@ public class ToistuvaTilitapahtuma{
         return this.kuvaus;
     }
     
+    /**
+     * Asettaa toistuvalle tilitapahtumalle uuden kuvauksen.
+     * Poistaa kuvauksesta puolipisteet mahdollista csv-konversiota varten. 
+     * @param kuvaus Toistuvan tilitapahtuman uusi kuvaus.
+     */
     public void setKuvaus(String kuvaus){
         this.kuvaus = kuvaus.replaceAll(";", "");
     }
@@ -43,6 +53,12 @@ public class ToistuvaTilitapahtuma{
         return this.alkupvm;
     }
     
+    /**
+     * Asettaa toistuvalle tilitapahtumalle uuden alkupäivämäärän.
+     * Hyväksyy uudeksi alkupäivämääräksi vain päivämäärän joka on ennen loppupäivämäärää.
+     * @param alkupvm   Uusi alkupäivämäärä.
+     * @return Onnistumista kuvaava boolean.
+     */
     public boolean setAlkupvm(Calendar alkupvm){
         if (alkupvm.after(this.loppupvm)){
             return false;
@@ -56,6 +72,12 @@ public class ToistuvaTilitapahtuma{
         return this.loppupvm;
     }
 
+    /**
+     * Asettaa toistuvalle tilitapahtumalle uuden loppupäivämäärän.
+     * Hyväksyttävän päivämäärän täytyy olla alkupäivämäärän jälkeen.
+     * @param loppupvm  Uusi loppupäivämäärä.
+     * @return Onnistumista kuvaava boolean.
+     */
     public boolean setLoppupvm(Calendar loppupvm){
         if (loppupvm.before(this.alkupvm)){
             return false;
@@ -65,6 +87,13 @@ public class ToistuvaTilitapahtuma{
         return true;
     }
     
+    /**
+     * Laskee toistuvan tilitapahtuman tietyn aikavälin maksukertojen määrän.
+     * 
+     * @param alaraja   Aikarajan alaraja.
+     * @param ylaraja   Aikarajan yläraja.
+     * @return Maksukertojen määrä.
+     */
     public int maksukerratAikavalilla(Calendar alaraja, Calendar ylaraja){
         if (this.alkupvm.after(ylaraja) || this.loppupvm.before(alaraja)){
             return 0;
@@ -96,6 +125,13 @@ public class ToistuvaTilitapahtuma{
         
     }
     
+    /**
+     * Muuntaa toistuvan tilitapahtuman yksittäisiksi tilitapahtumiksi yläaikarajalla.
+     * Muuntaa toistuvan tilitapahtuman tapahtumatkerrat yksittäisiksi tilitapahtumiksi sikäli
+     * kuin yksittäisten tilitapahtumien päivämäärä on ennen annettua ylärajaa.
+     * @param loppupvm  Viimeinen hyväksytty päivämäärä.
+     * @return ArrayList-muotoinen listaus konvertoiduista tilitapahtumista.
+     */
     public ArrayList<Tilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Calendar loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
         
@@ -126,6 +162,10 @@ public class ToistuvaTilitapahtuma{
         return tuloste;
     }
 
+    /**
+     * Siistii toistuvan tilitapahtuman aikaleimat siten.
+     * Siistittäessä poistetaan tunteja, minuutteja, sekunteja ja millisekunteja koskevat tiedot.
+     */
     private void siistiAikaleimat() {
         this.alkupvm.clear(Calendar.HOUR);
         this.alkupvm.clear(Calendar.MINUTE);
@@ -135,5 +175,30 @@ public class ToistuvaTilitapahtuma{
         this.loppupvm.clear(Calendar.MINUTE);
         this.loppupvm.clear(Calendar.SECOND);
         this.loppupvm.clear(Calendar.MILLISECOND);
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if (this == o){ return true;}
+        if (!(o instanceof ToistuvaTilitapahtuma)){ return false;}
+        
+        ToistuvaTilitapahtuma t = (ToistuvaTilitapahtuma)o;
+        if (this.kuvaus.equals(t.kuvaus) &&
+                this.summa.equals(t.summa) &&
+                this.alkupvm.equals((t.alkupvm)) &&
+                this.loppupvm.equals(t.loppupvm)){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + (this.kuvaus != null ? this.kuvaus.hashCode() : 0);
+        hash = 67 * hash + (this.summa != null ? this.summa.hashCode() : 0);
+        hash = 67 * hash + (this.alkupvm != null ? this.alkupvm.hashCode() : 0);
+        hash = 67 * hash + (this.loppupvm != null ? this.loppupvm.hashCode() : 0);
+        return hash;
     }
 }

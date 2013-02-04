@@ -111,7 +111,7 @@ public class ToistuvaTilitapahtumaTest {
     
     @Test
     public void ToistuvaTilitapahtumaTulostuuOikein(){
-        assertTrue(t.toString().equals("kuvaus                      10,00        15.1.2013 - 15.1.2014"));
+        assertTrue(t.toString().equals("kuvaus                                10,00             15.1.2013 - 15.1.2014"));
     }
     
     @Test
@@ -126,5 +126,28 @@ public class ToistuvaTilitapahtumaTest {
     @Test
     public void ToistuvaTilitapahtumaKonvertoiOikeinAikaleimoin(){
         assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new GregorianCalendar(2013,2,15)).get(2).getAikaleima().get(Calendar.MONTH) == 2);
+    }
+    
+        @Test
+    public void equalsPalauttaaTrueJosObjektitOvatSamat(){
+        assertTrue(t.equals(t));
+    }
+    
+    @Test
+    public void equalsPalauttaaFalseJosSyoteEiOleTyyppiaTilitapahtuma(){
+        assertFalse(t.equals("asd"));
+    }
+    
+    @Test
+    public void equalsTarkistaaKaikkiVertailtavatOminaisuudet(){
+        assertFalse(t.equals(new ToistuvaTilitapahtuma("väärä kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15), new GregorianCalendar(2014,0,15))));
+        assertFalse(t.equals(new ToistuvaTilitapahtuma("kuvaus", new Summa(1001), new GregorianCalendar(2013,0,15), new GregorianCalendar(2014,0,15))));
+        assertFalse(t.equals(new ToistuvaTilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,1,15), new GregorianCalendar(2014,0,15))));
+        assertFalse(t.equals(new ToistuvaTilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15), new GregorianCalendar(2014,1,15))));
+    }
+    
+    @Test
+    public void equalsHyvaksyyEriObjektinJollaSamatOminaisuudet(){
+        assertTrue(t.equals(new ToistuvaTilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15), new GregorianCalendar(2014,0,15))));
     }
 }

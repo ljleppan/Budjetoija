@@ -1,16 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package budjetoija.logiikka;
 
 import java.util.Comparator;
 
 /**
- *
- * @author ljleppan
+ * Toimii Comparator -luokan ilmentymänä ToistuvaTilitapahtuma -luokkaa varten.
  */
-class ToistuvaTilitapahtumaComparator implements Comparator<ToistuvaTilitapahtuma>{
+public class ToistuvaTilitapahtumaComparator implements Comparator<ToistuvaTilitapahtuma>{
 
     public ToistuvaTilitapahtumaComparator() {
     }
