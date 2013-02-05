@@ -43,55 +43,45 @@
 |(<paketti>.)<luokka>
 |	<luokan_kuvaus>
 |
-|	Testikattavuus: <Line> : <Branch> : <Mutation>
 |----------------------------------------------------------------------------
 | Budjetoija
 |	Pääluokka, josta ohjelma käynnistyy.
 |
-|	Testikattavuus: 0 : 0 : 0
 |----------------------------------------------------------------------------
 | logiikka.Tilitapahtuma
 |	Yksittäinen tilin tapahtuma, kuten otto tai pano.
 |
-|	Testikattavuus: 100 : 100 : 100
 |----------------------------------------------------------------------------
 | logiikka.ToistuvaTilitapahtuma
 |	Tilitapahtuma, joka toistuu kerran kuussa määritellyllä aikavälillä.
 |	Esimerkiksi vuokra, opintotuki tai kuukausipalkka.
 |
-|	Testikattavuus: 100 : 100 : 100
 |----------------------------------------------------------------------------
 | logiikka.Tili
 |	Tilitapahtumien listaus.
 |
-|	Testikattavuus: 100 : 100 : 100
 |----------------------------------------------------------------------------
 | logiikka.Summa
 |	Rahasumman roolia täyttävä luokka.
 |
-|	Testikattavuus: 100 : 100 : 100
 |----------------------------------------------------------------------------
 | util.Tiedostonkasittelija
 |	Tallentaa ja lataa tiedostoista csv-muotoista dataa arraylistiin.
 |	Rajapinta sovelluksen ja tiedostojärjestelmän välillä.
 |
 |
-|	Testikattavuus: 75 : 100 : 58
 |----------------------------------------------------------------------------
 | util.Konvertoija
 |	Konvertoi tilejä muotoon, jota tiedostonkäsittelijä ymmärtää, sekä
 | 	toisin päin.
 |
-|	Testikattavuus: 100 : 100 : 100
 |----------------------------------------------------------------------------
 | util.TallentajaLataaja
 |	Käyttää konvertoijaa ja tiedostonkäsittelijää tallentamaan ja lataa-
 |	maan käyttäjän tilin tiedostoon/tiedostosta.
 |
-|	Testikattavuus: 0 : 0 : 0
 |----------------------------------------------------------------------------
 | kayttoliittyma.GUI
 |	Ohjelman käyttöliittymä
 |
-|	Testikattavuus: 0 : 0 : 0
 \----------------------------------------------------------------------------
