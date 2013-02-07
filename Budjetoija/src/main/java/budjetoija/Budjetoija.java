@@ -5,7 +5,10 @@ import budjetoija.logiikka.Summa;
 import budjetoija.logiikka.Tili;
 import budjetoija.logiikka.Tilitapahtuma;
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
-import java.util.Calendar;
+import budjetoija.util.Konvertoija;
+import budjetoija.util.TallentajaLataaja;
+import budjetoija.util.Tiedostonkasittelija;
+import java.io.File;
 import java.util.GregorianCalendar;
 
 /**
@@ -23,33 +26,14 @@ public class Budjetoija {
         tili.lisaaTilitapahtuma(new Tilitapahtuma("t3", new Summa(300), new GregorianCalendar(2013, 0, 3)));
         tili.lisaaTilitapahtuma(new Tilitapahtuma("t4", new Summa(300), new GregorianCalendar(2013, 1, 1)));
         tili.lisaaTilitapahtuma(new Tilitapahtuma("t5", new Summa(300), new GregorianCalendar(2013, 2, 1)));
-        tili.lisaaTilitapahtuma(new Tilitapahtuma("t3", new Summa(300), new GregorianCalendar(2014, 0, 1)));
-        tili.lisaaTilitapahtuma(new Tilitapahtuma("t5", new Summa(300), new GregorianCalendar(2014, 1, 1)));
+        tili.lisaaTilitapahtuma(new Tilitapahtuma("t6", new Summa(300), new GregorianCalendar(2014, 0, 1)));
+        tili.lisaaTilitapahtuma(new Tilitapahtuma("t7", new Summa(300), new GregorianCalendar(2014, 1, 1)));
         
         tili.lisaaToistuvaTilitapahtuma(new ToistuvaTilitapahtuma("tt1", new Summa(100), new GregorianCalendar(2013,0,1), new GregorianCalendar(2014,0,1)));
         
-//        Calendar alkuPvm = new GregorianCalendar(2013, 0, 1);
-//        alkuPvm.clear(Calendar.HOUR);
-//        alkuPvm.clear(Calendar.MINUTE);
-//        alkuPvm.clear(Calendar.SECOND);
-//        alkuPvm.clear(Calendar.MILLISECOND);
-//        
-//        Calendar loppuPvm = new GregorianCalendar(2013, 2, 1);
-//        loppuPvm.set(Calendar.DAY_OF_MONTH, loppuPvm.getActualMaximum(Calendar.DAY_OF_MONTH));
-//        loppuPvm.clear(Calendar.HOUR);
-//        loppuPvm.clear(Calendar.MINUTE);
-//        loppuPvm.clear(Calendar.SECOND);
-//        loppuPvm.clear(Calendar.MILLISECOND);
-//        
-//        System.out.println(tili.getTilitapahtumatAjalta(alkuPvm, loppuPvm).size());
-//        for (Tilitapahtuma t : tili.getTilitapahtumatAjalta(alkuPvm, loppuPvm)){
-//            System.out.println(t);
-//        }
+        TallentajaLataaja io = new TallentajaLataaja(new Konvertoija(), new Tiedostonkasittelija(new File("testi.tili")));
         
-        System.out.println(new Tilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15)));
-        System.out.println(new ToistuvaTilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15), new GregorianCalendar(2014,0,15)));
-        
-        GUI ui = new GUI(tili);
+        GUI ui = new GUI(tili, io);
         java.awt.EventQueue.invokeLater(ui);
     }
 }

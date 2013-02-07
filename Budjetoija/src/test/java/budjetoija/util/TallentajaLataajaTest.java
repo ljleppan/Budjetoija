@@ -23,6 +23,7 @@ public class TallentajaLataajaTest {
     TallentajaLataaja io;
     Konvertoija konvertoija;
     Tiedostonkasittelija tiedostonkasittelija;
+    File tiedosto;
     
     public TallentajaLataajaTest() {
     }
@@ -38,7 +39,8 @@ public class TallentajaLataajaTest {
     @Before
     public void setUp() {
         this.konvertoija = new Konvertoija();
-        this.tiedostonkasittelija = new Tiedostonkasittelija(kansio.getRoot()+"/testi.txt");
+        this.tiedosto = new File(kansio.getRoot()+"/testi.txt");
+        this.tiedostonkasittelija = new Tiedostonkasittelija(tiedosto);
         this.io = new TallentajaLataaja(konvertoija, tiedostonkasittelija);
     }
     
@@ -64,7 +66,7 @@ public class TallentajaLataajaTest {
     
     @Test
     public void setTiedostonkasittelijaToimii(){
-        Tiedostonkasittelija t = new Tiedostonkasittelija("./");
+        Tiedostonkasittelija t = new Tiedostonkasittelija(new File("t.tili"));
         io.setTiedostonkasittelija(t);
         assertTrue(io.getTiedostonkasittelija() == t);
     }
@@ -72,32 +74,32 @@ public class TallentajaLataajaTest {
     @Test
     public void tallennaTiliPalauttaaTrueJosTallennusOnnistuu(){
         String polku = kansio.getRoot() + "/testi.txt";
-        assertTrue(io.tallennaTili(new Tili("tili"), polku));
-        assertTrue(new Tiedostonkasittelija(polku).tiedostoOlemassa());
+        assertTrue(io.tallennaTili(new Tili("tili"), tiedosto));
+        assertTrue(new Tiedostonkasittelija(tiedosto).tiedostoOlemassa());
     }
     
     @Test
-    public void tallennaTiliAsettaaPolunOikein(){
+    public void tallennaTiliAsettaaTiedostonOikein(){
         String polku = kansio.getRoot() + "/testi2.txt";
-        io.tallennaTili(new Tili("tili"), polku);
-        assertTrue(io.getTiedostonkasittelija().getTiedostopolku().equals(polku));
+        io.tallennaTili(new Tili("tili"), new File(polku));
+        assertTrue(io.getTiedostonkasittelija().getTiedosto().equals(new File(polku)));
     }
     
     @Test
     public void lataaTiliPalauttaaTrueJosLatausOnnistuu(){
         String polku = kansio.getRoot() + "/testi.txt";
         Tili tili = new Tili("testi");
-        io.tallennaTili(tili, polku);
-        Tili tili2 = io.lataaTili(polku);
+        io.tallennaTili(tili, new File(polku));
+        Tili tili2 = io.lataaTili(new File(polku));
         
         assertTrue(tili2.getNimi().equals(tili.getNimi()));
     }
     
     @Test
-    public void lataaTiliAsettaaTiedostopolunOikein(){
+    public void lataaTiliAsettaaTiedostonOikein(){
         String polku = kansio.getRoot() + "/testi2.txt";
-        io.tallennaTili(new Tili("tili"), polku);
-        io.lataaTili(polku);
-        assertTrue(io.getTiedostonkasittelija().getTiedostopolku().equals(polku));
+        io.tallennaTili(new Tili("tili"), new File(polku));
+        io.lataaTili(new File(polku));
+        assertTrue(io.getTiedostonkasittelija().getTiedosto().equals(new File(polku)));
     }
 }

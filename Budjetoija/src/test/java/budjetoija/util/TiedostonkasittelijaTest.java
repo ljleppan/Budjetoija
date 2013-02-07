@@ -29,7 +29,7 @@ public class TiedostonkasittelijaTest {
     
     @Before
     public void setUp() {
-        kasittelija = new Tiedostonkasittelija("/tiedosto.txt");
+        kasittelija = new Tiedostonkasittelija(new File("/tiedosto.txt"));
         testiArray = new ArrayList();
         testiArray.add("testi");
     }
@@ -43,33 +43,32 @@ public class TiedostonkasittelijaTest {
     
     @Test
     public void tiedostonkasittelijaAlustuuOikein(){
-        assertTrue(kasittelija.getTiedostopolku().equals("/tiedosto.txt"));
+        assertTrue(kasittelija.getTiedosto().equals(new File("/tiedosto.txt")));
     }
     
     @Test
     public void tiedostonkasittelijaSetTiedostopolkuToimii(){
-        kasittelija.setTiedostopolku("testi");
-        assertTrue(kasittelija.getTiedostopolku().equals("testi"));
+        kasittelija.setTiedosto(new File("/testi.txt"));
+        assertTrue(kasittelija.getTiedosto().equals(new File("/testi.txt")));
     }
     
     @Test
     public void tiedostoOlemassaLoytaaOlemassaOlevanTiedoston() throws IOException{
         File tiedosto = kansio.newFile("testi.txt");
-        String polku = kansio.getRoot() + "/testi.txt";
-        kasittelija.setTiedostopolku(polku);
+        kasittelija.setTiedosto(tiedosto);
         assertTrue(kasittelija.tiedostoOlemassa());
     }
     
     @Test
     public void tiedostoOlemassaEiLoydaOlematontaTiedostoa(){
-        kasittelija.setTiedostopolku("testi.txt");
+        kasittelija.setTiedosto(new File("/tiedosto.txt"));
         assertFalse(kasittelija.tiedostoOlemassa());
     }
     
     @Test
     public void luoTiedostoLuoKasketynTiedoston() throws IOException{
         String polku = kansio.getRoot() + "/testi.txt";
-        kasittelija.setTiedostopolku(polku);
+        kasittelija.setTiedosto(new File(polku));
         assertTrue(kasittelija.luoTiedosto());
         assertTrue(kasittelija.tiedostoOlemassa());
     }
@@ -81,14 +80,14 @@ public class TiedostonkasittelijaTest {
     
     @Test
     public void lueTiedostoPalauttaaTyhjanJosTiedostoaEiOleOlemassa(){
-        kasittelija.setTiedostopolku("testi.txt");
+        kasittelija.setTiedosto(new File("testi.txt"));
         assertTrue(kasittelija.lue().isEmpty());
     }
     
     @Test
     public void lueTiedostoPalauttaaTiedostonSisallonValidistaTiedostosta(){
         String polku = kansio.getRoot() + "/testi.txt";
-        kasittelija.setTiedostopolku(polku);
+        kasittelija.setTiedosto(new File(polku));
         assertTrue(kasittelija.tallenna(testiArray));
         assertTrue(kasittelija.lue().get(0).equals("testi"));
     }
@@ -101,7 +100,7 @@ public class TiedostonkasittelijaTest {
     @Test
     public void tallennaTiedostoLuoTiedostonJosSeEiOleJoOlemassa(){
         String polku = kansio.getRoot() + "/testi.txt";
-        kasittelija.setTiedostopolku(polku);
+        kasittelija.setTiedosto(new File(polku));
         assertFalse(kasittelija.tiedostoOlemassa());
         assertTrue(kasittelija.tallenna(testiArray));
         assertTrue(kasittelija.tiedostoOlemassa());
@@ -110,7 +109,7 @@ public class TiedostonkasittelijaTest {
     @Test
     public void tallennaTiedostoKirjoittaaDatanOikeinTyhjaanTiedostoon(){
         String polku = kansio.getRoot() + "/testi.txt";
-        kasittelija.setTiedostopolku(polku);
+        kasittelija.setTiedosto(new File(polku));
         assertTrue(kasittelija.tallenna(testiArray));
         assertTrue(kasittelija.lue().get(0).equals("testi"));
     }
@@ -118,7 +117,7 @@ public class TiedostonkasittelijaTest {
     @Test
     public void tallennaTiedostoYlikirjoittaaOlemassaOlevanTiedoston(){
         String polku = kansio.getRoot() + "/testi.txt";
-        kasittelija.setTiedostopolku(polku);
+        kasittelija.setTiedosto(new File(polku));
         kasittelija.tallenna(testiArray);
         testiArray.set(0, "testi2");
         kasittelija.tallenna(testiArray);

@@ -76,9 +76,8 @@ public class Tili {
     public ArrayList<Tilitapahtuma> getTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();     
         alkupvm.add(Calendar.DAY_OF_MONTH, -1);
-        loppupvm.add(Calendar.DAY_OF_MONTH, 1);
         for (Tilitapahtuma t : tapahtumat){
-            if (t.getAikaleima().after(alkupvm) && t.getAikaleima().before(loppupvm)){
+            if (t.getAikaleima().after(alkupvm) && !(t.getAikaleima().after(loppupvm))){
                 palautettava.add(t);
             }
         }        

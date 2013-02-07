@@ -14,19 +14,19 @@ import java.util.ArrayList;
 */
 
 public class Tiedostonkasittelija {
-    private String tiedostopolku;
+    private File tiedosto;
 
-    public Tiedostonkasittelija(String tiedostopolku){
+    public Tiedostonkasittelija(File tiedosto){
         
-        this.tiedostopolku = tiedostopolku;
+        this.tiedosto = tiedosto;
     }
     
-    public String getTiedostopolku(){
-        return this.tiedostopolku;
+    public File getTiedosto(){
+        return this.tiedosto;
     }
     
-    public void setTiedostopolku(String tiedostopolku){
-        this.tiedostopolku = tiedostopolku;
+    public void setTiedosto(File tiedosto){
+        this.tiedosto = tiedosto;
     }
     
     /**
@@ -40,7 +40,7 @@ public class Tiedostonkasittelija {
             return data;
         }
         try{
-            BufferedReader lukija = new BufferedReader(new FileReader(this.tiedostopolku));
+            BufferedReader lukija = new BufferedReader(new FileReader(this.tiedosto));
             String rivi;
             while ((rivi = lukija.readLine()) != null){
                 data.add(rivi);
@@ -62,7 +62,7 @@ public class Tiedostonkasittelija {
      */
     public boolean tallenna(ArrayList<String> data){
         try{
-            BufferedWriter kirjoittaja = new BufferedWriter(new FileWriter(this.tiedostopolku));
+            BufferedWriter kirjoittaja = new BufferedWriter(new FileWriter(this.tiedosto));
             for (String rivi : data){
                 kirjoittaja.write(rivi);
                 kirjoittaja.newLine();
@@ -82,7 +82,6 @@ public class Tiedostonkasittelija {
      */
     public boolean luoTiedosto() {
         try{
-            File tiedosto = new File(this.tiedostopolku);
             tiedosto.createNewFile();
             return true;
         }
@@ -97,7 +96,6 @@ public class Tiedostonkasittelija {
      * @return Tiedoston olemassaoloa kuvaavan booleanin.
      */
     public boolean tiedostoOlemassa() {
-        File tiedosto = new File(this.tiedostopolku);
         return tiedosto.exists();
     }
 }
