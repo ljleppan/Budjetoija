@@ -98,21 +98,8 @@ public class ToistuvaTilitapahtuma{
         if (this.alkupvm.after(ylaraja) || this.loppupvm.before(alaraja)){
             return 0;
         }
-        
-        Calendar alku;
-        Calendar loppu;
-        
-        if (alaraja.before(this.alkupvm)){
-            alku = this.alkupvm;
-        } else {
-            alku = alaraja;
-        }
-        
-        if (ylaraja.after(this.loppupvm)){
-            loppu = loppupvm;
-        } else {
-            loppu = ylaraja;
-        }
+        Calendar alku = alaraja.before(this.alkupvm) ? this.alkupvm : alaraja;
+        Calendar loppu = ylaraja.after(this.loppupvm) ? this.loppupvm : ylaraja;
 
         int taysiaVuosia = loppu.get(Calendar.YEAR) - alku.get(Calendar.YEAR);
         

@@ -101,7 +101,10 @@ public class Tili {
         for (ToistuvaTilitapahtuma tt : this.toistuvatTapahtumat){
             int maksukerrat = tt.maksukerratAikavalilla(alkupvm, loppupvm);
             for (int i = 0; i < maksukerrat; i++){
-                Calendar aikaleima = new GregorianCalendar(tt.getAlkupvm().get(Calendar.YEAR), tt.getAlkupvm().get(Calendar.MONTH) + i, tt.getAlkupvm().get(Calendar.DAY_OF_MONTH));
+                Calendar aikaleima = new GregorianCalendar(
+                        tt.getAlkupvm().get(Calendar.YEAR), 
+                        tt.getAlkupvm().get(Calendar.MONTH) + i, 
+                        tt.getAlkupvm().get(Calendar.DAY_OF_MONTH));
                 palautettava.add(new Tilitapahtuma(tt.getKuvaus(), tt.getSumma(), aikaleima));
             }
         }

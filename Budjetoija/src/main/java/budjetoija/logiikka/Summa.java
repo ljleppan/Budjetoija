@@ -74,7 +74,7 @@ public class Summa {
 
     /**
      * Tarkistaa onko syöte muodoltaan kaksi tai enemmän desimaaleja sisältävä numeraali.
-     * Hyväksyy syötteen joka on muotoa "* numeroa, pilkku, 2-* numeroa, EOL".
+     * Hyväksyy syötteen joka on muotoa "n numeroa, pilkku, 2-n numeroa, EOL".
      * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
      * 
@@ -91,7 +91,7 @@ public class Summa {
     
     /**
      * Tarkistaa onko syöte muodoltaan yhden desimaalin sisältävä numeraali.
-     * Hyväksyy syötteen joka on muotoa "* numeroa, pilkku, numero, EOL".
+     * Hyväksyy syötteen joka on muotoa "n numeroa, pilkku, numero, EOL".
      * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
      * 
@@ -108,7 +108,7 @@ public class Summa {
     
     /**
      * Tarkistaa onko syöte muodoltaan desimaaleja sisältämätön numeraali.
-     * Hyväksyy syötteen joka on muotoa "* numeroa, 0-1 pilkku, EOL".
+     * Hyväksyy syötteen joka on muotoa "n numeroa, 0-1 pilkku, EOL".
      * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
      * 
