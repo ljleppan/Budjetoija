@@ -1,15 +1,11 @@
 package budjetoija.logiikka;
 
-import budjetoija.logiikka.Tilitapahtuma;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class TilitapahtumaTest {
     
@@ -28,7 +24,7 @@ public class TilitapahtumaTest {
     
     @Before
     public void setUp() {
-        t = new Tilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15));
+        t = new Tilitapahtuma("kuvaus", new Summa(1000), new Paivamaara(2013,0,15));
     }
     
     @After
@@ -39,7 +35,7 @@ public class TilitapahtumaTest {
     public void TilitapahtumaAlustuuOikein(){
         assertTrue(t.getKuvaus().equals("kuvaus"));
         assertTrue(t.getSumma().getSummaInt() == 1000);
-        assertTrue(t.getAikaleima().equals(new GregorianCalendar(2013,0,15)));
+        assertTrue(t.getAikaleima().equals(new Paivamaara(2013,0,15)));
     }
     
     @Test
@@ -56,8 +52,8 @@ public class TilitapahtumaTest {
     
     @Test
     public void TilitapahtumaSetAikaleimaToimii(){
-        t.setAikaleima(new GregorianCalendar (2000,0,1));
-        assertTrue(t.getAikaleima().equals(new GregorianCalendar (2000,0,1)));
+        t.setAikaleima(new Paivamaara (2000,0,1));
+        assertTrue(t.getAikaleima().equals(new Paivamaara (2000,0,1)));
     }
     
     @Test
@@ -77,14 +73,14 @@ public class TilitapahtumaTest {
     
     @Test
     public void equalsTarkistaaKaikkiVertailtavatOminaisuudet(){
-        assertFalse(t.equals(new Tilitapahtuma("väärä kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15))));
-        assertFalse(t.equals(new Tilitapahtuma("kuvaus", new Summa(1001), new GregorianCalendar(2013,0,15))));
-        assertFalse(t.equals(new Tilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,1,15))));
+        assertFalse(t.equals(new Tilitapahtuma("väärä kuvaus", new Summa(1000), new Paivamaara(2013,0,15))));
+        assertFalse(t.equals(new Tilitapahtuma("kuvaus", new Summa(1001), new Paivamaara(2013,0,15))));
+        assertFalse(t.equals(new Tilitapahtuma("kuvaus", new Summa(1000), new Paivamaara(2013,1,15))));
     }
     
     @Test
     public void equalsHyvaksyyEriObjektinJollaSamatOminaisuudet(){
-        assertTrue(t.equals(new Tilitapahtuma("kuvaus", new Summa(1000), new GregorianCalendar(2013,0,15))));
+        assertTrue(t.equals(new Tilitapahtuma("kuvaus", new Summa(1000), new Paivamaara(2013,0,15))));
     }
     
     

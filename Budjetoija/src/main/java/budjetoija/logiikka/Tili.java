@@ -3,7 +3,6 @@ package budjetoija.logiikka;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.GregorianCalendar;
 
 /**
  * Kuvaa tiliä, jonka muodostavat erilaiset toistuvat ja yksittäiset tilitapahtumat.
@@ -73,7 +72,7 @@ public class Tili {
      * 
      * @return ArrayList -muotoinen listaus tilitapahtumista.
      */
-    public ArrayList<Tilitapahtuma> getTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
+    public ArrayList<Tilitapahtuma> getTilitapahtumatAjalta(Paivamaara alkupvm, Paivamaara loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();     
         alkupvm.add(Calendar.DAY_OF_MONTH, -1);
         for (Tilitapahtuma t : tapahtumat){
@@ -95,13 +94,13 @@ public class Tili {
     * 
     * @return ArrayList -muotoinen listaus, jossa jokainen toistuvan tilitapahtuman toistumakerta yksittäisenä tilitapahtumana.
     */
-    public ArrayList<Tilitapahtuma> getToistuvatTilitapahtumatTilitapahtuminaAjalta(Calendar alkupvm, Calendar loppupvm){
+    public ArrayList<Tilitapahtuma> getToistuvatTilitapahtumatTilitapahtuminaAjalta(Paivamaara alkupvm, Paivamaara loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
         alkupvm.add(Calendar.DAY_OF_MONTH, -1);
         for (ToistuvaTilitapahtuma tt : this.toistuvatTapahtumat){
             int maksukerrat = tt.maksukerratAikavalilla(alkupvm, loppupvm);
             for (int i = 0; i < maksukerrat; i++){
-                Calendar aikaleima = new GregorianCalendar(
+                Paivamaara aikaleima = new Paivamaara(
                         tt.getAlkupvm().get(Calendar.YEAR), 
                         tt.getAlkupvm().get(Calendar.MONTH) + i, 
                         tt.getAlkupvm().get(Calendar.DAY_OF_MONTH));
@@ -127,7 +126,8 @@ public class Tili {
         alkupvm.add(Calendar.DAY_OF_MONTH, -1);
         for (ToistuvaTilitapahtuma tt : this.toistuvatTapahtumat){
             if ((tt.getAlkupvm().after(alkupvm) && tt.getAlkupvm().before(loppupvm))
-                    || tt.getLoppupvm().after(alkupvm) && tt.getLoppupvm().before(loppupvm)){
+                    || (tt.getLoppupvm().after(alkupvm) && tt.getLoppupvm().before(loppupvm))
+                    || (tt.getAlkupvm().before(alkupvm) && tt.getLoppupvm().after(loppupvm))){
                 palautettava.add(tt);
             }
         }
@@ -148,7 +148,7 @@ public class Tili {
      * 
      * @return  ArrayList -muotoinen listaus tilitapahtumista.
      */
-    public ArrayList<Tilitapahtuma> getKaikkiTilitapahtumatAjalta(Calendar alkupvm, Calendar loppupvm){
+    public ArrayList<Tilitapahtuma> getKaikkiTilitapahtumatAjalta(Paivamaara alkupvm, Paivamaara loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
         palautettava.addAll(getTilitapahtumatAjalta(alkupvm, loppupvm));
         palautettava.addAll(getToistuvatTilitapahtumatTilitapahtuminaAjalta(alkupvm, loppupvm));
@@ -201,7 +201,7 @@ public class Tili {
      * 
      * @return  Suorituksen onnistumista kuvaava boolean.
      */
-    public boolean konvertoiJaPoistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma, Calendar loppupvm){
+    public boolean konvertoiJaPoistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma, Paivamaara loppupvm){
         if (!poistaToistuvaTilitapahtuma(tapahtuma)){
             return false;
         }

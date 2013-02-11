@@ -1,7 +1,6 @@
 package budjetoija.logiikka;
 
 import java.util.Calendar;
-import java.util.Collections;
 
 /**
  * Kuvaa yksittäistä, sellaisenaan toistumatonta tilitapahtumaa, kuten kauppakäyntiä.
@@ -11,13 +10,12 @@ import java.util.Collections;
 public class Tilitapahtuma {
     private String kuvaus;
     private Summa summa;
-    private Calendar aikaleima;
+    private Paivamaara aikaleima;
     
-    public Tilitapahtuma(String kuvaus, Summa summa, Calendar aikaleima){
+    public Tilitapahtuma(String kuvaus, Summa summa, Paivamaara aikaleima){
         this.kuvaus = kuvaus;
         this.summa = summa;
         this.aikaleima = aikaleima;
-        siistiAikaleima();
     }
     
     public String getKuvaus(){
@@ -43,20 +41,17 @@ public class Tilitapahtuma {
         this.summa = summa;
     }
     
-    public Calendar getAikaleima(){
+    public Paivamaara getAikaleima(){
         return this.aikaleima;
     }
 
     /**
      * Asettaa tilitapahtumalle uuden aikaleiman.
      * 
-     * Uudesta aikaleimasta poistetaan kaikki tunteja ja niitä pienempiä aikayksiköitä koskeva tieto.
-     * 
      * @param   aikaleima   tapahtuman uusi aikaleima.
      */    
-    public void setAikaleima(Calendar aikaleima){
+    public void setAikaleima(Paivamaara aikaleima){
         this.aikaleima = aikaleima;
-        siistiAikaleima();
     }
     
     @Override
@@ -91,19 +86,4 @@ public class Tilitapahtuma {
         hash = 37 * hash + (this.aikaleima != null ? this.aikaleima.hashCode() : 0);
         return hash;
     }
-
-    /**
-     * Poistaa tilitapahtuman aikaleimasta tarpeettoman tiedon.
-     * 
-     * Aikaleimasta poistetaan kaikki tunteja, minuutteja, sekunteja ja millisekunteja koskeva tieto.
-     */
-    private void siistiAikaleima() {
-        this.aikaleima.clear(Calendar.HOUR);
-        this.aikaleima.clear(Calendar.MINUTE);
-        this.aikaleima.clear(Calendar.SECOND);
-        this.aikaleima.clear(Calendar.MILLISECOND);
-    }
-    
-    
-
 }

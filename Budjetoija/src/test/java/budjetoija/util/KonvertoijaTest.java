@@ -4,19 +4,19 @@
  */
 package budjetoija.util;
 
+import budjetoija.logiikka.Paivamaara;
 import budjetoija.logiikka.Summa;
 import budjetoija.logiikka.Tili;
 import budjetoija.logiikka.Tilitapahtuma;
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -34,11 +34,11 @@ public class KonvertoijaTest {
         konvertoija = new Konvertoija();
         tili = new Tili("tili");
         
-        tapahtuma1 = new Tilitapahtuma("Tapahtuma 1", new Summa("1,23"), new GregorianCalendar(2012,1,1));
-        tapahtuma2 = new Tilitapahtuma("Tapahtuma 2", new Summa("12,34"), new GregorianCalendar(2012,1,2));
+        tapahtuma1 = new Tilitapahtuma("Tapahtuma 1", new Summa("1,23"), new Paivamaara(2012,1,1));
+        tapahtuma2 = new Tilitapahtuma("Tapahtuma 2", new Summa("12,34"), new Paivamaara(2012,1,2));
         
-        toistuvaTapahtuma1 = new ToistuvaTilitapahtuma("Toistuva tapahtuma 1", new Summa("123,45"), new GregorianCalendar(2012,1,1), new GregorianCalendar(2012,11,31));
-        toistuvaTapahtuma2 = new ToistuvaTilitapahtuma("Toistuva tapahtuma 2", new Summa("1234,56"), new GregorianCalendar(2014,1,1), new GregorianCalendar(2014,11,31));
+        toistuvaTapahtuma1 = new ToistuvaTilitapahtuma("Toistuva tapahtuma 1", new Summa("123,45"), new Paivamaara(2012,1,1), new Paivamaara(2012,11,31));
+        toistuvaTapahtuma2 = new ToistuvaTilitapahtuma("Toistuva tapahtuma 2", new Summa("1234,56"), new Paivamaara(2014,1,1), new Paivamaara(2014,11,31));
         
         tili.lisaaTilitapahtuma(tapahtuma1);
         tili.lisaaTilitapahtuma(tapahtuma2);

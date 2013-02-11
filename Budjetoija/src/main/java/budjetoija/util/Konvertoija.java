@@ -1,12 +1,12 @@
 package budjetoija.util;
 
+import budjetoija.logiikka.Paivamaara;
 import budjetoija.logiikka.Summa;
 import budjetoija.logiikka.Tili;
 import budjetoija.logiikka.Tilitapahtuma;
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 /**
 * Konvertoi tili-muotoista dataa csv-muotoiseksi ja toisin päin.
 * 
@@ -116,12 +116,12 @@ public class Konvertoija {
         String kuvaus = riviPalasina[0];
         Summa summa = new Summa(riviPalasina[1]);
 
-        Calendar alkupvm = new GregorianCalendar();
+        Paivamaara alkupvm = new Paivamaara();
         alkupvm.set(Calendar.YEAR, Integer.parseInt(riviPalasina[2]));
         alkupvm.set(Calendar.MONTH, Integer.parseInt(riviPalasina[3]));
         alkupvm.set(Calendar.DAY_OF_MONTH, Integer.parseInt(riviPalasina[4]));
 
-        Calendar loppupvm = new GregorianCalendar();
+        Paivamaara loppupvm = new Paivamaara();
         loppupvm.set(Calendar.YEAR, Integer.parseInt(riviPalasina[5]));
         loppupvm.set(Calendar.MONTH, Integer.parseInt(riviPalasina[6]));
         loppupvm.set(Calendar.DAY_OF_MONTH, Integer.parseInt(riviPalasina[7]));
@@ -145,7 +145,7 @@ public class Konvertoija {
         String kuvaus = riviPalasina[0];
         Summa summa = new Summa(riviPalasina[1]);
 
-        Calendar aikaleima = new GregorianCalendar();
+        Paivamaara aikaleima = new Paivamaara();
         aikaleima.set(Calendar.YEAR, Integer.parseInt(riviPalasina[2]));
         aikaleima.set(Calendar.MONTH, Integer.parseInt(riviPalasina[3]));
         aikaleima.set(Calendar.DAY_OF_MONTH, Integer.parseInt(riviPalasina[4]));

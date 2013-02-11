@@ -12,10 +12,10 @@ import java.util.GregorianCalendar;
 public class ToistuvaTilitapahtuma{
     private String kuvaus;
     private Summa summa;
-    private Calendar alkupvm;
-    private Calendar loppupvm;
+    private Paivamaara alkupvm;
+    private Paivamaara loppupvm;
     
-    public ToistuvaTilitapahtuma(String kuvaus, Summa summa, Calendar alkupvm, Calendar loppupvm){
+    public ToistuvaTilitapahtuma(String kuvaus, Summa summa, Paivamaara alkupvm, Paivamaara loppupvm){
         this.kuvaus = kuvaus;
         this.summa = summa;
         if (!alkupvm.after(loppupvm)){
@@ -25,7 +25,6 @@ public class ToistuvaTilitapahtuma{
             this.alkupvm = loppupvm;
             this.loppupvm = alkupvm;
         }
-        siistiAikaleimat();
     }
     
     public String getKuvaus(){
@@ -49,7 +48,7 @@ public class ToistuvaTilitapahtuma{
         this.summa = summa;
     }
     
-    public Calendar getAlkupvm(){
+    public Paivamaara getAlkupvm(){
         return this.alkupvm;
     }
     
@@ -59,16 +58,15 @@ public class ToistuvaTilitapahtuma{
      * @param alkupvm   Uusi alkupäivämäärä.
      * @return Onnistumista kuvaava boolean.
      */
-    public boolean setAlkupvm(Calendar alkupvm){
+    public boolean setAlkupvm(Paivamaara alkupvm){
         if (alkupvm.after(this.loppupvm)){
             return false;
         }
         this.alkupvm = alkupvm;
-        siistiAikaleimat();
         return true;
     }
     
-    public Calendar getLoppupvm(){
+    public Paivamaara getLoppupvm(){
         return this.loppupvm;
     }
 
@@ -78,12 +76,11 @@ public class ToistuvaTilitapahtuma{
      * @param loppupvm  Uusi loppupäivämäärä.
      * @return Onnistumista kuvaava boolean.
      */
-    public boolean setLoppupvm(Calendar loppupvm){
+    public boolean setLoppupvm(Paivamaara loppupvm){
         if (loppupvm.before(this.alkupvm)){
             return false;
         }
         this.loppupvm = loppupvm;
-        siistiAikaleimat();
         return true;
     }
     
@@ -94,12 +91,12 @@ public class ToistuvaTilitapahtuma{
      * @param ylaraja   Aikarajan yläraja.
      * @return Maksukertojen määrä.
      */
-    public int maksukerratAikavalilla(Calendar alaraja, Calendar ylaraja){
+    public int maksukerratAikavalilla(Paivamaara alaraja, Paivamaara ylaraja){
         if (this.alkupvm.after(ylaraja) || this.loppupvm.before(alaraja)){
             return 0;
         }
-        Calendar alku = alaraja.before(this.alkupvm) ? this.alkupvm : alaraja;
-        Calendar loppu = ylaraja.after(this.loppupvm) ? this.loppupvm : ylaraja;
+        Paivamaara alku = alaraja.before(this.alkupvm) ? this.alkupvm : alaraja;
+        Paivamaara loppu = ylaraja.after(this.loppupvm) ? this.loppupvm : ylaraja;
 
         int taysiaVuosia = loppu.get(Calendar.YEAR) - alku.get(Calendar.YEAR);
         
@@ -119,12 +116,16 @@ public class ToistuvaTilitapahtuma{
      * @param loppupvm  Viimeinen hyväksytty päivämäärä.
      * @return ArrayList-muotoinen listaus konvertoiduista tilitapahtumista.
      */
-    public ArrayList<Tilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Calendar loppupvm){
+    public ArrayList<Tilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Paivamaara loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
+        
+        if(loppupvm == null){
+            loppupvm = this.loppupvm;
+        }
         
         int maksukerrat = maksukerratAikavalilla(alkupvm, loppupvm);
             for (int i = 0; i < maksukerrat; i++){
-                Calendar aikaleima = new GregorianCalendar(
+                Paivamaara aikaleima = new Paivamaara(
                         this.alkupvm.get(Calendar.YEAR), 
                         this.alkupvm.get(Calendar.MONTH) + i, 
                         this.alkupvm.get(Calendar.DAY_OF_MONTH));
@@ -147,21 +148,6 @@ public class ToistuvaTilitapahtuma{
                 this.loppupvm.get(Calendar.YEAR)
                 );
         return tuloste;
-    }
-
-    /**
-     * Siistii toistuvan tilitapahtuman aikaleimat siten.
-     * Siistittäessä poistetaan tunteja, minuutteja, sekunteja ja millisekunteja koskevat tiedot.
-     */
-    private void siistiAikaleimat() {
-        this.alkupvm.clear(Calendar.HOUR);
-        this.alkupvm.clear(Calendar.MINUTE);
-        this.alkupvm.clear(Calendar.SECOND);
-        this.alkupvm.clear(Calendar.MILLISECOND);
-        this.loppupvm.clear(Calendar.HOUR);
-        this.loppupvm.clear(Calendar.MINUTE);
-        this.loppupvm.clear(Calendar.SECOND);
-        this.loppupvm.clear(Calendar.MILLISECOND);
     }
     
     @Override
