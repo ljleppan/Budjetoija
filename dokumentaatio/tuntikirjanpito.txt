@@ -85,4 +85,11 @@
 |
 |	P‰iv‰	Projekti
 |	45min	1755min
+|----------------------------------------------------------------------------
+|11.2.2013	Maanantai
+|	120min	Refaktoroitu projekti k‰ytt‰m‰‰n Paivamaara-luokkaan,
+|		korjailtu GUI:n bugeja ja ep‰loogisuuksia.
+|
+|	P‰iv‰	Projekti
+|	120min	1875min
 \----------------------------------------------------------------------------
