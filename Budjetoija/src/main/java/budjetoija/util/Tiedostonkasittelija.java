@@ -3,7 +3,6 @@ package budjetoija.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -61,6 +60,10 @@ public class Tiedostonkasittelija {
      * @return Onnistumista kuvaava boolean.
      */
     public boolean tallenna(ArrayList<String> data){
+        if (!tiedostoOlemassa()){
+            luoTiedosto();
+        }
+        
         try{
             BufferedWriter kirjoittaja = new BufferedWriter(new FileWriter(this.tiedosto));
             for (String rivi : data){

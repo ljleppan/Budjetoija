@@ -138,9 +138,7 @@ public class Tili {
     /**
      * Palauttaa kaikkien tiettyjen päivämäärien välillä tapahtuvien tilitapahtumien listauksen.
      * 
-     * Palauttaa kaikkien tiettyjen päivämäärien välillä tapahtuvien tilitapahtumien listauksen, joka sisältää
-     * kaikki aikavälin yksittäiset tilitapahtumat sekä toistuvien tilitapahtumien aikavälin sisään jäävät
-     * kerrat yksittäisinä tilitapahtumina.
+     * Listaus sisältää kaikki aikavälin yksittäiset tilitapahtumat sekä toistuvien tilitapahtumien aikavälin sisään jäävät kerrat yksittäisinä tilitapahtumina.
      * Listaus on järjestetty tapahtumien päivämäärien mukaan.
      * 
      * @param   alkupvm     Ensimmäinen hyväksyttävä päivämäärä.

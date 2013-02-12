@@ -2,7 +2,6 @@ package budjetoija.logiikka;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Kuvaa kerran kuussa toteutuvaa vakiosummaista tilitapahtumaa kuten vuokra tai palkka.
@@ -34,6 +33,7 @@ public class ToistuvaTilitapahtuma{
     /**
      * Asettaa toistuvalle tilitapahtumalle uuden kuvauksen.
      * Poistaa kuvauksesta puolipisteet mahdollista csv-konversiota varten. 
+     * 
      * @param kuvaus Toistuvan tilitapahtuman uusi kuvaus.
      */
     public void setKuvaus(String kuvaus){
@@ -55,7 +55,9 @@ public class ToistuvaTilitapahtuma{
     /**
      * Asettaa toistuvalle tilitapahtumalle uuden alkupäivämäärän.
      * Hyväksyy uudeksi alkupäivämääräksi vain päivämäärän joka on ennen loppupäivämäärää.
+     * 
      * @param alkupvm   Uusi alkupäivämäärä.
+     * 
      * @return Onnistumista kuvaava boolean.
      */
     public boolean setAlkupvm(Paivamaara alkupvm){
@@ -73,7 +75,9 @@ public class ToistuvaTilitapahtuma{
     /**
      * Asettaa toistuvalle tilitapahtumalle uuden loppupäivämäärän.
      * Hyväksyttävän päivämäärän täytyy olla alkupäivämäärän jälkeen.
+     * 
      * @param loppupvm  Uusi loppupäivämäärä.
+     * 
      * @return Onnistumista kuvaava boolean.
      */
     public boolean setLoppupvm(Paivamaara loppupvm){
@@ -89,6 +93,7 @@ public class ToistuvaTilitapahtuma{
      * 
      * @param alaraja   Aikarajan alaraja.
      * @param ylaraja   Aikarajan yläraja.
+     * 
      * @return Maksukertojen määrä.
      */
     public int maksukerratAikavalilla(Paivamaara alaraja, Paivamaara ylaraja){
@@ -111,9 +116,9 @@ public class ToistuvaTilitapahtuma{
     
     /**
      * Muuntaa toistuvan tilitapahtuman yksittäisiksi tilitapahtumiksi yläaikarajalla.
-     * Muuntaa toistuvan tilitapahtuman tapahtumatkerrat yksittäisiksi tilitapahtumiksi sikäli
-     * kuin yksittäisten tilitapahtumien päivämäärä on ennen annettua ylärajaa.
+     * 
      * @param loppupvm  Viimeinen hyväksytty päivämäärä.
+     * 
      * @return ArrayList-muotoinen listaus konvertoiduista tilitapahtumista.
      */
     public ArrayList<Tilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Paivamaara loppupvm){
