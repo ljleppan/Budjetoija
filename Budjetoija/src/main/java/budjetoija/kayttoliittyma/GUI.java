@@ -26,6 +26,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
     public GUI(Tili tili, TallentajaLataaja tallentajalataaja) {
         this.tili = tili;
+        this.io = tallentajalataaja;
 
         this.alkuPvm = new Paivamaara();
         this.alkuPvm.set(Calendar.DAY_OF_MONTH, 1);
@@ -107,6 +108,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         nakymaLoppuKuukausiSpinner = new javax.swing.JSpinner();
         nakymaLoppuVuosiSpinner = new javax.swing.JSpinner();
         meneButton = new javax.swing.JButton();
+        Logo = new javax.swing.JLabel();
         sivuPalkki = new javax.swing.JPanel();
         kuvausLabel = new javax.swing.JLabel();
         kuvausTextField = new javax.swing.JTextField();
@@ -144,7 +146,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buddy - pientalouden budjetoija");
-        setPreferredSize(new java.awt.Dimension(800, 570));
+        setPreferredSize(new java.awt.Dimension(760, 620));
         setResizable(false);
 
         listausList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -200,6 +202,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buddy copy.jpg"))); // NOI18N
+        Logo.setPreferredSize(new java.awt.Dimension(119, 90));
+        Logo.setRequestFocusEnabled(false);
+
         nakymaAlkuVuosiSpinner.setEditor(new JSpinner.NumberEditor(nakymaAlkuVuosiSpinner, "#"));
         nakymaLoppuVuosiSpinner.setEditor(new JSpinner.NumberEditor(nakymaLoppuVuosiSpinner, "#"));
 
@@ -226,7 +232,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                                 .addComponent(nakymaLoppuVuosiSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(meneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(65, 65, 65)
+                .addGap(53, 53, 53)
                 .addGroup(ylaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ylaPaneeliLayout.createSequentialGroup()
                         .addComponent(lisaaTilitapahtumaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,13 +241,18 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(poistaTilitapahtumaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(hallitseTilitapahtumiaLabel))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ylaPaneeliLayout.setVerticalGroup(
             ylaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ylaPaneeliLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ylaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ylaPaneeliLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ylaPaneeliLayout.createSequentialGroup()
                         .addComponent(nakymaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -254,17 +265,14 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                             .addComponent(nakymaLoppuKuukausiSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nakymaLoppuVuosiSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nakymaLoppuPaivaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ylaPaneeliLayout.createSequentialGroup()
-                        .addComponent(hallitseTilitapahtumiaLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(muunnaTilitapahtumaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ylaPaneeliLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(ylaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(ylaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lisaaTilitapahtumaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(poistaTilitapahtumaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(meneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(hallitseTilitapahtumiaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(ylaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(muunnaTilitapahtumaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                            .addComponent(lisaaTilitapahtumaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                            .addComponent(poistaTilitapahtumaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                            .addComponent(meneButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -319,7 +327,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         sivuPalkkiLayout.setHorizontalGroup(
             sivuPalkkiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sivuPalkkiLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addGroup(sivuPalkkiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tallennaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(kuvausTextField)
@@ -417,7 +424,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(toistuvaLoppuVuosiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(tallennaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         kuvausTextField.getAccessibleContext().setAccessibleName("");
@@ -455,7 +462,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(yhteenvetoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(sivuPalkki, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         getContentPane().add(paaPaneeli, java.awt.BorderLayout.CENTER);
@@ -610,6 +617,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 this.tili = ladattu;
             }
         }
+        paivitaListaus();
+        paivitaOtsikko();
     }//GEN-LAST:event_avaaMenuItemActionPerformed
 
     private void tallennaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tallennaMenuItemActionPerformed
@@ -725,7 +734,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             uusiLoppuPvm.set(Calendar.DAY_OF_MONTH, uusiLoppuPvm.getActualMaximum(Calendar.DAY_OF_MONTH));
         }
         
-        //Tarkistetaan ettei alku lopun jälkeen
+        //Tarkistetaan ettei alkupvm ole loppupvm:n jälkeen
         if(!uusiAlkuPvm.after(uusiLoppuPvm)){
             this.alkuPvm = uusiAlkuPvm;
             this.loppuPvm = uusiLoppuPvm;
@@ -743,6 +752,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         paivitaListaus();
     }//GEN-LAST:event_meneButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Logo;
     private javax.swing.JMenuItem avaaMenuItem;
     private javax.swing.JLabel hallitseTilitapahtumiaLabel;
     private javax.swing.JLabel kuukausiLabel;
@@ -822,6 +832,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         tapahtumat.addAll(tili.getTilitapahtumatAjalta(alku, loppu));
 
         listausList.setListData(tapahtumat.toArray());
+        
+        paivitaYhteenveto();
     }
 
     private void vaihdaToistuvuusCheckBoxValinta() {
@@ -856,5 +868,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         toistuvaLoppuVuosiTextField.setText("");
         toistuvaLoppuKuukausiTextField.setText("");
         toistuvaLoppuPaivaTextField.setText("");
+    }
+
+    private void paivitaYhteenveto() {
+        this.yhteenvetoTextArea.setText(new Yhteenveto(tili).yhteenvetoAikavalilta(alkuPvm, loppuPvm));
     }
 }
