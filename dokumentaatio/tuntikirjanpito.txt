@@ -95,6 +95,7 @@
 |----------------------------------------------------------------------------
 |12.2.2013	Tiistai
 |	180min	Yhteenveto-luokka, testejä, viimeistelyä, ui:ta.
+|	30min	Luokkakaavion päivitys, uusi sekvenssikaavio.
 |
 |	Päivä	Projekti
 |	180min	2055min
