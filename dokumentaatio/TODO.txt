@@ -1,12 +1,1 @@
-- ToistuvaTilitapahtuma 
-  - equals
-- GUI
-  - Tilin hallinta
-    - uusi
-    - tallenna
-    - lataa
-  - Yhteenveto
-    - yhteenvedon laskeminen
-    - yhteenvedon tulostaminen
-  - syötteen validointi (ehkä logiikassa?)
-- Testejä ihan kaikelle
+﻿
