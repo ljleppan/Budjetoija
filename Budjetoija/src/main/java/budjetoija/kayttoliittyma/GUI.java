@@ -18,6 +18,9 @@ import javax.swing.JSpinner;
  * Budjetoijan käyttöliittymä.
  */
 public class GUI extends javax.swing.JFrame implements Runnable {
+    
+    public static final int SUURIN_KUVAUKSEN_PITUUS = 35;
+    public static final int SUURIN_NUMERAALIN_PITUUS = 8;
 
     TallentajaLataaja io;
     Tili tili;
@@ -141,12 +144,14 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         uusiMenuItem = new javax.swing.JMenuItem();
         avaaMenuItem = new javax.swing.JMenuItem();
         tallennaMenuItem = new javax.swing.JMenuItem();
-        menuSeparator = new javax.swing.JPopupMenu.Separator();
+        menuSeparator1 = new javax.swing.JPopupMenu.Separator();
+        vaihdaTilinNimiMenuItem = new javax.swing.JMenuItem();
+        menuSeparator2 = new javax.swing.JPopupMenu.Separator();
         poistuMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buddy - pientalouden budjetoija");
-        setPreferredSize(new java.awt.Dimension(760, 620));
+        setPreferredSize(null);
         setResizable(false);
 
         listausList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -203,7 +208,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         });
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buddy copy.jpg"))); // NOI18N
-        Logo.setPreferredSize(new java.awt.Dimension(119, 90));
         Logo.setRequestFocusEnabled(false);
 
         nakymaAlkuVuosiSpinner.setEditor(new JSpinner.NumberEditor(nakymaAlkuVuosiSpinner, "#"));
@@ -242,7 +246,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                         .addComponent(poistaTilitapahtumaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(hallitseTilitapahtumiaLabel))
                 .addGap(18, 18, 18)
-                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Logo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ylaPaneeliLayout.setVerticalGroup(
@@ -252,7 +256,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGroup(ylaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ylaPaneeliLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Logo))
                     .addGroup(ylaPaneeliLayout.createSequentialGroup()
                         .addComponent(nakymaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,7 +381,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                                 .addComponent(toistuvaLoppuVuosiLabel)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(toistuvaLoppuVuosiTextField))))
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
         sivuPalkkiLayout.setVerticalGroup(
             sivuPalkkiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,7 +428,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(toistuvaLoppuVuosiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(tallennaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         kuvausTextField.getAccessibleContext().setAccessibleName("");
@@ -456,13 +460,13 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paaPaneeliLayout.createSequentialGroup()
                 .addComponent(ylaPaneeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(paaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(paaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paaPaneeliLayout.createSequentialGroup()
-                        .addComponent(listausScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(listausScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(yhteenvetoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(sivuPalkki, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(24, 24, 24))
+                    .addComponent(sivuPalkki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
         );
 
         getContentPane().add(paaPaneeli, java.awt.BorderLayout.CENTER);
@@ -492,7 +496,16 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             }
         });
         tiliMenu.add(tallennaMenuItem);
-        tiliMenu.add(menuSeparator);
+        tiliMenu.add(menuSeparator1);
+
+        vaihdaTilinNimiMenuItem.setText("Vaihda tilin nimi");
+        vaihdaTilinNimiMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaihdaTilinNimiMenuItemActionPerformed(evt);
+            }
+        });
+        tiliMenu.add(vaihdaTilinNimiMenuItem);
+        tiliMenu.add(menuSeparator2);
 
         poistuMenuItem.setText("Poistu");
         poistuMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -515,8 +528,13 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             if (listausList.getModel().getElementAt(valinta) instanceof Tilitapahtuma) {
                 Tilitapahtuma tapahtuma = (Tilitapahtuma) listausList.getModel().getElementAt(valinta);
 
-                tapahtuma.setKuvaus(kuvausTextField.getText());
-                tapahtuma.getSumma().setSummaString(summaTextField.getText());
+                if (kuvausTextField.getText().length() <= GUI.SUURIN_KUVAUKSEN_PITUUS){
+                    tapahtuma.setKuvaus(kuvausTextField.getText());
+                }
+                if (summaTextField.getText().length() <= GUI.SUURIN_NUMERAALIN_PITUUS){
+                    tapahtuma.getSumma().setSummaString(summaTextField.getText());
+                }
+
 
                 String vuosi = vuosiTextField.getText();
                 String kuukausi = kuukausiTextField.getText();
@@ -528,11 +546,16 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                             Integer.parseInt(kuukausi) - 1,
                             Integer.parseInt(paiva)));
                 }
+                
             } else if (listausList.getModel().getElementAt(valinta) instanceof ToistuvaTilitapahtuma) {
                 ToistuvaTilitapahtuma tapahtuma = (ToistuvaTilitapahtuma) listausList.getModel().getElementAt(valinta);
 
-                tapahtuma.setKuvaus(kuvausTextField.getText());
-                tapahtuma.getSumma().setSummaString(summaTextField.getText());
+                if (kuvausTextField.getText().length() <= GUI.SUURIN_KUVAUKSEN_PITUUS){
+                    tapahtuma.setKuvaus(kuvausTextField.getText());
+                }
+                if (summaTextField.getText().length() <= GUI.SUURIN_NUMERAALIN_PITUUS){
+                    tapahtuma.getSumma().setSummaString(summaTextField.getText());
+                }
 
                 String alkuVuosi = toistuvaAlkuVuosiTextField.getText();
                 String alkuKuukausi = toistuvaAlkuKuukausiTextField.getText();
@@ -718,7 +741,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 (Integer) nakymaAlkuVuosiSpinner.getValue(),
                 (Integer) nakymaAlkuKuukausiSpinner.getValue() - 1,
                 1);
-
+        
         //Asetetaan päiväksi kuukauden viimeinen päivä, jos päivä yli sen
         int alkuPaiva = (Integer) nakymaAlkuPaivaSpinner.getValue();
         if (alkuPaiva < uusiAlkuPvm.getActualMaximum(Calendar.DAY_OF_MONTH)) {
@@ -751,6 +774,16 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         paivitaOtsikko();
         paivitaListaus();
     }//GEN-LAST:event_meneButtonActionPerformed
+
+    private void vaihdaTilinNimiMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaihdaTilinNimiMenuItemActionPerformed
+        String uusiNimi = JOptionPane.showInputDialog(null, "Syötä tilin uusi nimi", "Vaihda tilin nimi", 1);
+        if (uusiNimi != null){
+            tili.setNimi(uusiNimi);
+        }
+        paivitaOtsikko();
+        paivitaListaus();
+    }//GEN-LAST:event_vaihdaTilinNimiMenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
     private javax.swing.JMenuItem avaaMenuItem;
@@ -764,7 +797,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JScrollPane listausScrollPane;
     private javax.swing.JButton meneButton;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JPopupMenu.Separator menuSeparator;
+    private javax.swing.JPopupMenu.Separator menuSeparator1;
+    private javax.swing.JPopupMenu.Separator menuSeparator2;
     private javax.swing.JButton muunnaTilitapahtumaButton;
     private javax.swing.JSpinner nakymaAlkuKuukausiSpinner;
     private javax.swing.JSpinner nakymaAlkuPaivaSpinner;
@@ -798,6 +832,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField toistuvaLoppuVuosiTextField;
     private javax.swing.JCheckBox toistuvuusCheckBox;
     private javax.swing.JMenuItem uusiMenuItem;
+    private javax.swing.JMenuItem vaihdaTilinNimiMenuItem;
     private javax.swing.JLabel vuosiLabel;
     private javax.swing.JTextField vuosiTextField;
     private javax.swing.JScrollPane yhteenvetoPane;
@@ -827,10 +862,22 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         Paivamaara loppu = (Paivamaara) loppuPvm.clone();
 
         ArrayList<Object> tapahtumat = new ArrayList();
-        tapahtumat.addAll(tili.getToistuvatTilitapahtumatAjalta(alku, loppu));
-        tapahtumat.add("--");
-        tapahtumat.addAll(tili.getTilitapahtumatAjalta(alku, loppu));
-
+        
+        ArrayList<ToistuvaTilitapahtuma> toistuvatTapahtumat = tili.getToistuvatTilitapahtumatAjalta(alku, loppu);
+        ArrayList<Tilitapahtuma> yksittaisetTapahtumat = tili.getTilitapahtumatAjalta(alku, loppu);
+        
+        if (!toistuvatTapahtumat.isEmpty()){
+            tapahtumat.add("          Toistuvat tilitapahtumat");
+        }
+        tapahtumat.addAll(toistuvatTapahtumat);
+        if (!toistuvatTapahtumat.isEmpty() && !yksittaisetTapahtumat.isEmpty()){
+            tapahtumat.add(" ");
+        }
+        if (!yksittaisetTapahtumat.isEmpty()){
+            tapahtumat.add("          Yksittäiset tilitapahtumat");
+        }
+        tapahtumat.addAll(yksittaisetTapahtumat);
+        
         listausList.setListData(tapahtumat.toArray());
         
         paivitaYhteenveto();
@@ -850,7 +897,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     }
 
     private boolean onNumeraali(String teksti) {
-        if (teksti.matches("[0-9]+")) {
+        if (teksti.matches("[0-9]+") && teksti.length() < GUI.SUURIN_NUMERAALIN_PITUUS) {
             return true;
         }
         return false;

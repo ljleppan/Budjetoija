@@ -1,5 +1,6 @@
 package budjetoija.logiikka;
 
+import budjetoija.kayttoliittyma.GUI;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -32,12 +33,16 @@ public class ToistuvaTilitapahtuma{
     
     /**
      * Asettaa toistuvalle tilitapahtumalle uuden kuvauksen.
-     * Poistaa kuvauksesta puolipisteet mahdollista csv-konversiota varten. 
+     * Poistaa kuvauksesta puolipisteet mahdollista csv-konversiota varten.
+     * Kuvaus myös lyhennetään siten, ettei se ole GUI.SUURIN_KUVAUKSEN_PITUUS merkkiä pidempi.
      * 
      * @param kuvaus Toistuvan tilitapahtuman uusi kuvaus.
      */
     public void setKuvaus(String kuvaus){
         this.kuvaus = kuvaus.replaceAll(";", "");
+        if (this.kuvaus.length() > GUI.SUURIN_KUVAUKSEN_PITUUS){
+            this.kuvaus = this.kuvaus.substring(0, GUI.SUURIN_KUVAUKSEN_PITUUS);
+        }
     }
     
     public Summa getSumma(){
@@ -109,7 +114,7 @@ public class ToistuvaTilitapahtuma{
             // Kuukausien indeksi alkaa nollasta.
             return loppu.get(Calendar.MONTH) - alku.get(Calendar.MONTH) + 1;
         } else {
-            return (taysiaVuosia * 12) + (alku.get(Calendar.MONTH) + 1);
+            return (taysiaVuosia * 12) + (loppu.get(Calendar.MONTH) - alku.get(Calendar.MONTH) + 1);
         }
         
     }

@@ -122,12 +122,12 @@ public class YhteenvetoTest {
         assertEquals(600, s);
     }
     
-//    @Test
-//    public void toistuvienTilitapahtumienSaldoToimiiToisenaVuonna(){
-//        tili.lisaaToistuvaTilitapahtuma(new ToistuvaTilitapahtuma("tt", new Summa(100), new Paivamaara(2013,0,1), new Paivamaara(2014,11,31)));
-//        int s = yv.toistuvienTilitapahtumienSaldo(new Paivamaara(2014,11,31));
-//        assertEquals(2400, s);
-//    }
+    @Test
+    public void toistuvienTilitapahtumienSaldoToimiiToisenaVuonna(){
+        tili.lisaaToistuvaTilitapahtuma(new ToistuvaTilitapahtuma("tt", new Summa(100), new Paivamaara(2013,0,1), new Paivamaara(2014,11,31)));
+        int s = yv.toistuvienTilitapahtumienSaldo(new Paivamaara(2014,11,31));
+        assertEquals(2400, s);
+    }
     
     @Test
     public void yhteenvetoTulostuuOikein(){
@@ -135,9 +135,9 @@ public class YhteenvetoTest {
         System.out.println(tuloste);
         assertEquals("Tili\n" 
            + "2013.0.1 - 2013.0.15\n" 
-           + "Saldo tarkastelujakson alussa:  1,00 \n" 
+           + "Saldo tarkastelujakson alussa:  0,00 \n" 
            + "Saldo tarkastelujakson lopulla: 6,00 \n" 
-           + "Muutos tarkastelujakson aikana: 5,00", 
+           + "Muutos tarkastelujakson aikana: 6,00", 
            tuloste);
     }
 }

@@ -1,5 +1,6 @@
 package budjetoija.logiikka;
 
+import budjetoija.kayttoliittyma.GUI;
 import java.util.Calendar;
 
 /**
@@ -23,14 +24,17 @@ public class Tilitapahtuma {
     }
     
     /**
-     * Asettaa tapahtumalle uuden kuvauksen poistaen laittomat merkit.
-     * 
-     * Syötteestä poistetaan kaikki puolipisteet, jotta mahdollinen csv-muunnos onnistuu.
+     * Asettaa tapahtumalle uuden kuvauksen muokaten tekstin sopivan pituiseksi.
+     * Kuvauksen ei anneta olla SUURIN_KUVAUKSEN_PITUUS -merkkiä pidempi.
+     * Syötteestä poistetaan myös kaikki puolipisteet, jotta mahdollinen csv-muunnos onnistuu.
      * 
      * @param   kuvaus  tapahtuman uusi kuvaus.
      */    
     public void setKuvaus(String kuvaus){
         this.kuvaus = kuvaus.replaceAll(";", "");
+        if (this.kuvaus.length() > GUI.SUURIN_KUVAUKSEN_PITUUS){
+            this.kuvaus = this.kuvaus.substring(0, GUI.SUURIN_KUVAUKSEN_PITUUS);
+        }
     }
     
     public Summa getSumma(){

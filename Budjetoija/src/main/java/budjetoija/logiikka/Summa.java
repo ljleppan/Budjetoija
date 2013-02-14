@@ -50,19 +50,24 @@ public class Summa {
      * 
      * @param   summa   String-muotoinen kuvaus summasta.
      */
-    public boolean setSummaString(String summa){
+    public boolean setSummaString(String summa) throws NumberFormatException{
         if (summa == null){
             return false;
         }
         summa = summa.replace('.', ',');
-        if (kaksiTaiEnemmanDesimaalia(summa)) {
-            return true;
+        try{
+            if (kaksiTaiEnemmanDesimaalia(summa)) {
+                return true;
+            }
+            else if (yksiDesimaali(summa)) {
+                return true;
+            }
+            else if (eiDesimaaleja(summa)) {
+                return true;
+            }
         }
-        else if (yksiDesimaali(summa)) {
-            return true;
-        }
-        else if (eiDesimaaleja(summa)) {
-            return true;
+        catch (NumberFormatException e){
+            return false;
         }
         return false;
     }

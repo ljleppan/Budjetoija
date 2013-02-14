@@ -34,8 +34,15 @@ public class Yhteenveto {
      * @return  String-muotoinen yhteenveto
      */
     public String yhteenvetoAikavalilta(Paivamaara alku, Paivamaara loppu){
-        Summa saldoAlussa = laskeSaldo(alku);
-        Summa saldoLopussa = laskeSaldo(loppu);
+        //Otetaan kloonit, jotta päivämäärien käsittely ei vaikuta metodin ulkopuolella.
+        Paivamaara alkuPvm = (Paivamaara) alku.clone();
+        Paivamaara loppuPvm = (Paivamaara) loppu.clone();
+        
+        //Ei haluta alkupvm:ää molempiin saldoihin.
+        alkuPvm.add(Calendar.DAY_OF_MONTH, -1);
+        
+        Summa saldoAlussa = laskeSaldo(alkuPvm);
+        Summa saldoLopussa = laskeSaldo(loppuPvm);
         Summa saldonMuutos = new Summa(saldoLopussa.getSummaInt() - saldoAlussa.getSummaInt());
         
         return String.format("%s\n"
