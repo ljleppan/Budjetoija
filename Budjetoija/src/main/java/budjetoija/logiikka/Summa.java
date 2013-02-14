@@ -74,14 +74,14 @@ public class Summa {
 
     /**
      * Tarkistaa onko syöte muodoltaan kaksi tai enemmän desimaaleja sisältävä numeraali.
-     * Hyväksyy syötteen joka on muotoa "n numeroa, pilkku, 2-n numeroa, EOL".
+     * Hyväksyy syötteen joka on muotoa "0-1 miinus-merkki, n numeroa, pilkku, 2-n numeroa, EOL".
      * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
      * 
      * @return  Syötteen täsmäävyys
      */
     private boolean kaksiTaiEnemmanDesimaalia(String summa) throws NumberFormatException {
-        if (summa.matches("[0-9]*[,][0-9]{2,}$")) {
+        if (summa.matches("[-]?[0-9]*[,][0-9]{2,}$")) {
             String[] summaOsissa = summa.split(",");
             this.summa = Integer.parseInt(summaOsissa[0] + summaOsissa[1].subSequence(0, 2));
             return true;
@@ -91,14 +91,14 @@ public class Summa {
     
     /**
      * Tarkistaa onko syöte muodoltaan yhden desimaalin sisältävä numeraali.
-     * Hyväksyy syötteen joka on muotoa "n numeroa, pilkku, numero, EOL".
+     * Hyväksyy syötteen joka on muotoa "0-1 miinus-merkki, n numeroa, pilkku, numero, EOL".
      * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
      * 
      * @return  Syötteen täsmäävyys
      */
     private boolean yksiDesimaali(String summa) throws NumberFormatException {
-        if (summa.matches("[0-9]*[,][0-9]$")) {
+        if (summa.matches("[-]?[0-9]*[,][0-9]$")) {
             String[] summaOsissa = summa.split(",");
             this.summa = Integer.parseInt(summaOsissa[0] + summaOsissa[1] + "0");
             return true;
@@ -108,14 +108,14 @@ public class Summa {
     
     /**
      * Tarkistaa onko syöte muodoltaan desimaaleja sisältämätön numeraali.
-     * Hyväksyy syötteen joka on muotoa "n numeroa, 0-1 pilkku, EOL".
+     * Hyväksyy syötteen joka on muotoa "0-1 miinus-merkki, n numeroa, 0-1 pilkku, EOL".
      * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
      * 
      * @return  Syötteen täsmäävyys
      */
     private boolean eiDesimaaleja(String summa) throws NumberFormatException {
-        if (summa.matches("[0-9]+[,]?$")) {
+        if (summa.matches("[-]?[0-9]+[,]?$")) {
             summa = summa.replaceAll("[,]", "");
             this.summa = Integer.parseInt(summa + "00");
             return true;
