@@ -102,7 +102,9 @@
 |----------------------------------------------------------------------------
 |14.2.2013	Torstai
 |	120min	Bugien metsästelyä yms.
+|	90min	Yhteenvedon parantelua, bugien metsästystä, toStringien
+|		luomista
 |
 |	Päivä	Projekti
-|	120min	2175min
+|	210min	2265min
 \----------------------------------------------------------------------------
