@@ -24,4 +24,10 @@ public class Paivamaara extends GregorianCalendar{
         super.clear(Calendar.SECOND);
         super.clear(Calendar.MILLISECOND);
     }
+    
+    @Override
+    public String toString(){
+        String palaute = String.format("%td.%tm.%tY", this, this, this);
+        return palaute;
+    }
 }

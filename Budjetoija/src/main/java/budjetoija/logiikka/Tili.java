@@ -199,11 +199,11 @@ public class Tili {
      * 
      * @return  Suorituksen onnistumista kuvaava boolean.
      */
-    public boolean konvertoiJaPoistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma, Paivamaara loppupvm){
+    public boolean konvertoiJaPoistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma, Paivamaara alkupvm, Paivamaara loppupvm){
         if (!poistaToistuvaTilitapahtuma(tapahtuma)){
             return false;
         }
-        ArrayList<Tilitapahtuma> konvertoitu = tapahtuma.konvertoiYksittaisiksiTapahtumiksi(loppupvm);
+        ArrayList<Tilitapahtuma> konvertoitu = tapahtuma.konvertoiYksittaisiksiTapahtumiksi(alkupvm, loppupvm);
         this.tapahtumat.addAll(konvertoitu);       
         return true;
     }

@@ -50,7 +50,7 @@ public class Summa {
      * 
      * @param   summa   String-muotoinen kuvaus summasta.
      */
-    public boolean setSummaString(String summa) throws NumberFormatException{
+    public boolean setSummaString(String summa){
         if (summa == null){
             return false;
         }

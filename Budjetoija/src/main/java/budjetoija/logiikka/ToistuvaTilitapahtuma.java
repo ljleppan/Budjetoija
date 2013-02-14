@@ -126,7 +126,7 @@ public class ToistuvaTilitapahtuma{
      * 
      * @return ArrayList-muotoinen listaus konvertoiduista tilitapahtumista.
      */
-    public ArrayList<Tilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Paivamaara loppupvm){
+    public ArrayList<Tilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Paivamaara alkupvm, Paivamaara loppupvm){
         ArrayList<Tilitapahtuma> palautettava = new ArrayList();
         
         if(loppupvm == null){
@@ -147,16 +147,11 @@ public class ToistuvaTilitapahtuma{
     
     @Override
     public String toString(){
-        String tuloste = String.format("%-35s   %-15s   %s.%s.%s - %s.%s.%s", 
+        String tuloste = String.format("%-35s   %-15s   %s - %s", 
                 this.kuvaus, 
                 this.summa, 
-                this.alkupvm.get(Calendar.DAY_OF_MONTH),
-                this.alkupvm.get(Calendar.MONTH)+1, 
-                this.alkupvm.get(Calendar.YEAR), 
-                this.loppupvm.get(Calendar.DAY_OF_MONTH),
-                this.loppupvm.get(Calendar.MONTH)+1, 
-                this.loppupvm.get(Calendar.YEAR)
-                );
+                this.alkupvm, 
+                this.loppupvm);
         return tuloste;
     }
     

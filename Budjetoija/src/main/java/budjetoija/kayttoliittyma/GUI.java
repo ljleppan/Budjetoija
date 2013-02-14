@@ -154,6 +154,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         setPreferredSize(null);
         setResizable(false);
 
+        listausList.setFont(new java.awt.Font("Nimbus Mono L", 0, 15)); // NOI18N
         listausList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listausList.setFont(new Font("Monospaced", Font.PLAIN, 12));
         listausList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -435,6 +436,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
         yhteenvetoTextArea.setEditable(false);
         yhteenvetoTextArea.setColumns(20);
+        yhteenvetoTextArea.setFont(new java.awt.Font("Nimbus Mono L", 0, 15)); // NOI18N
         yhteenvetoTextArea.setRows(5);
         yhteenvetoPane.setViewportView(yhteenvetoTextArea);
 
@@ -462,7 +464,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGap(0, 0, 0)
                 .addGroup(paaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paaPaneeliLayout.createSequentialGroup()
-                        .addComponent(listausScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                        .addComponent(listausScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(yhteenvetoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(sivuPalkki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -712,20 +714,18 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             } else if (listausList.getModel().getElementAt(indeksi) instanceof ToistuvaTilitapahtuma) {
                 ToistuvaTilitapahtuma tapahtuma = (ToistuvaTilitapahtuma) listausList.getModel().getElementAt(indeksi);
                 int vastaus = JOptionPane.showConfirmDialog(null,
-                        "Haluatko muuntaa kaikki tapahtumakerrat yksittäisiksi tapahtumiksi?\n\n"
-                        + "Kyllä: Muunna kaikki.\n"
-                        + "Ei: Muunna ennen tiettyä päivämäärää.",
-                        "Muunnetaanko kaikki?",
+                        "Haluatko muuntaa vain näkyvien kuukausien tapahtumat?\n\n",
+                        "Muunnetaanko vain näkyvien kuukausien osalta?",
                         JOptionPane.YES_NO_CANCEL_OPTION);
                 
                 if (vastaus == JOptionPane.YES_OPTION || vastaus == JOptionPane.NO_OPTION) {
                     Paivamaara ylaRaja = null;
-                    // Jätetään null:ksi jos käyttäjä haluaa konvertoida kaikki
-                    if (vastaus == JOptionPane.NO_OPTION) {
-                        ylaRaja = new Paivamaara();
-                        //TODO: Aseta yläRaja:lle käyttäjän syöttämät arvot
+                    Paivamaara alaRaja = null;
+                    if (vastaus == JOptionPane.YES_OPTION) {
+                        alaRaja = (Paivamaara) this.alkuPvm.clone();
+                        ylaRaja = (Paivamaara) this.loppuPvm.clone();
                     }
-                    tili.konvertoiJaPoistaToistuvaTilitapahtuma(tapahtuma, ylaRaja);
+                    tili.konvertoiJaPoistaToistuvaTilitapahtuma(tapahtuma, alaRaja, ylaRaja);
                 }
             }
             paivitaListaus();
@@ -733,36 +733,18 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_muunnaTilitapahtumaButtonActionPerformed
 
     private void meneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meneButtonActionPerformed
-        Paivamaara uusiLoppuPvm = new Paivamaara(
-                (Integer) nakymaLoppuVuosiSpinner.getValue(),
-                (Integer) nakymaLoppuKuukausiSpinner.getValue() - 1,
-                1);
-        Paivamaara uusiAlkuPvm = new Paivamaara(
-                (Integer) nakymaAlkuVuosiSpinner.getValue(),
-                (Integer) nakymaAlkuKuukausiSpinner.getValue() - 1,
-                1);
+        Paivamaara uusiLoppuPvm = new Paivamaara();
+        Paivamaara uusiAlkuPvm = new Paivamaara();
         
-        //Asetetaan päiväksi kuukauden viimeinen päivä, jos päivä yli sen
-        int alkuPaiva = (Integer) nakymaAlkuPaivaSpinner.getValue();
-        if (alkuPaiva < uusiAlkuPvm.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-            uusiAlkuPvm.set(Calendar.DAY_OF_MONTH, alkuPaiva);
-        } else {
-            uusiAlkuPvm.set(Calendar.DAY_OF_MONTH, uusiAlkuPvm.getActualMaximum(Calendar.DAY_OF_MONTH));
+        if(asetaPaivamaara(uusiAlkuPvm, nakymaAlkuVuosiSpinner, nakymaAlkuKuukausiSpinner, nakymaAlkuPaivaSpinner)){
+            if(asetaPaivamaara(uusiLoppuPvm, nakymaLoppuVuosiSpinner, nakymaLoppuKuukausiSpinner, nakymaLoppuPaivaSpinner)){
+                if(!uusiAlkuPvm.after(uusiLoppuPvm)){
+                    this.alkuPvm = uusiAlkuPvm;
+                    this.loppuPvm = uusiLoppuPvm;
+                }
+            }
         }
-        
-        int loppuPaiva = (Integer) nakymaLoppuPaivaSpinner.getValue();
-        if (loppuPaiva < uusiLoppuPvm.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-            uusiLoppuPvm.set(Calendar.DAY_OF_MONTH, loppuPaiva);
-        } else {
-            uusiLoppuPvm.set(Calendar.DAY_OF_MONTH, uusiLoppuPvm.getActualMaximum(Calendar.DAY_OF_MONTH));
-        }
-        
-        //Tarkistetaan ettei alkupvm ole loppupvm:n jälkeen
-        if(!uusiAlkuPvm.after(uusiLoppuPvm)){
-            this.alkuPvm = uusiAlkuPvm;
-            this.loppuPvm = uusiLoppuPvm;
-        }
-        
+
         //Asetetaan spinnerit todelliseen aikaan
         nakymaAlkuVuosiSpinner.setValue(alkuPvm.get(Calendar.YEAR));
         nakymaAlkuKuukausiSpinner.setValue(alkuPvm.get(Calendar.MONTH) +1);   
@@ -919,5 +901,30 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
     private void paivitaYhteenveto() {
         this.yhteenvetoTextArea.setText(new Yhteenveto(tili).yhteenvetoAikavalilta(alkuPvm, loppuPvm));
+    }
+
+    private boolean asetaPaivamaara(Paivamaara pvm, JSpinner vuosiSpinner, JSpinner kuukausiSpinner, JSpinner paivaSpinner) {
+        try{
+            int vuosi = (Integer) vuosiSpinner.getValue();
+            int kuukausi = (Integer) kuukausiSpinner.getValue() - 1;
+            int paiva = (Integer) paivaSpinner.getValue();
+            
+            if (vuosi < 0) { return false; }
+            
+            vuosi = (vuosi > 0) ? vuosi : 1;
+            pvm.set(Calendar.YEAR, vuosi);
+
+            pvm.set(Calendar.MONTH, kuukausi);
+
+            paiva = (paiva < pvm.getActualMaximum(Calendar.DAY_OF_MONTH)) ? paiva : pvm.getActualMaximum(Calendar.DAY_OF_MONTH);
+            pvm.set(Calendar.DAY_OF_MONTH, paiva);
+            
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+        
+        
+        
     }
 }

@@ -133,11 +133,11 @@ public class YhteenvetoTest {
     public void yhteenvetoTulostuuOikein(){
         String tuloste = yv.yhteenvetoAikavalilta(new Paivamaara(2013,0,1), new Paivamaara(2013,0,15));
         System.out.println(tuloste);
-        assertEquals("Tili\n" 
-           + "2013.0.1 - 2013.0.15\n" 
-           + "Saldo tarkastelujakson alussa:  0,00 \n" 
-           + "Saldo tarkastelujakson lopulla: 6,00 \n" 
-           + "Muutos tarkastelujakson aikana: 6,00", 
+        assertEquals("Tili                   Nykyinen jakso            Edellinen jakso\n" +
+                     "              31.12.2012 - 15.01.2013    17.12.2012 - 31.12.2012\n" +
+                     "Alkusaldo:                       0,00                       0,00\n" +
+                     "Loppusaldo:                      6,00                       0,00\n" +
+                     "Muutos:                          6,00                       0,00", 
            tuloste);
     }
 }

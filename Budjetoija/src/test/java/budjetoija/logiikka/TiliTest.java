@@ -167,35 +167,35 @@ public class TiliTest {
     @Test
     public void ToistuvanTilitapahtumanKonvertointiJaPoistoPoistaaToistuvanTilitapahtuman(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        assertTrue(tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new Paivamaara(2013,0,1)));
+        assertTrue(tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new Paivamaara(2010,0,1), new Paivamaara(2013,0,1)));
         assertTrue(tili.getToistuvatTilitapahtumat().isEmpty());
     }
     
     @Test
     public void ToistuvanTilitapahtumanKonvertointiJaPoistoEiPoistaOlematontaTilitapahtumaa(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        assertFalse(tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma2, new Paivamaara(2013,0,1)));
+        assertFalse(tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma2, new Paivamaara(2010,0,1), new Paivamaara(2013,0,1)));
         assertTrue(tili.getToistuvatTilitapahtumat().size() == 1);
     }
     
     @Test
-    public void ToistuvanTilitapahtumanKonvertointiJaPoistoToimiiKunRajaEnnenAlkupvm(){
+    public void ToistuvanTilitapahtumanKonvertointiJaPoistoToimiiKunYalarajaEnnenAlkupvm(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new Paivamaara(2013,0,1));
+        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new Paivamaara(2010,0,1), new Paivamaara(2013,0,1));
         assertTrue(tili.getTilitapahtumat().isEmpty());
     }
     
     @Test
     public void ToistuvanTilitapahtumanKonvertointiJaPoistoLuoYksittaisenTilitapahtumanJosRajanaOnToistuvanTapahtumanAlkupvm(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new Paivamaara(2013,0,15));
+        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new Paivamaara(2010,0,1), new Paivamaara(2013,0,15));
         assertTrue(tili.getTilitapahtumat().size() == 1);
     }
     
     @Test
     public void ToistuvanTilitapahtumanKonvertointiJaPoistoLuoYksittaisenTilitapahtumanJosRajanaOnToistuvanTapahtumanLoppupvm(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new Paivamaara(2013,11,31));
+        tili.konvertoiJaPoistaToistuvaTilitapahtuma(toistuvaTapahtuma1, new Paivamaara(2010,0,1), new Paivamaara(2013,11,31));
         assertTrue(tili.getTilitapahtumat().size() == 12);
     }
     

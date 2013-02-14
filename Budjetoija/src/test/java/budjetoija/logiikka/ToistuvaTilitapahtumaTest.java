@@ -109,21 +109,21 @@ public class ToistuvaTilitapahtumaTest {
     
     @Test
     public void ToistuvaTilitapahtumaTulostuuOikein(){
-        assertTrue(t.toString().equals("kuvaus                                10,00             15.1.2013 - 15.1.2014"));
+        assertTrue(t.toString().equals("kuvaus                                10,00             15.01.2013 - 15.01.2014"));
     }
     
     @Test
     public void ToistuvaTilitapahtumaKonvertoituuOikeaksiMaaraksiYksittaisiaTilitapahtumia(){
-        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2012,0,1)).isEmpty());
-        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2013,0,15)).size() == 1);
-        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2013,1,15)).size() == 2);
-        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2014,0,15)).size() == 13);
-        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2015,1,15)).size() == 13);
+        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2010,0,1), new Paivamaara(2012,0,1)).isEmpty());
+        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2010,0,1), new Paivamaara(2013,0,15)).size() == 1);
+        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2010,0,1), new Paivamaara(2013,1,15)).size() == 2);
+        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2010,0,1), new Paivamaara(2014,0,15)).size() == 13);
+        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2010,0,1), new Paivamaara(2015,1,15)).size() == 13);
     }
     
     @Test
     public void ToistuvaTilitapahtumaKonvertoiOikeinAikaleimoin(){
-        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2013,2,15)).get(2).getAikaleima().get(Calendar.MONTH) == 2);
+        assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2010,0,1), new Paivamaara(2013,2,15)).get(2).getAikaleima().get(Calendar.MONTH) == 2);
     }
     
         @Test

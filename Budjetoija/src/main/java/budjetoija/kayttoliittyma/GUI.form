@@ -120,7 +120,7 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="listausScrollPane" pref="357" max="32767" attributes="0"/>
+                          <Component id="listausScrollPane" pref="352" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="yhteenvetoPane" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -138,6 +138,9 @@
           <SubComponents>
             <Component class="javax.swing.JList" name="listausList">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Nimbus Mono L" size="15" style="0"/>
+                </Property>
                 <Property name="selectionMode" type="int" value="0"/>
               </Properties>
               <Events>
@@ -601,6 +604,9 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Nimbus Mono L" size="15" style="0"/>
+                </Property>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
             </Component>

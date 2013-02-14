@@ -28,7 +28,7 @@ public class Yhteenveto {
     }
     
     /**
-     * Palauttaa String-muotoisen yhteenvedon tilin tapahtumista aikavälillä.
+     * Palauttaa String-muotoisen yhteenvedon tilin tapahtumista.
      * @param alku  Aikavälin alku
      * @param loppu Aikavälin loppu
      * @return  String-muotoinen yhteenveto
@@ -38,24 +38,35 @@ public class Yhteenveto {
         Paivamaara alkuPvm = (Paivamaara) alku.clone();
         Paivamaara loppuPvm = (Paivamaara) loppu.clone();
         
-        //Ei haluta alkupvm:ää molempiin saldoihin.
+        Paivamaara edellisenJaksonLoppu = (Paivamaara) alku.clone();
+        Paivamaara edellisenJaksonAlku = new Paivamaara();
+        long jaksonPituus = loppuPvm.getTimeInMillis() - alkuPvm.getTimeInMillis();
+        edellisenJaksonAlku.setTimeInMillis(alkuPvm.getTimeInMillis() - jaksonPituus);
+        
+        //Ei haluta alkupvm:ää sekä alku että loppu saldoihin.
         alkuPvm.add(Calendar.DAY_OF_MONTH, -1);
+        edellisenJaksonLoppu.add(Calendar.DAY_OF_MONTH, -1);
+        edellisenJaksonAlku.add(Calendar.DAY_OF_MONTH, -1);
         
-        Summa saldoAlussa = laskeSaldo(alkuPvm);
-        Summa saldoLopussa = laskeSaldo(loppuPvm);
-        Summa saldonMuutos = new Summa(saldoLopussa.getSummaInt() - saldoAlussa.getSummaInt());
+        Summa tamanSaldoAlussa = laskeSaldo(alkuPvm);
+        Summa tamanSaldoLopussa = laskeSaldo(loppuPvm);
+        Summa tamanSaldonMuutos = new Summa(tamanSaldoLopussa.getSummaInt() - tamanSaldoAlussa.getSummaInt());
         
-        return String.format("%s\n"
-                + "%s.%s.%s - %s.%s.%s\n"
-                + "%s  %s \n"
-                + "%s %s \n"
-                + "%s %s",
-                tili.getNimi(),
-                ""+alku.get(Calendar.YEAR), ""+alku.get(Calendar.MONTH), ""+alku.get(Calendar.DAY_OF_MONTH),
-                ""+loppu.get(Calendar.YEAR), ""+loppu.get(Calendar.MONTH), ""+loppu.get(Calendar.DAY_OF_MONTH),
-                "Saldo tarkastelujakson alussa:", saldoAlussa,
-                "Saldo tarkastelujakson lopulla:", saldoLopussa,
-                "Muutos tarkastelujakson aikana:", saldonMuutos);
+        Summa edellisenSaldoAlussa = laskeSaldo(edellisenJaksonAlku);
+        Summa edellisenSaldoLopussa = laskeSaldo(edellisenJaksonLoppu);
+        Summa edellisenSaldonMuutos = new Summa(edellisenSaldoLopussa.getSummaInt() - edellisenSaldoAlussa.getSummaInt());
+        
+        return String.format("%s                   %s            %s\n"
+                + "              %s - %s    %s - %s\n"
+                + "%s           %15s            %15s\n"
+                + "%s           %15s            %15s\n"
+                + "%s           %15s            %15s",
+                tili.getNimi(), "Nykyinen jakso", "Edellinen jakso",
+                alkuPvm.toString(), loppuPvm.toString(),
+                edellisenJaksonAlku.toString(), edellisenJaksonLoppu.toString(),
+                "Alkusaldo: ", tamanSaldoAlussa, edellisenSaldoAlussa,
+                "Loppusaldo:", tamanSaldoLopussa, edellisenSaldoLopussa,
+                "Muutos:    ", tamanSaldonMuutos, edellisenSaldonMuutos);
     }
 
     /**
@@ -110,7 +121,7 @@ public class Yhteenveto {
         int saldo = 0;
         ArrayList<ToistuvaTilitapahtuma> toistuvatTapahtumat = tili.getToistuvatTilitapahtumat();
         for (ToistuvaTilitapahtuma tt : toistuvatTapahtumat){
-            ArrayList<Tilitapahtuma> tapahtumat = tt.konvertoiYksittaisiksiTapahtumiksi(loppu);
+            ArrayList<Tilitapahtuma> tapahtumat = tt.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(1,0,1), loppu);
             for (Tilitapahtuma t : tapahtumat){
                 saldo += t.getSumma().getSummaInt();
             }

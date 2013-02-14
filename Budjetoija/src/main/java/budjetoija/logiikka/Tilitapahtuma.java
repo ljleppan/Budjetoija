@@ -60,12 +60,10 @@ public class Tilitapahtuma {
     
     @Override
     public String toString(){
-        return String.format("%-35s   %-15s   %s.%s.%s", 
+        return String.format("%-35s   %-15s   %s", 
                 this.kuvaus,
                 this.summa,
-                this.aikaleima.get(Calendar.DAY_OF_MONTH),
-                this.aikaleima.get(Calendar.MONTH)+1,
-                this.aikaleima.get(Calendar.YEAR));
+                this.aikaleima);
     }
     
     @Override
