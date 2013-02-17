@@ -47,18 +47,6 @@ public class ToistuvaTilitapahtumaTest {
     }   
     
     @Test
-    public void ToistuvaTilitapahtumaSetKuvausToimii(){
-        t.setKuvaus("testi");
-        assertTrue(t.getKuvaus().equals("testi"));
-    }
-    
-    @Test
-    public void ToistuvaTilitapahtumaSetSummaToimii(){
-        t.setSumma(new Summa(1001));
-        assertTrue(t.getSumma().getSummaInt() == 1001);
-    }
-    
-    @Test
     public void ToistuvaTilitapahtumaSetAlkupvmToimiiValidillaAikaleimalla(){
         assertTrue(t.setAlkupvm(new Paivamaara(2013,1,1)));
         assertTrue(t.getAlkupvm().equals(new Paivamaara(2013,1,1)));

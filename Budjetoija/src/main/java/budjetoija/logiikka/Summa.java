@@ -1,17 +1,25 @@
 package budjetoija.logiikka;
 
 /**
- * Rahasummaa kuvaava luokka
- * 
+ * Rahasummaa kuvaava luokka.
  */
 
 public class Summa {
+    /** Summan kuvaama rahamäärä sentteina. */
     int summa;
     
+    /**
+     * Luoka konstuktori.
+     * @param summa rahamäärä sentteinä.
+     */
     public Summa(int summa){
         this.summa = summa;
     }
     
+    /**
+     * Luokan konstruktori.
+     * @param summa Rahamäärää kuvaava String.
+     */
     public Summa(String summa){
         if (!setSummaString(summa)){
             this.summa = 0;
@@ -27,9 +35,7 @@ public class Summa {
     }
 
     /**
-     * 
      * Palauttaa summan kuvaaman rahasumma String-muotoisena.
-     * 
      * @return rahasumman String-muotoisena.
      */
     public String getSummaString(){
@@ -47,7 +53,6 @@ public class Summa {
 
     /**
      * Vaihtaa rahasumman String-muotoisena annetun syötteen mukaiseksi.
-     * 
      * @param   summa   String-muotoinen kuvaus summasta.
      */
     public boolean setSummaString(String summa){
@@ -80,9 +85,7 @@ public class Summa {
     /**
      * Tarkistaa onko syöte muodoltaan kaksi tai enemmän desimaaleja sisältävä numeraali.
      * Hyväksyy syötteen joka on muotoa "0-1 miinus-merkki, n numeroa, pilkku, 2-n numeroa, EOL".
-     * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
-     * 
      * @return  Syötteen täsmäävyys
      */
     private boolean kaksiTaiEnemmanDesimaalia(String summa) throws NumberFormatException {
@@ -97,9 +100,7 @@ public class Summa {
     /**
      * Tarkistaa onko syöte muodoltaan yhden desimaalin sisältävä numeraali.
      * Hyväksyy syötteen joka on muotoa "0-1 miinus-merkki, n numeroa, pilkku, numero, EOL".
-     * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
-     * 
      * @return  Syötteen täsmäävyys
      */
     private boolean yksiDesimaali(String summa) throws NumberFormatException {
@@ -114,9 +115,7 @@ public class Summa {
     /**
      * Tarkistaa onko syöte muodoltaan desimaaleja sisältämätön numeraali.
      * Hyväksyy syötteen joka on muotoa "0-1 miinus-merkki, n numeroa, 0-1 pilkku, EOL".
-     * 
      * @param   summa   Tarkistettava String-muotoinen syöte.
-     * 
      * @return  Syötteen täsmäävyys
      */
     private boolean eiDesimaaleja(String summa) throws NumberFormatException {

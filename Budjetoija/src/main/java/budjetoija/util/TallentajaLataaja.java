@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package budjetoija.util;
 
 import budjetoija.logiikka.Tili;
@@ -11,9 +7,17 @@ import java.io.File;
  * Tallentaa ja lataa tilitietoja tiedostoon ja takaisin.
  */
 public class TallentajaLataaja {
+    /** CSV muotoon ja takaisin konvertoinnista vastaava olio. */
     private Konvertoija konvertoija;
+    
+    /** Tiedostojen käsittelystä vastaava olio. */
     private Tiedostonkasittelija kasittelija;
     
+    /**
+     * Luokan konstruktori.
+     * @param konvertoija CSV-konversioista vastaava olio.
+     * @param kasittelija Tiedostojen käsittelystä vastaava olio.
+     */
     public TallentajaLataaja(Konvertoija konvertoija, Tiedostonkasittelija kasittelija){
         this.konvertoija = konvertoija;
         this.kasittelija = kasittelija;
@@ -36,9 +40,9 @@ public class TallentajaLataaja {
     }
     
     /**
-     * Tallentaa tili tiedostoon.
+     * Tallentaa tilin tiedostoon.
      * @param tili Tallennettava tili.
-     * @param tiedostopolku Tiedosto johon tili tallennetaan.
+     * @param tiedosto Tiedosto johon tili tallennetaan.
      * @return Onnistumista kuvaava boolean.
      */
     public boolean tallennaTili(Tili tili, File tiedosto){
@@ -48,7 +52,7 @@ public class TallentajaLataaja {
     
     /**
      * Lataa tilin tiedostosta.
-     * @param tiedostopolku Tiedosto josta tili ladataan.
+     * @param tiedosto Tiedosto josta tili ladataan.
      * @return Ladattu tili.
      */
     public Tili lataaTili(File tiedosto){

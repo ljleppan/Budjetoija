@@ -11,12 +11,15 @@ import java.util.ArrayList;
 /**
 * Tallentaa ja lataa tekstimuotoista tietoa käyttäjän spesifioimasta tiedostosta.
 */
-
 public class Tiedostonkasittelija {
+    /** Käsiteltävä tiedosto. */
     private File tiedosto;
 
+    /**
+     * Luokan konstruktori.
+     * @param tiedosto Käsiteltävä tiedosto.
+     */
     public Tiedostonkasittelija(File tiedosto){
-        
         this.tiedosto = tiedosto;
     }
     

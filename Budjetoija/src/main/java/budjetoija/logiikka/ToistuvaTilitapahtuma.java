@@ -1,20 +1,26 @@
 package budjetoija.logiikka;
 
-import budjetoija.kayttoliittyma.GUI;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
  * Kuvaa kerran kuussa toteutuvaa vakiosummaista tilitapahtumaa kuten vuokra tai palkka.
- * 
  */
 
-public class ToistuvaTilitapahtuma{
-    private String kuvaus;
-    private Summa summa;
+public class ToistuvaTilitapahtuma extends Tilitapahtuma{
+    /** Ensimmäisen tapahtumakerran päivämäärä. */
     private Paivamaara alkupvm;
+    
+    /** Päivämäärä johon asti tapahtuma toistuu kerran kuukaudessa. */
     private Paivamaara loppupvm;
     
+    /**
+     * Luokan konstruktori.
+     * @param kuvaus Tapahtuman kuvaus.
+     * @param summa Tapahtuman summa.
+     * @param alkupvm Ensimmäisen tapahtuman päivämäärä.
+     * @param loppupvm  Päivämäärä johon asti tapahtuma toistuu kerran kuukaudessa.
+     */
     public ToistuvaTilitapahtuma(String kuvaus, Summa summa, Paivamaara alkupvm, Paivamaara loppupvm){
         this.kuvaus = kuvaus;
         this.summa = summa;
@@ -27,32 +33,6 @@ public class ToistuvaTilitapahtuma{
         }
     }
     
-    public String getKuvaus(){
-        return this.kuvaus;
-    }
-    
-    /**
-     * Asettaa toistuvalle tilitapahtumalle uuden kuvauksen.
-     * Poistaa kuvauksesta puolipisteet mahdollista csv-konversiota varten.
-     * Kuvaus myös lyhennetään siten, ettei se ole GUI.SUURIN_KUVAUKSEN_PITUUS merkkiä pidempi.
-     * 
-     * @param kuvaus Toistuvan tilitapahtuman uusi kuvaus.
-     */
-    public void setKuvaus(String kuvaus){
-        this.kuvaus = kuvaus.replaceAll(";", "");
-        if (this.kuvaus.length() > GUI.SUURIN_KUVAUKSEN_PITUUS){
-            this.kuvaus = this.kuvaus.substring(0, GUI.SUURIN_KUVAUKSEN_PITUUS);
-        }
-    }
-    
-    public Summa getSumma(){
-        return this.summa;
-    }
-    
-    public void setSumma(Summa summa){
-        this.summa = summa;
-    }
-    
     public Paivamaara getAlkupvm(){
         return this.alkupvm;
     }
@@ -60,9 +40,7 @@ public class ToistuvaTilitapahtuma{
     /**
      * Asettaa toistuvalle tilitapahtumalle uuden alkupäivämäärän.
      * Hyväksyy uudeksi alkupäivämääräksi vain päivämäärän joka on ennen loppupäivämäärää.
-     * 
      * @param alkupvm   Uusi alkupäivämäärä.
-     * 
      * @return Onnistumista kuvaava boolean.
      */
     public boolean setAlkupvm(Paivamaara alkupvm){
@@ -80,9 +58,7 @@ public class ToistuvaTilitapahtuma{
     /**
      * Asettaa toistuvalle tilitapahtumalle uuden loppupäivämäärän.
      * Hyväksyttävän päivämäärän täytyy olla alkupäivämäärän jälkeen.
-     * 
      * @param loppupvm  Uusi loppupäivämäärä.
-     * 
      * @return Onnistumista kuvaava boolean.
      */
     public boolean setLoppupvm(Paivamaara loppupvm){
@@ -95,10 +71,8 @@ public class ToistuvaTilitapahtuma{
     
     /**
      * Laskee toistuvan tilitapahtuman tietyn aikavälin maksukertojen määrän.
-     * 
      * @param alaraja   Aikarajan alaraja.
      * @param ylaraja   Aikarajan yläraja.
-     * 
      * @return Maksukertojen määrä.
      */
     public int maksukerratAikavalilla(Paivamaara alaraja, Paivamaara ylaraja){
@@ -121,13 +95,11 @@ public class ToistuvaTilitapahtuma{
     
     /**
      * Muuntaa toistuvan tilitapahtuman yksittäisiksi tilitapahtumiksi yläaikarajalla.
-     * 
      * @param loppupvm  Viimeinen hyväksytty päivämäärä.
-     * 
      * @return ArrayList-muotoinen listaus konvertoiduista tilitapahtumista.
      */
-    public ArrayList<Tilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Paivamaara alkupvm, Paivamaara loppupvm){
-        ArrayList<Tilitapahtuma> palautettava = new ArrayList();
+    public ArrayList<YksittainenTilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Paivamaara alkupvm, Paivamaara loppupvm){
+        ArrayList<YksittainenTilitapahtuma> palautettava = new ArrayList();
         
         if(loppupvm == null){
             loppupvm = this.loppupvm;
@@ -139,7 +111,7 @@ public class ToistuvaTilitapahtuma{
                         this.alkupvm.get(Calendar.YEAR), 
                         this.alkupvm.get(Calendar.MONTH) + i, 
                         this.alkupvm.get(Calendar.DAY_OF_MONTH));
-                palautettava.add(new Tilitapahtuma(this.kuvaus, this.summa, aikaleima));
+                palautettava.add(new YksittainenTilitapahtuma(this.kuvaus, this.summa, aikaleima));
             }
         
         return palautettava;

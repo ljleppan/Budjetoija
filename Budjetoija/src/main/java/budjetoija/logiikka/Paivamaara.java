@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 /**
  * Kuvaa päivämäärää.
  * Toimii kuten GregorianCalendar, mutta ei sisällä tietoa päivää pienemmistä aikayksiköistä. 
+ * @see GregorianCalendar
  */
 public class Paivamaara extends GregorianCalendar{
     

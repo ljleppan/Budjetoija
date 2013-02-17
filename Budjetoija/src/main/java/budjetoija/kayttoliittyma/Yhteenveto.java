@@ -3,8 +3,8 @@ package budjetoija.kayttoliittyma;
 import budjetoija.logiikka.Paivamaara;
 import budjetoija.logiikka.Summa;
 import budjetoija.logiikka.Tili;
-import budjetoija.logiikka.Tilitapahtuma;
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
+import budjetoija.logiikka.YksittainenTilitapahtuma;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -13,8 +13,14 @@ import java.util.Calendar;
  */
 
 public class Yhteenveto {
+    /** Tili josta yhteenveto tehdään. */
     Tili tili;
     
+    /**
+     * Luokan konstruktori.
+     * @param tili tili josta yhteenveto tehdään.
+     * @see Tili
+     */
     public Yhteenveto(Tili tili){
         this.tili = tili;
     }
@@ -29,9 +35,9 @@ public class Yhteenveto {
     
     /**
      * Palauttaa String-muotoisen yhteenvedon tilin tapahtumista.
-     * @param alku  Aikavälin alku
-     * @param loppu Aikavälin loppu
-     * @return  String-muotoinen yhteenveto
+     * @param alku  Aikavälin alku.
+     * @param loppu Aikavälin loppu.
+     * @return  String-muotoinen yhteenveto.
      */
     public String yhteenvetoAikavalilta(Paivamaara alku, Paivamaara loppu){
         //Otetaan kloonit, jotta päivämäärien käsittely ei vaikuta metodin ulkopuolella.
@@ -44,15 +50,16 @@ public class Yhteenveto {
         edellisenJaksonAlku.setTimeInMillis(alkuPvm.getTimeInMillis() - jaksonPituus);
         
         //Ei haluta alkupvm:ää sekä alku että loppu saldoihin.
-        alkuPvm.add(Calendar.DAY_OF_MONTH, -1);
         edellisenJaksonLoppu.add(Calendar.DAY_OF_MONTH, -1);
         edellisenJaksonAlku.add(Calendar.DAY_OF_MONTH, -1);
         
         Summa tamanSaldoAlussa = laskeSaldo(alkuPvm);
+        alkuPvm.add(Calendar.DAY_OF_MONTH, -1);
         Summa tamanSaldoLopussa = laskeSaldo(loppuPvm);
         Summa tamanSaldonMuutos = new Summa(tamanSaldoLopussa.getSummaInt() - tamanSaldoAlussa.getSummaInt());
         
         Summa edellisenSaldoAlussa = laskeSaldo(edellisenJaksonAlku);
+        edellisenJaksonAlku.add(Calendar.DAY_OF_MONTH, -1);
         Summa edellisenSaldoLopussa = laskeSaldo(edellisenJaksonLoppu);
         Summa edellisenSaldonMuutos = new Summa(edellisenSaldoLopussa.getSummaInt() - edellisenSaldoAlussa.getSummaInt());
         
@@ -76,9 +83,9 @@ public class Yhteenveto {
      * @return  Summa-muotoinen saldo
      */
     public Summa laskeSaldo(Paivamaara alku, Paivamaara loppu) {
-        ArrayList<Tilitapahtuma> tapahtumat = tili.getKaikkiTilitapahtumatAjalta(alku, loppu);
+        ArrayList<YksittainenTilitapahtuma> tapahtumat = tili.getKaikkiTilitapahtumatAjalta(alku, loppu);
         int muutos = 0;
-        for (Tilitapahtuma t : tapahtumat){
+        for (YksittainenTilitapahtuma t : tapahtumat){
             muutos += t.getSumma().getSummaInt();
         }
         return new Summa(muutos);
@@ -103,8 +110,8 @@ public class Yhteenveto {
      */
     public int tilitapahtumienSaldo(Paivamaara loppu) {
         int saldo = 0;
-        ArrayList<Tilitapahtuma> tapahtumat = tili.getTilitapahtumat();
-        for (Tilitapahtuma t : tapahtumat){
+        ArrayList<YksittainenTilitapahtuma> tapahtumat = tili.getTilitapahtumat();
+        for (YksittainenTilitapahtuma t : tapahtumat){
             if (!t.getAikaleima().after(loppu)){
                 saldo += t.getSumma().getSummaInt();
             }
@@ -121,8 +128,8 @@ public class Yhteenveto {
         int saldo = 0;
         ArrayList<ToistuvaTilitapahtuma> toistuvatTapahtumat = tili.getToistuvatTilitapahtumat();
         for (ToistuvaTilitapahtuma tt : toistuvatTapahtumat){
-            ArrayList<Tilitapahtuma> tapahtumat = tt.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(1,0,1), loppu);
-            for (Tilitapahtuma t : tapahtumat){
+            ArrayList<YksittainenTilitapahtuma> tapahtumat = tt.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(1,0,1), loppu);
+            for (YksittainenTilitapahtuma t : tapahtumat){
                 saldo += t.getSumma().getSummaInt();
             }
         }

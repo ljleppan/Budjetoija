@@ -3,20 +3,17 @@ package budjetoija.util;
 import budjetoija.logiikka.Paivamaara;
 import budjetoija.logiikka.Summa;
 import budjetoija.logiikka.Tili;
-import budjetoija.logiikka.Tilitapahtuma;
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
+import budjetoija.logiikka.YksittainenTilitapahtuma;
 import java.util.ArrayList;
 import java.util.Calendar;
 /**
 * Konvertoi tili-muotoista dataa csv-muotoiseksi ja toisin päin.
-* 
 */
 public class Konvertoija {
     
-    
     public Konvertoija(){
     }
-    
     
     /**
      * Muuntaa annetun tilin csv-muotoon.
@@ -31,7 +28,7 @@ public class Konvertoija {
             csv.add(toistuvaTilitapahtuma2csv(tt));
         }
         csv.add("-");
-        for (Tilitapahtuma t : tili.getTilitapahtumat()){
+        for (YksittainenTilitapahtuma t : tili.getTilitapahtumat()){
             csv.add(tilitapahtuma2csv(t));            
         }
         return csv;
@@ -60,7 +57,7 @@ public class Konvertoija {
      * @param tapahtuma Muunnettava tilitapahtuma.
      * @return csv-muotoinen string.
      */
-    public String tilitapahtuma2csv(Tilitapahtuma tapahtuma){
+    public String tilitapahtuma2csv(YksittainenTilitapahtuma tapahtuma){
         String csv = "";
         csv = csv.concat(tapahtuma.getKuvaus()+";");
         csv = csv.concat(tapahtuma.getSumma()+";");
@@ -92,7 +89,7 @@ public class Konvertoija {
                     toistuvatKesken = false;
                 }
             } else {
-                Tilitapahtuma t = csv2tilitapahtuma(rivi);
+                YksittainenTilitapahtuma t = csv2tilitapahtuma(rivi);
                 if (t != null){
                     tili.lisaaTilitapahtuma(t);
                 }
@@ -135,7 +132,7 @@ public class Konvertoija {
      * @param rivi Muunnettava csv-muotoinen string.
      * @return Muunnettu tilitapahtuma.
      */
-    public Tilitapahtuma csv2tilitapahtuma(String rivi){
+    public YksittainenTilitapahtuma csv2tilitapahtuma(String rivi){
         String[] riviPalasina = rivi.split(";");
         
         if (riviPalasina.length != 5){
@@ -150,6 +147,6 @@ public class Konvertoija {
         aikaleima.set(Calendar.MONTH, Integer.parseInt(riviPalasina[3]));
         aikaleima.set(Calendar.DAY_OF_MONTH, Integer.parseInt(riviPalasina[4]));
         
-        return new Tilitapahtuma(kuvaus, summa, aikaleima);
+        return new YksittainenTilitapahtuma(kuvaus, summa, aikaleima);
     }
 }

@@ -20,8 +20,8 @@ import org.junit.Test;
  */
 public class TiliTest {
     Tili tili;
-    Tilitapahtuma tapahtuma1;
-    Tilitapahtuma tapahtuma2;
+    YksittainenTilitapahtuma tapahtuma1;
+    YksittainenTilitapahtuma tapahtuma2;
     ToistuvaTilitapahtuma toistuvaTapahtuma1;
     ToistuvaTilitapahtuma toistuvaTapahtuma2;
     
@@ -39,8 +39,8 @@ public class TiliTest {
     @Before
     public void setUp() {
         tili = new Tili("Testitili");
-        tapahtuma1 = new Tilitapahtuma("Tilitapahtuma 1", new Summa(100), new Paivamaara(2013,0,15));
-        tapahtuma2 = new Tilitapahtuma("Tilitapahtuma 2", new Summa(1000), new Paivamaara(2013,5,15));
+        tapahtuma1 = new YksittainenTilitapahtuma("Tilitapahtuma 1", new Summa(100), new Paivamaara(2013,0,15));
+        tapahtuma2 = new YksittainenTilitapahtuma("Tilitapahtuma 2", new Summa(1000), new Paivamaara(2013,5,15));
         toistuvaTapahtuma1 = new ToistuvaTilitapahtuma("Toistuva tilitapahtuma 1", new Summa(100), new Paivamaara(2013,0,15), new Paivamaara(2013,11,31));
         toistuvaTapahtuma2 = new ToistuvaTilitapahtuma("Toistuva tilitapahtuma 2", new Summa(1000), new Paivamaara(2014,0,15), new Paivamaara(2014,11,31));
     }
@@ -160,7 +160,7 @@ public class TiliTest {
     @Test
     public void ToistuvienTilitapahtumienHakeminenAjallaKonvertoiTilitapahtumilleOikeatAikaleimat(){
         tili.lisaaToistuvaTilitapahtuma(toistuvaTapahtuma1);
-        ArrayList<Tilitapahtuma> t = tili.getToistuvatTilitapahtumatTilitapahtuminaAjalta(new Paivamaara(2013,0,15), new Paivamaara(2013,2,31));
+        ArrayList<YksittainenTilitapahtuma> t = tili.getToistuvatTilitapahtumatTilitapahtuminaAjalta(new Paivamaara(2013,0,15), new Paivamaara(2013,2,31));
         assertTrue(t.get(2).getAikaleima().get(Calendar.MONTH) == 2);
     }
     
@@ -209,18 +209,18 @@ public class TiliTest {
     @Test
     public void getTilitapahtumaPalauttaaTilitapahtumanOikein(){
         tili.lisaaTilitapahtuma(tapahtuma1);
-        assertTrue(tapahtuma1.equals(tili.getTilitapahtuma(new Tilitapahtuma("Tilitapahtuma 1", new Summa(100), new Paivamaara(2013,0,15)))));
+        assertTrue(tapahtuma1.equals(tili.getTilitapahtuma(new YksittainenTilitapahtuma("Tilitapahtuma 1", new Summa(100), new Paivamaara(2013,0,15)))));
     }
     
     @Test
     public void getTilitapahtumaPalauttaaNullJosTilillaEiYhtaanTapahtumaa(){
-        assertTrue(tili.getTilitapahtuma(new Tilitapahtuma("Olematon Tapahtuma", new Summa(100), new Paivamaara(2013,0,15))) == null);
+        assertTrue(tili.getTilitapahtuma(new YksittainenTilitapahtuma("Olematon Tapahtuma", new Summa(100), new Paivamaara(2013,0,15))) == null);
     }
     
     @Test
     public void getTilitapahtumaPalauttaaNullJosTilitapahtumaaEiLoydy(){
         tili.lisaaTilitapahtuma(tapahtuma1);
-        assertTrue(tili.getTilitapahtuma(new Tilitapahtuma("Olematon Tapahtuma", new Summa(100), new Paivamaara(2013,0,15))) == null);
+        assertTrue(tili.getTilitapahtuma(new YksittainenTilitapahtuma("Olematon Tapahtuma", new Summa(100), new Paivamaara(2013,0,15))) == null);
     }
     
     @Test

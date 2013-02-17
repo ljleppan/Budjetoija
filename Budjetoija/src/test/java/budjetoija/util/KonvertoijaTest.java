@@ -7,7 +7,7 @@ package budjetoija.util;
 import budjetoija.logiikka.Paivamaara;
 import budjetoija.logiikka.Summa;
 import budjetoija.logiikka.Tili;
-import budjetoija.logiikka.Tilitapahtuma;
+import budjetoija.logiikka.YksittainenTilitapahtuma;
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,8 +25,8 @@ import org.junit.Test;
 public class KonvertoijaTest {
     Konvertoija konvertoija;
     Tili tili;
-    Tilitapahtuma tapahtuma1;
-    Tilitapahtuma tapahtuma2;
+    YksittainenTilitapahtuma tapahtuma1;
+    YksittainenTilitapahtuma tapahtuma2;
     ToistuvaTilitapahtuma toistuvaTapahtuma1;
     ToistuvaTilitapahtuma toistuvaTapahtuma2;
     
@@ -34,8 +34,8 @@ public class KonvertoijaTest {
         konvertoija = new Konvertoija();
         tili = new Tili("tili");
         
-        tapahtuma1 = new Tilitapahtuma("Tapahtuma 1", new Summa("1,23"), new Paivamaara(2012,1,1));
-        tapahtuma2 = new Tilitapahtuma("Tapahtuma 2", new Summa("12,34"), new Paivamaara(2012,1,2));
+        tapahtuma1 = new YksittainenTilitapahtuma("Tapahtuma 1", new Summa("1,23"), new Paivamaara(2012,1,1));
+        tapahtuma2 = new YksittainenTilitapahtuma("Tapahtuma 2", new Summa("12,34"), new Paivamaara(2012,1,2));
         
         toistuvaTapahtuma1 = new ToistuvaTilitapahtuma("Toistuva tapahtuma 1", new Summa("123,45"), new Paivamaara(2012,1,1), new Paivamaara(2012,11,31));
         toistuvaTapahtuma2 = new ToistuvaTilitapahtuma("Toistuva tapahtuma 2", new Summa("1234,56"), new Paivamaara(2014,1,1), new Paivamaara(2014,11,31));
@@ -88,7 +88,7 @@ public class KonvertoijaTest {
     
     @Test
     public void csv2tilitapahtumaToimii(){
-        Tilitapahtuma tapahtuma = konvertoija.csv2tilitapahtuma("Tapahtuma 1;1,23;2012;1;1;");
+        YksittainenTilitapahtuma tapahtuma = konvertoija.csv2tilitapahtuma("Tapahtuma 1;1,23;2012;1;1;");
         assertTrue(tapahtuma.getKuvaus().equals(tapahtuma1.getKuvaus()));
         assertTrue(tapahtuma.getSumma().getSummaInt() == tapahtuma1.getSumma().getSummaInt());
         assertTrue(tapahtuma.getAikaleima().get(Calendar.YEAR) == tapahtuma1.getAikaleima().get(Calendar.YEAR));
