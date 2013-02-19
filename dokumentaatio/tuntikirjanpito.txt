@@ -17,7 +17,7 @@
 |	60min	Testit aloitettu logiikkaluokille
 |
 |	Päivä	Projekti
-|	250min	380min
+|	250min	370min
 |----------------------------------------------------------------------------
 |16.01.2013	Keskiviikko
 |	180min	Testien kirjoittelua, tiedostokäsittelijän perustoiminnalli-
@@ -29,14 +29,14 @@
 |	60min	Perehtymistä Swing:iin käyttäliittymää valmistellen	
 |
 |	Päivä	Projekti
-|	305min	685min
+|	305min	675min
 |----------------------------------------------------------------------------
 |18.01.2013	Perjantai
 |	130min	Lisätty util-pakettiin TallentajaLataaja sekä Konvertoija
 |		-luokat.
 |
 |	Päivä	Projekti
-|	130min	815min
+|	130min	805min
 |----------------------------------------------------------------------------
 |21.01.2013	Maanantai
 |	140min	Lisätty Summa-luokka, muokattu vanha koodi käyttämään sitä,
@@ -45,60 +45,60 @@
 |	90min	Luotu testit Konvertoija-luokalle (100% coberture, 100% pit)
 |
 |	Päivä	Projekti
-|	230min	1045min
+|	230min	1035min
 |----------------------------------------------------------------------------
 |23.01.2013	Keskiviikko
 |	45min	Refaktoroitu Summa, tehty testit TallentajaLataajalle
 |
 |	Päivä	Projekti
-|	45min	1090min
+|	45min	1080min
 |----------------------------------------------------------------------------
 |28.01.2013	Maanantai
 |	10min	Pientä logiikkaluokkien refaktorointa
 |	180min	Käyttöliittymän aloitus
 |
 |	Päivä	Projekti
-|	190min	1280min
+|	190min	1270min
 |----------------------------------------------------------------------------
 |29.01.2013	Tiistai
 |	10min	Luokkakaavion päivitys
 |
 |	Päivä	Projekti
-|	10min	1290min
+|	10min	1280min
 |----------------------------------------------------------------------------
 |30.01.2013	Keskiviikko
 |	270min	Käyttöliittymän jatkamista, sekalaista logiikkaluokkien
 |		hifistelyä
 |
 |	Päivä	Projekti
-|	270min	1560min
+|	270min	1550min
 |----------------------------------------------------------------------------
 |4.2.2013	Maanantai
 |	60min	Testien täydentämistä
 |	90min	Javadocien luomista
 |
 |	Päivä	Projekti
-|	150min	1710min
+|	150min	1700min
 |----------------------------------------------------------------------------
 |5.2.2013	Tiistai
 |	45min	Sekvenssikaavioiden piirtelyä
 |
 |	Päivä	Projekti
-|	45min	1755min
+|	45min	1745min
 |----------------------------------------------------------------------------
 |11.2.2013	Maanantai
 |	120min	Refaktoroitu projekti käyttämään Paivamaara-luokkaan,
 |		korjailtu GUI:n bugeja ja epäloogisuuksia.
 |
 |	Päivä	Projekti
-|	120min	1875min
+|	120min	1865min
 |----------------------------------------------------------------------------
 |12.2.2013	Tiistai
 |	180min	Yhteenveto-luokka, testejä, viimeistelyä, ui:ta.
 |	30min	Luokkakaavion päivitys, uusi sekvenssikaavio.
 |
 |	Päivä	Projekti
-|	180min	2055min
+|	210min	2075min
 |----------------------------------------------------------------------------
 |14.2.2013	Torstai
 |	120min	Bugien metsästelyä yms.
@@ -106,5 +106,17 @@
 |		luomista
 |
 |	Päivä	Projekti
-|	210min	2265min
+|	210min	2285min
+|----------------------------------------------------------------------------
+|15.2.2013	Perjantai
+|	120min	Refaktorointia, javadoc
+|	
+|	Päivä	Projekti
+|	120min	2405min
+|----------------------------------------------------------------------------
+|19.2.2013	Tiistai
+|	120min	Yhteenveto-luokan parantelua, manuaalin tekemistä
+|
+|	Päivä	Projekti
+|	120min	2525min
 \----------------------------------------------------------------------------
