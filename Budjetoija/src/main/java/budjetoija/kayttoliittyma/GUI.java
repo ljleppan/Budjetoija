@@ -39,10 +39,8 @@ public class GUI extends javax.swing.JFrame implements Runnable {
 
     /**
      * Luokan konstruktori.
-     * 
      * @param tili Käsiteltävä tili.
      * @param tallentajalataaja Tilin tallentamisesta ja lataamisesta vastaava TallentajaLataaja-luokan ilmentymä.
-     * 
      * @see Tili
      * @see TallentajaLataaja
      */
@@ -102,7 +100,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     }
 
     /**
-     * 
      * Käyttöliittymän rakentava metodi.
      * Swingbuilderin generoimaa koodia, jota ei tule missään tilanteessa
      * muuntaa käsin. Muutamiseen käytettävä Swingbuilderia.
@@ -550,7 +547,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
      * Tallenna-painikkeen kuuntelija.
      * Muuntaa listauksessa valitun tilitapahtuman tiedot kentissä syötetyiksi
      * tiedoiksi kun käyttäjä painaa Tallenna-painiketta.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma
      */
     private void tallennaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tallennaButtonActionPerformed
@@ -621,7 +617,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
      * Tapahtumalistauksen kuuntelija.
      * Asettaa sivupalkin kenttien arvot ja kenttien enabled-attribuutin valitun
      * tapahtuman tyypin mukaan.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void listausListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listausListValueChanged
@@ -668,7 +663,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
      * Uusi tili -painikkeen kuuntelija.
      * Varmistaa käyttäjältä haluaako tämä varmasti luoda uuden tilin. Mikäli
      * käyttäjä vastaa positiivisesti, luo uuden tilin.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void uusiMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uusiMenuItemActionPerformed
@@ -683,7 +677,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     /**
      * Avaa tili -painikkeen kuuntelija.
      * Avaa tiedostonvalinta -dialogin ja lataa käyttäjän valitseman tilin tiedostosta.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void avaaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avaaMenuItemActionPerformed
@@ -702,7 +695,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     /**
      * Tallenna tili-painikkeen kuuntelija.
      * Avaa tiedostonvalinta -dialogin ja tallentaa tilin käyttäjän valitsemaan tiedostoon.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void tallennaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tallennaMenuItemActionPerformed
@@ -717,7 +709,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     /**
      * Poistu -painikkeen kuuntelija.
      * Sulkee ohjelman. 
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void poistuMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poistuMenuItemActionPerformed
@@ -730,7 +721,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     /**
      * Poista tilitapahtuma -painikkeen kuuntelija.
      * Varmistaa toiminnan käyttäjältä ja poistaa valitun tilitapahtuman.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void poistaTilitapahtumaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poistaTilitapahtumaButtonActionPerformed
@@ -764,7 +754,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     /**
      * Lisää tilitapahtuma -painikkeen kuuntelija.
      * Luo tilille uuden tilitapahtuman.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void lisaaTilitapahtumaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lisaaTilitapahtumaButtonActionPerformed
@@ -782,8 +771,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
      * Muuntaa tilitapahtuman toisen tyyppiseksi.
      * YksittäinenTilitapahtuma muuntuu ToistuvaTilitapahtuma:ksi. ToistuvaTilitapahtuma
      * muuntuu YksittäinenTilitapahtuma:ksi joko kaikkien tapahtumakertojensa tai vain
-     * bäkyvän aikavälin osalta käyttäjän syötteestä riippuen.
-     * 
+     * näkyvän aikavälin osalta käyttäjän syötteestä riippuen.
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void muunnaTilitapahtumaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muunnaTilitapahtumaButtonActionPerformed
@@ -821,7 +809,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     /**
      * Mene -painikkeen kuuntelija.
      * Vaihtaa näytettävän aikavälin.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void meneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meneButtonActionPerformed
@@ -852,7 +839,6 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     /**
      * Vaihda tilin nimi -painikkeen kuuntelija.
      * Avaa dialogin jolla käyttäjä voi uudelleennimetä tilin.
-     * 
      * @param evt Toiminnan laukauseva tapahtuma.
      */
     private void vaihdaTilinNimiMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaihdaTilinNimiMenuItemActionPerformed
@@ -989,9 +975,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
      * Tarkistaa onko syöte validi numeraali.
      * Syöte on validi jos se koostuu vain yhdestä tai useammasta numerosta ja on
      * lyhyempi kuin SUURIN_NUMERAALIN_PITUUS.
-     * 
      * @param teksti Tarkistettava teksti.
-     * 
      * @return Validiutta kuvaava boolean-arvo.
      */
     private boolean onNumeraali(String teksti) {
@@ -1030,12 +1014,10 @@ public class GUI extends javax.swing.JFrame implements Runnable {
      * Tarkistaa myös päivämäärän järkevyyden seuraavin kriteerein:
      * Päivä -arvo ei voi olla suurempi kuin mitä kuukaudessa on päiviä.
      * Vuosi ei voi olla 0 tai pienempi.
-     * 
      * @param pvm Päivämäärä joka päivitetään uusin arvoin.
      * @param vuosiSpinner JSpinner josta saadaan vuosi.
      * @param kuukausiSpinner JSpinner josta saadaan kuukausi.
      * @param paivaSpinner JSpinner josta saadaan päivä.
-     * 
      * @return Operaation onnistumista kuvaava boolean -arvo.
      */
     private boolean asetaPaivamaara(Paivamaara pvm, JSpinner vuosiSpinner, JSpinner kuukausiSpinner, JSpinner paivaSpinner) {

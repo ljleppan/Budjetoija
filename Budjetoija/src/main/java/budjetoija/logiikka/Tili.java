@@ -1,5 +1,6 @@
 package budjetoija.logiikka;
 
+import budjetoija.kayttoliittyma.GUI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -32,8 +33,16 @@ public class Tili {
         return this.nimi;
     }
     
+    /**
+     * Asettaa tilille uuden nimen.
+     * Nimen suurin sallittu pituus on GUI.SUURIN_KUVAUKSEN_PITUUS
+     * @param nimi uusi nimi.
+     */
     public void setNimi(String nimi){
         this.nimi = nimi;
+        if (this.nimi.length() > GUI.SUURIN_KUVAUKSEN_PITUUS){
+            this.nimi = this.nimi.substring(0, GUI.SUURIN_KUVAUKSEN_PITUUS);
+        }
     }
     
     /**
