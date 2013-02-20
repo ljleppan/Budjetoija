@@ -230,7 +230,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buddy copy.jpg"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buddy.jpg"))); // NOI18N
         Logo.setRequestFocusEnabled(false);
 
         nakymaAlkuVuosiSpinner.setEditor(new JSpinner.NumberEditor(nakymaAlkuVuosiSpinner, "#"));
