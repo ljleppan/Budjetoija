@@ -10,6 +10,9 @@ import java.util.GregorianCalendar;
  */
 public class Paivamaara extends GregorianCalendar{
     
+    /**
+     * Paivamaara-luokan konstruktori, jonka luoman olion päivämäärä on sen luomisen hetki.
+     */
     public Paivamaara(){
         super();
         super.clear(Calendar.HOUR);
@@ -18,6 +21,12 @@ public class Paivamaara extends GregorianCalendar{
         super.clear(Calendar.MILLISECOND);
     }
     
+    /**
+     * Paivamaara-luokan konsturktori, joka asettaa luodulle oliolle annetun päivämäärän.
+     * @param vuosi Päivämäärän vuosiosa.
+     * @param kuukausi Päivämäärän kuukausiosa.
+     * @param paiva Päivämäärän kuukaudenpäiväosa.
+     */
     public Paivamaara(int vuosi, int kuukausi, int paiva){
         super(vuosi, kuukausi, paiva);
         super.clear(Calendar.HOUR);
