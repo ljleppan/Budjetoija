@@ -74,38 +74,28 @@ public class Konvertoija {
      * @return Palautettu tili.
      */
     public Tili csv2tili(ArrayList<String> csv){        
-        Tili tili = new Tili(csv.get(0));
-        
-        boolean toistuvatKesken = true;
+        Tili tili = new Tili("");
+        tili.setNimi(csv.get(0));
         
         for (String rivi : csv){
-            if (toistuvatKesken){
-                if(!rivi.equals("-")){
-                    ToistuvaTilitapahtuma tt = csv2toistuvaTilitapahtuma(rivi);
-                    if (tt != null){
-                        tili.lisaaToistuvaTilitapahtuma(tt);
-                    }
-                } else {
-                    toistuvatKesken = false;
-                }
-            } else {
-                YksittainenTilitapahtuma t = csv2tilitapahtuma(rivi);
-                if (t != null){
-                    tili.lisaaTilitapahtuma(t);
-                }
+            String[] riviPalasina = rivi.split(";");
+            if (riviPalasina.length == 8){
+                ToistuvaTilitapahtuma tt = csv2toistuvaTilitapahtuma(riviPalasina);
+                tili.lisaaToistuvaTilitapahtuma(tt);
+            } if (riviPalasina.length == 5){
+                YksittainenTilitapahtuma t = csv2tilitapahtuma(riviPalasina);
+                tili.lisaaTilitapahtuma(t);
             }
         }
         return tili;
     }
     
     /**
-     * Muuntaa csv-muotoisen stringin toistuvaksi tilitapahtumaksi.
-     * @param rivi  Muunnettava csv-muotoinen string.
+     * Muuntaa csv:stä johdetun string[]:n toistuvaksi tilitapahtumaksi.
+     * @param rivi  csv-rivi eroteltuna listaan.
      * @return  Muunnettu toistuva tilitapahtuma.
      */
-    public ToistuvaTilitapahtuma csv2toistuvaTilitapahtuma(String rivi){
-        String[] riviPalasina = rivi.split(";");
-        
+    public ToistuvaTilitapahtuma csv2toistuvaTilitapahtuma(String[] riviPalasina){
         if (riviPalasina.length != 8){
             return null;
         }
@@ -128,13 +118,11 @@ public class Konvertoija {
     }
     
     /**
-     * Muuntaa csv-muotoisen stringin tilitapahtumaksi.
-     * @param rivi Muunnettava csv-muotoinen string.
+     * Muuntaa csv:stä johdetun string[]:n tilitapahtumaksi.
+     * @param rivi csv-rivi eroteltuna listaan.
      * @return Muunnettu tilitapahtuma.
      */
-    public YksittainenTilitapahtuma csv2tilitapahtuma(String rivi){
-        String[] riviPalasina = rivi.split(";");
-        
+    public YksittainenTilitapahtuma csv2tilitapahtuma(String[] riviPalasina){
         if (riviPalasina.length != 5){
             return null;
         }
