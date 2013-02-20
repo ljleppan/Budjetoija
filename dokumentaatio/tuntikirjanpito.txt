@@ -122,7 +122,8 @@
 |----------------------------------------------------------------------------
 |20.2.2013
 |	120min	Testauksen parantelua, dokumentointia.
+|	120min	Refaktorointia, viimeistelyä, palautukseen valmistautumista
 |
 |	Päivä	Projekti
-|	120min	2745min
+|	240min	2765min
 \----------------------------------------------------------------------------
