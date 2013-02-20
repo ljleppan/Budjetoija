@@ -557,63 +557,52 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         if (valinta != -1) {
             if (listausList.getModel().getElementAt(valinta) instanceof YksittainenTilitapahtuma) {
                 YksittainenTilitapahtuma tapahtuma = (YksittainenTilitapahtuma) listausList.getModel().getElementAt(valinta);
-
-                if (kuvausTextField.getText().length() <= GUI.SUURIN_KUVAUKSEN_PITUUS){
-                    tapahtuma.setKuvaus(kuvausTextField.getText());
-                }
+                
+                tapahtuma.setKuvaus(kuvausTextField.getText());
+                
                 if (summaTextField.getText().length() <= GUI.SUURIN_NUMERAALIN_PITUUS){
                     tapahtuma.getSumma().setSummaString(summaTextField.getText());
-                }
-
-
-                String vuosi = vuosiTextField.getText();
-                String kuukausi = kuukausiTextField.getText();
-                String paiva = paivaTextField.getText();
-
-                if (onNumeraali(vuosi) && onNumeraali(kuukausi) && onNumeraali(paiva)) {
-                    tapahtuma.setAikaleima(new Paivamaara(
-                            Integer.parseInt(vuosi),
-                            Integer.parseInt(kuukausi) - 1,
-                            Integer.parseInt(paiva)));
                 }
                 
+                Paivamaara uusiAikaleima = muunnaPaivamaaraksi(
+                        vuosiTextField.getText(),
+                        kuukausiTextField.getText(),
+                        paivaTextField.getText()
+                        );
+                if (uusiAikaleima != null){
+                    tapahtuma.setAikaleima(uusiAikaleima);
+                }
+
             } else if (listausList.getModel().getElementAt(valinta) instanceof ToistuvaTilitapahtuma) {
                 ToistuvaTilitapahtuma tapahtuma = (ToistuvaTilitapahtuma) listausList.getModel().getElementAt(valinta);
-
-                if (kuvausTextField.getText().length() <= GUI.SUURIN_KUVAUKSEN_PITUUS){
-                    tapahtuma.setKuvaus(kuvausTextField.getText());
-                }
+                
+                tapahtuma.setKuvaus(kuvausTextField.getText());
+                
                 if (summaTextField.getText().length() <= GUI.SUURIN_NUMERAALIN_PITUUS){
                     tapahtuma.getSumma().setSummaString(summaTextField.getText());
                 }
-
-                String alkuVuosi = toistuvaAlkuVuosiTextField.getText();
-                String alkuKuukausi = toistuvaAlkuKuukausiTextField.getText();
-                String alkuPaiva = toistuvaAlkuPaivaTextField.getText();
-
-                if (onNumeraali(alkuVuosi) && onNumeraali(alkuKuukausi) && onNumeraali(alkuPaiva)) {
-                    tapahtuma.setAlkupvm(new Paivamaara(
-                            Integer.parseInt(alkuVuosi),
-                            Integer.parseInt(alkuKuukausi) - 1,
-                            Integer.parseInt(alkuPaiva)));
+                
+                Paivamaara uusiAlkuPvm = muunnaPaivamaaraksi(
+                        toistuvaAlkuVuosiTextField.getText(),
+                        toistuvaAlkuKuukausiTextField.getText(),
+                        toistuvaAlkuPaivaTextField.getText()
+                        );
+                if (uusiAlkuPvm != null){
+                    tapahtuma.setAlkupvm(uusiAlkuPvm);
                 }
-
-                String loppuVuosi = toistuvaLoppuVuosiTextField.getText();
-                String loppuKuukausi = toistuvaLoppuKuukausiTextField.getText();
-                String loppuPaiva = toistuvaLoppuPaivaTextField.getText();
-
-                if (onNumeraali(loppuVuosi) && onNumeraali(loppuKuukausi) && onNumeraali(loppuPaiva)) {
-                    tapahtuma.setLoppupvm(new Paivamaara(
-                            Integer.parseInt(toistuvaLoppuVuosiTextField.getText()),
-                            Integer.parseInt(toistuvaLoppuKuukausiTextField.getText()) - 1,
-                            Integer.parseInt(toistuvaLoppuPaivaTextField.getText())));
+                
+                Paivamaara uusiLoppuPvm = muunnaPaivamaaraksi(
+                        toistuvaLoppuVuosiTextField.getText(),
+                        toistuvaLoppuKuukausiTextField.getText(),
+                        toistuvaLoppuPaivaTextField.getText()
+                        );
+                if (uusiLoppuPvm != null){
+                    tapahtuma.setLoppupvm(uusiLoppuPvm);
                 }
             }
-
             paivitaListaus();
             listausList.setSelectedIndex(valinta);
         }
-
     }//GEN-LAST:event_tallennaButtonActionPerformed
 
     /**
@@ -1043,8 +1032,15 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         } catch (Exception e){
             return false;
         }
-        
-        
-        
+    }
+
+    private Paivamaara muunnaPaivamaaraksi(String vuosi, String kuukausi, String paiva) {
+        if (onNumeraali(vuosi) && onNumeraali(kuukausi) && onNumeraali(paiva)) {
+            return new Paivamaara(
+                    Integer.parseInt(vuosi),
+                    Integer.parseInt(kuukausi) - 1,
+                    Integer.parseInt(paiva));
+        }
+        return null;
     }
 }

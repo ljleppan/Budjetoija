@@ -63,8 +63,7 @@ public class Yhteenveto {
                 + "%s           %15s            %15s\n"
                 + "%s           %15s            %15s",
                 tili.getNimi(), "Nykyinen jakso", "Edellinen jakso",
-                alkuPvm.toString(), loppuPvm.toString(),
-                edellisenJaksonAlku.toString(), edellisenJaksonLoppu.toString(),
+                alkuPvm.toString(), loppuPvm.toString(), edellisenJaksonAlku.toString(), edellisenJaksonLoppu.toString(),
                 "Alkusaldo: ", tamanSaldoAlussa, edellisenSaldoAlussa,
                 "Loppusaldo:", tamanSaldoLopussa, edellisenSaldoLopussa,
                 "Muutos:    ", tamanSaldonMuutos, edellisenSaldonMuutos);

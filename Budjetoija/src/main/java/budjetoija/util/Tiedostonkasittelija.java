@@ -83,7 +83,7 @@ public class Tiedostonkasittelija {
     }
 
     /**
-     * Luo tiedoston, mikäli sitä ei ole olemassa.
+     * Luo tiedoston.
      * @return Onnistumista kuvaava boolean.
      */
     public boolean luoTiedosto() {

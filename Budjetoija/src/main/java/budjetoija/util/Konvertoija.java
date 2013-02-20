@@ -113,7 +113,6 @@ public class Konvertoija {
         loppupvm.set(Calendar.MONTH, Integer.parseInt(riviPalasina[6]));
         loppupvm.set(Calendar.DAY_OF_MONTH, Integer.parseInt(riviPalasina[7]));
 
-
         return new ToistuvaTilitapahtuma(kuvaus, summa, alkupvm, loppupvm);
     }
     
