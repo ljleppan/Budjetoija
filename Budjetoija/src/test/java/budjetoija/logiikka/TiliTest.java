@@ -67,6 +67,12 @@ public class TiliTest {
     }
     
     @Test
+    public void TiliSetNimiHylkaaLiaanPitkanNimen(){
+        tili.setNimi("1234567890123456789012345678901234567890");
+        assertEquals("12345678901234567890", tili.getNimi());
+    }
+    
+    @Test
     public void TilitapahtumanLisaaminenToimii(){
         tili.lisaaTilitapahtuma(tapahtuma1);
         assertTrue(tili.getTilitapahtumat().size() == 1);
@@ -271,7 +277,3 @@ public class TiliTest {
         assertTrue(palaute.size() == 1);
     }
 }
-
-    //1.6.2013 - 1.1.2014
-    //15.1.2013 - 31.12.2013
-    //15.1.2014 - 31.12.2014

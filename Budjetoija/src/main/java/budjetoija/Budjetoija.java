@@ -19,20 +19,8 @@ import java.io.File;
 public class Budjetoija {
 
     public static void main(String[] args) {
-        Tili tili = new Tili("Tili");
-        
-        tili.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t1", new Summa(100), new Paivamaara(2013, 0, 1)));
-        tili.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t2", new Summa(200), new Paivamaara(2013, 0, 2)));
-        tili.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t3", new Summa(300), new Paivamaara(2013, 0, 3)));
-        tili.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t4", new Summa(300), new Paivamaara(2013, 1, 1)));
-        tili.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t5", new Summa(300), new Paivamaara(2013, 2, 1)));
-        tili.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t6", new Summa(300), new Paivamaara(2014, 0, 1)));
-        tili.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t7", new Summa(300), new Paivamaara(2014, 1, 1)));
-        
-        tili.lisaaToistuvaTilitapahtuma(new ToistuvaTilitapahtuma("tt1", new Summa(100), new Paivamaara(2013,0,1), new Paivamaara(2014,0,1)));
-        
-        TallentajaLataaja io = new TallentajaLataaja(new Konvertoija(), new Tiedostonkasittelija(new File("testi.tili")));
-        
+        Tili tili = new Tili("");        
+        TallentajaLataaja io = new TallentajaLataaja(new Konvertoija(), new Tiedostonkasittelija(new File("tili.tili")));
         GUI ui = new GUI(tili, io);
         java.awt.EventQueue.invokeLater(ui);
     }

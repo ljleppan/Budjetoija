@@ -56,8 +56,8 @@ public class Yhteenveto {
         Summa edellisenSaldoAlussa = laskeSaldo(edellisenJaksonAlku);
         Summa edellisenSaldoLopussa = laskeSaldo(edellisenJaksonLoppu);
         Summa edellisenSaldonMuutos = new Summa(edellisenSaldoLopussa.getSummaInt() - edellisenSaldoAlussa.getSummaInt());
-
-        return String.format("%s                   %s            %s\n"
+        
+        return String.format("%-20s   %s            %s\n"
                 + "              %s - %s    %s - %s\n"
                 + "%s           %15s            %15s\n"
                 + "%s           %15s            %15s\n"
@@ -154,8 +154,8 @@ public class Yhteenveto {
         Paivamaara edellisenJaksonAlku = (Paivamaara) alkuPvm.clone();
         edellisenJaksonAlku.add(Calendar.DAY_OF_MONTH, -1);
         
-        if((alkuPvm.get(Calendar.DAY_OF_MONTH) == 1) 
-                && (loppuPvm.get(Calendar.DAY_OF_MONTH) == loppuPvm.getActualMaximum(Calendar.DAY_OF_MONTH))){
+        if(alkuPvm.get(Calendar.DAY_OF_MONTH) == 1
+                && loppuPvm.get(Calendar.DAY_OF_MONTH) == loppuPvm.getActualMaximum(Calendar.DAY_OF_MONTH)){
             int vuosienErotus = alkuPvm.get(Calendar.YEAR ) - loppuPvm.get(Calendar.YEAR);
             edellisenJaksonAlku.add(Calendar.YEAR, vuosienErotus );
             

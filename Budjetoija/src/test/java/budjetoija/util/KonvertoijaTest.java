@@ -88,7 +88,9 @@ public class KonvertoijaTest {
     
     @Test
     public void csv2tilitapahtumaToimii(){
-        YksittainenTilitapahtuma tapahtuma = konvertoija.csv2tilitapahtuma("Tapahtuma 1;1,23;2012;1;1;");
+        String rivi = "Tapahtuma 1;1,23;2012;1;1;";
+        String[] riviPalasina = rivi.split(";");
+        YksittainenTilitapahtuma tapahtuma = konvertoija.csv2tilitapahtuma(riviPalasina);
         assertTrue(tapahtuma.getKuvaus().equals(tapahtuma1.getKuvaus()));
         assertTrue(tapahtuma.getSumma().getSummaInt() == tapahtuma1.getSumma().getSummaInt());
         assertTrue(tapahtuma.getAikaleima().get(Calendar.YEAR) == tapahtuma1.getAikaleima().get(Calendar.YEAR));
@@ -98,12 +100,16 @@ public class KonvertoijaTest {
     
     @Test
     public void csv2tiliPalauttaaNullJosEpavalidiSyote(){
-        assertTrue(konvertoija.csv2tilitapahtuma("asd") == null);
+        String rivi = "asd";
+        String[] riviPalasina = rivi.split(";");
+        assertTrue(konvertoija.csv2tilitapahtuma(riviPalasina) == null);
     }
     
     @Test
     public void csv2toistuvaTilitapahtumaToimii(){
-        ToistuvaTilitapahtuma tapahtuma = konvertoija.csv2toistuvaTilitapahtuma("Toistuva tapahtuma 1;123,45;2012;1;1;2012;11;31;");
+        String rivi = "Toistuva tapahtuma 1;123,45;2012;1;1;2012;11;31;";
+        String[] riviPalasina = rivi.split(";");
+        ToistuvaTilitapahtuma tapahtuma = konvertoija.csv2toistuvaTilitapahtuma(riviPalasina);
         assertTrue(tapahtuma.getKuvaus().equals(toistuvaTapahtuma1.getKuvaus()));
         assertTrue(tapahtuma.getSumma().getSummaInt() == toistuvaTapahtuma1.getSumma().getSummaInt());
         assertTrue(tapahtuma.getAlkupvm().get(Calendar.YEAR) == toistuvaTapahtuma1.getAlkupvm().get(Calendar.YEAR));
@@ -116,7 +122,9 @@ public class KonvertoijaTest {
     
     @Test
     public void csv2ToistuvatilitapahtumaPalauttaaNullJosEpavalidiSyote(){
-        assertTrue(konvertoija.csv2toistuvaTilitapahtuma("asd") == null);
+        String rivi = "asd";
+        String[] riviPalasina = rivi.split(";");
+        assertTrue(konvertoija.csv2toistuvaTilitapahtuma(riviPalasina) == null);
     }
     
     @Test

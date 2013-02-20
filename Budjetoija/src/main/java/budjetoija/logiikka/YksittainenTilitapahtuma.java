@@ -48,13 +48,4 @@ public class YksittainenTilitapahtuma extends Tilitapahtuma {
         }
         return false;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + (this.kuvaus != null ? this.kuvaus.hashCode() : 0);
-        hash = 37 * hash + (this.summa != null ? this.summa.hashCode() : 0);
-        hash = 37 * hash + (this.aikaleima != null ? this.aikaleima.hashCode() : 0);
-        return hash;
-    }
 }

@@ -45,6 +45,12 @@ public class TilitapahtumaTest {
     }
     
     @Test
+    public void TilitapahtumaSetKuvausLyhentaaLiianPitkanKuvauksen(){
+        t.setKuvaus("1234567890123456789012345678901234567890");
+        assertEquals("12345678901234567890123456789012345", t.getKuvaus());
+    }
+    
+    @Test
     public void TilitapahtumaSetSummaToimii(){
         t.setSumma(new Summa(100));
         assertTrue(t.getSumma().getSummaInt() == 100);

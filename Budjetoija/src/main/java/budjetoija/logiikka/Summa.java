@@ -137,13 +137,5 @@ public class Summa {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + this.summa;
-        return hash;
-    }
-    
+    }   
 }

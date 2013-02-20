@@ -40,8 +40,8 @@ public class Tili {
      */
     public void setNimi(String nimi){
         this.nimi = nimi;
-        if (this.nimi.length() > GUI.SUURIN_KUVAUKSEN_PITUUS){
-            this.nimi = this.nimi.substring(0, GUI.SUURIN_KUVAUKSEN_PITUUS);
+        if (this.nimi.length() > GUI.SUURIN_TILIN_NIMI){
+            this.nimi = this.nimi.substring(0, GUI.SUURIN_TILIN_NIMI);
         }
     }
     

@@ -101,6 +101,9 @@ public class ToistuvaTilitapahtuma extends Tilitapahtuma{
     public ArrayList<YksittainenTilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Paivamaara alkupvm, Paivamaara loppupvm){
         ArrayList<YksittainenTilitapahtuma> palautettava = new ArrayList();
         
+        if(alkupvm == null){
+            alkupvm = this.alkupvm;
+        }
         if(loppupvm == null){
             loppupvm = this.loppupvm;
         }
@@ -140,15 +143,5 @@ public class ToistuvaTilitapahtuma extends Tilitapahtuma{
             return true;
         }
         return false;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + (this.kuvaus != null ? this.kuvaus.hashCode() : 0);
-        hash = 67 * hash + (this.summa != null ? this.summa.hashCode() : 0);
-        hash = 67 * hash + (this.alkupvm != null ? this.alkupvm.hashCode() : 0);
-        hash = 67 * hash + (this.loppupvm != null ? this.loppupvm.hashCode() : 0);
-        return hash;
     }
 }

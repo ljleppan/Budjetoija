@@ -129,15 +129,53 @@ public class YhteenvetoTest {
         assertEquals(2400, s);
     }
     
-//    @Test
-//    public void yhteenvetoTulostuuOikein(){
-//        String tuloste = yv.yhteenvetoAikavalilta(new Paivamaara(2013,0,1), new Paivamaara(2013,0,15));
-//        System.out.println(tuloste);
-//        assertEquals("Tili                   Nykyinen jakso            Edellinen jakso\n" +
-//                     "              31.12.2012 - 15.01.2013    17.12.2012 - 31.12.2012\n" +
-//                     "Alkusaldo:                       0,00                       0,00\n" +
-//                     "Loppusaldo:                      6,00                       0,00\n" +
-//                     "Muutos:                          6,00                       0,00", 
-//           tuloste);
-//    }
+    @Test
+    public void maaritaEdellisenJaksonAlkuToimiiTaydellaKuukaudella(){
+        Paivamaara edellisenAlku = yv.maaritaEdellisenJaksonAlku(new Paivamaara(2013,1,1), new Paivamaara(2013,1,31));
+        System.out.println(edellisenAlku);
+        assertEquals("01.01.2013", edellisenAlku.toString());
+    }
+    
+    @Test
+    public void maaritaEdellisenJaksonAlkuToimiiVajaallaKuukaudella(){
+        Paivamaara edellisenAlku = yv.maaritaEdellisenJaksonAlku(new Paivamaara(2013,1,2), new Paivamaara(2013,1,27));
+        assertEquals("07.01.2013", edellisenAlku.toString());
+    }
+    
+    @Test
+    public void maaritaEdellisenJaksonAlkuToimiiTaydellaVuodella(){
+        Paivamaara edellisenAlku = yv.maaritaEdellisenJaksonAlku(new Paivamaara(2013,0,1), new Paivamaara(2013,11,31));
+        assertEquals("01.01.2012", edellisenAlku.toString());
+    }
+    
+    @Test
+    public void maaritaEdellisenJaksonAlkuToimiiKahdellaVuodella(){
+        Paivamaara edellisenAlku = yv.maaritaEdellisenJaksonAlku(new Paivamaara(2012,0,1), new Paivamaara(2013,11,31));
+        assertEquals("01.01.2010", edellisenAlku.toString());
+    }
+    
+    @Test
+    public void yhteenvetoTulostuuOikein(){
+        Tili tili2 = new Tili("Tili");
+        
+        tili2.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t1", new Summa(100), new Paivamaara(2013, 0, 1)));
+        tili2.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t2", new Summa(200), new Paivamaara(2013, 0, 2)));
+        tili2.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t3", new Summa(300), new Paivamaara(2013, 0, 3)));
+        tili2.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t4", new Summa(300), new Paivamaara(2013, 1, 1)));
+        tili2.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t5", new Summa(300), new Paivamaara(2013, 2, 1)));
+        tili2.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t6", new Summa(300), new Paivamaara(2014, 0, 1)));
+        tili2.lisaaTilitapahtuma(new YksittainenTilitapahtuma("t7", new Summa(300), new Paivamaara(2014, 1, 1)));
+        
+        tili2.lisaaToistuvaTilitapahtuma(new ToistuvaTilitapahtuma("tt1", new Summa(100), new Paivamaara(2013,0,1), new Paivamaara(2014,0,1)));
+        
+        Yhteenveto yv2 = new Yhteenveto(tili2);
+        String tuloste = yv.yhteenvetoAikavalilta(new Paivamaara(2013,0,1), new Paivamaara(2013,0,15));
+        System.out.println(tuloste);
+        assertEquals("Tili                   Nykyinen jakso            Edellinen jakso\n" +
+                    "              01.01.2013 - 15.01.2013    17.12.2012 - 31.12.2012\n" +
+                    "Alkusaldo:                       1,00                       0,00\n" +
+                    "Loppusaldo:                      6,00                       0,00\n" +
+                    "Muutos:                          5,00                       0,00", 
+           tuloste);
+    }
 }

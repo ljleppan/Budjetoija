@@ -110,6 +110,12 @@ public class ToistuvaTilitapahtumaTest {
     }
     
     @Test
+    public void ToistuvaTilitapahtumaKovertoituuKokoAjaltaJosRajatOnNull(){
+        ToistuvaTilitapahtuma tt = new ToistuvaTilitapahtuma("test", new Summa(100), new Paivamaara(2010,0,1), new Paivamaara(2012,0,1));
+        assertEquals(25, tt.konvertoiYksittaisiksiTapahtumiksi(null, null).size());
+    }
+    
+    @Test
     public void ToistuvaTilitapahtumaKonvertoiOikeinAikaleimoin(){
         assertTrue(t.konvertoiYksittaisiksiTapahtumiksi(new Paivamaara(2010,0,1), new Paivamaara(2013,2,15)).get(2).getAikaleima().get(Calendar.MONTH) == 2);
     }

@@ -24,6 +24,9 @@ public class GUI extends javax.swing.JFrame implements Runnable {
     
     /** Suurin käyttöliittymän sallima numeraalin pituus. */
     public static final int SUURIN_NUMERAALIN_PITUUS = 8;
+    
+    /** Suurin käyttöliittymän sallima tilin nimi. */
+    public static int SUURIN_TILIN_NIMI = 20;
 
     /** Tilin tallentamisesta ja lataamisesta vastaavan luokan ilmentymä. */
     TallentajaLataaja io;
@@ -483,7 +486,7 @@ public class GUI extends javax.swing.JFrame implements Runnable {
                 .addGap(0, 0, 0)
                 .addGroup(paaPaneeliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paaPaneeliLayout.createSequentialGroup()
-                        .addComponent(listausScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                        .addComponent(listausScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(yhteenvetoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(sivuPalkki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
