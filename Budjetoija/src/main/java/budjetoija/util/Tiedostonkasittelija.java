@@ -14,14 +14,6 @@ import java.util.ArrayList;
 public class Tiedostonkasittelija {
     /** Käsiteltävä tiedosto. */
     private File tiedosto;
-
-    /**
-     * Luokan konstruktori.
-     * @param tiedosto Käsiteltävä tiedosto.
-     */
-    public Tiedostonkasittelija(File tiedosto){
-        this.tiedosto = tiedosto;
-    }
     
     public File getTiedosto(){
         return this.tiedosto;

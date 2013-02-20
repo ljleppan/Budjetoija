@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 public class TiedostonkasittelijaTest {
@@ -29,7 +29,8 @@ public class TiedostonkasittelijaTest {
     
     @Before
     public void setUp() {
-        kasittelija = new Tiedostonkasittelija(new File("/tiedosto.txt"));
+        kasittelija = new Tiedostonkasittelija();
+        kasittelija.setTiedosto(new File("/tiedosto.txt"));
         testiArray = new ArrayList();
         testiArray.add("testi");
     }
@@ -125,9 +126,4 @@ public class TiedostonkasittelijaTest {
         assertTrue(rivit.size() == 1);
         assertTrue(rivit.get(0).equals("testi2"));
     }
-    
-//    @Test
-//    public void tallennaTiedostoPalauttaaFalseJosKirjoittaessaTapahtuuVirhe(){
-//        
-//    }
 }

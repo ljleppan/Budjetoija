@@ -15,12 +15,10 @@ public class TallentajaLataaja {
     
     /**
      * Luokan konstruktori.
-     * @param konvertoija CSV-konversioista vastaava olio.
-     * @param kasittelija Tiedostojen käsittelystä vastaava olio.
      */
-    public TallentajaLataaja(Konvertoija konvertoija, Tiedostonkasittelija kasittelija){
-        this.konvertoija = konvertoija;
-        this.kasittelija = kasittelija;
+    public TallentajaLataaja(){
+        this.konvertoija = new Konvertoija();
+        this.kasittelija = new Tiedostonkasittelija();
     }
     
     public Konvertoija getKonvertoija(){

@@ -3,14 +3,14 @@ package budjetoija.kayttoliittyma;
 import budjetoija.logiikka.Paivamaara;
 import budjetoija.logiikka.Summa;
 import budjetoija.logiikka.Tili;
-import budjetoija.logiikka.YksittainenTilitapahtuma;
 import budjetoija.logiikka.ToistuvaTilitapahtuma;
+import budjetoija.logiikka.YksittainenTilitapahtuma;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class YhteenvetoTest {
     Tili tili;

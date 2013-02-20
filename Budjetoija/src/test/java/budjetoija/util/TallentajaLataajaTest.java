@@ -8,11 +8,11 @@ import budjetoija.logiikka.Tili;
 import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 /**
@@ -38,10 +38,13 @@ public class TallentajaLataajaTest {
     
     @Before
     public void setUp() {
+        this.io = new TallentajaLataaja();
         this.konvertoija = new Konvertoija();
+        io.setKonvertoija(konvertoija);
         this.tiedosto = new File(kansio.getRoot()+"/testi.txt");
-        this.tiedostonkasittelija = new Tiedostonkasittelija(tiedosto);
-        this.io = new TallentajaLataaja(konvertoija, tiedostonkasittelija);
+        this.tiedostonkasittelija = new Tiedostonkasittelija();
+        io.setTiedostonkasittelija(tiedostonkasittelija);
+        
     }
     
     @After
@@ -66,7 +69,7 @@ public class TallentajaLataajaTest {
     
     @Test
     public void setTiedostonkasittelijaToimii(){
-        Tiedostonkasittelija t = new Tiedostonkasittelija(new File("t.tili"));
+        Tiedostonkasittelija t = new Tiedostonkasittelija();
         io.setTiedostonkasittelija(t);
         assertTrue(io.getTiedostonkasittelija() == t);
     }
@@ -75,7 +78,9 @@ public class TallentajaLataajaTest {
     public void tallennaTiliPalauttaaTrueJosTallennusOnnistuu(){
         String polku = kansio.getRoot() + "/testi.txt";
         assertTrue(io.tallennaTili(new Tili("tili"), tiedosto));
-        assertTrue(new Tiedostonkasittelija(tiedosto).tiedostoOlemassa());
+        Tiedostonkasittelija uusiIO = new Tiedostonkasittelija();
+        uusiIO.setTiedosto(tiedosto);
+        assertTrue(uusiIO.tiedostoOlemassa());
     }
     
     @Test
