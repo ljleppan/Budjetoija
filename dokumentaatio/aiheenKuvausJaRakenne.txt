@@ -16,7 +16,7 @@
 | kuukausittain.
 |
 |----------------------------------------------------------------------------
-|	Käyttötapaukset (listaus)
+|	Käyttötapaukset
 |----------------------------------------------------------------------------
 | Käyttäjät: käyttäjä
 | 
@@ -37,67 +37,99 @@
 |   - tilitapahtumien tarkastelu erilaisilla aikaväleillä
 |   - tilin tietojen tarkastelu
 |
+| Tärkeimpien käyttötapausten suoritaminen on kuvattu käyttöohjeen lopussa
+| kohdassa "Yleisimmät toiminnot".
+|----------------------------------------------------------------------------
+|	Sovelluksen rakenne
+|----------------------------------------------------------------------------
+| Sovelluksessa on kolme ydinluokkaa, käyttäjän tiliä kuvaava Tili, ohjelman
+| käyttöliittymä GUI sekä ohjelman ja tiedostojärjestelmän interaktiosta
+| vastaava TallentajaLataaja.
+|
+| GUI itsessään sisältää ohjelman kättöliittymän piirtämiseen ja toimintaan
+| liittyvän koodin, jota tukee tilistä tietyn aikavälin yhteenvetoja luova
+| Yhteeveto-luokka.
+|
+| TallentajaLataaja toimii käytännössä rajapintana ja kokoavana luokkana
+| tiedostojärjestelmää käsittelevälle Tiedostonkäsittelijä-luokalle sekä
+| Konvertoija-luokalle, joka muuntaa tilin ja sen tapahtumat tallennettavaan
+| CSV-muotoon tai siitä takaisin.
+|
+| Tili on ohjelman logiikkaa kokoava luokka, joka sisältää käyttäjän
+| yksittäiset ja toistuvat tilitapahtumat, sekä metodeja niiden käsittelyyn.
+| YksittainenTilitapahtuma ja ToistuvaTilitapahtuma (jotka molemmat toteut-
+| tavat abstraktin Tilitapahtuma-luokan) ovat käyttäjän tilin tapahtumia,
+| jotka sisältävät rahasummaa kuvaavan Summa-olion, tapahtuman kuvauksen sekä
+| luokasta riippuen yksi tai kaksi Paivamaara-oliota. Paivamaara on luokkaa
+| GregorianCalendar perivä luokka, joka sisältää tiedon päivästä, kuukaudesta
+| sekä vuodesta ja toimii ohjelman käyttämänä aikaleimana.
 |----------------------------------------------------------------------------
 |	Sovelluksen luokat
 |----------------------------------------------------------------------------
 |(<paketti>.)<luokka>
 |	<luokan_kuvaus>
-|
 |----------------------------------------------------------------------------
 | budjetoija.Budjetoija
 |	Pääluokka, josta ohjelma käynnistyy.
-|
 |----------------------------------------------------------------------------
-| logiikka.Tilitapahtuma
+| budjetoija.Tilitapahtuma
+|	Abstrakti "tilitapahtuma", joka sisältää yksittäiselle ja toistuvalle
+|	tilitapahtumalle yhteisiä asioita.
+|----------------------------------------------------------------------------
+| logiikka.YksittainenTilitapahtuma
 |	Yksittäinen tilin tapahtuma, kuten otto tai pano.
-|
 |----------------------------------------------------------------------------
 | logiikka.ToistuvaTilitapahtuma
 |	Tilitapahtuma, joka toistuu kerran kuussa määritellyllä aikavälillä.
 |	Esimerkiksi vuokra, opintotuki tai kuukausipalkka.
-|
 |----------------------------------------------------------------------------
 | logiikka.Tili
 |	Tilitapahtumien listaus.
-|
 |----------------------------------------------------------------------------
 | logiikka.Summa
 |	Rahasumman roolia täyttävä luokka.
-|
 |----------------------------------------------------------------------------
 | logiikka.Paivamaara
 |	GragorianCalendarista johdettu päivämärää kuvaava luokka.
-|
 |----------------------------------------------------------------------------
 | logiikka.TilitapahtumaComparator
 |	Vertailee kahta tilitapahtumaa.
-|
 |----------------------------------------------------------------------------
 | logiikka.ToistuvaTilitapahtumaComparator
 |	Vertailee kahta toistuvaa tilitapahtumaa.
-|
 |----------------------------------------------------------------------------
 | util.Tiedostonkasittelija
 |	Tallentaa ja lataa tiedostoista csv-muotoista dataa arraylistiin.
 |	Rajapinta sovelluksen ja tiedostojärjestelmän välillä.
-|
-|
 |----------------------------------------------------------------------------
 | util.Konvertoija
 |	Konvertoi tilejä muotoon, jota tiedostonkäsittelijä ymmärtää, sekä
 | 	toisin päin.
-|
 |----------------------------------------------------------------------------
 | util.TallentajaLataaja
 |	Käyttää konvertoijaa ja tiedostonkäsittelijää tallentamaan ja lataa-
 |	maan käyttäjän tilin tiedostoon/tiedostosta.
-|
 |----------------------------------------------------------------------------
 | kayttoliittyma.GUI
 |	Ohjelman käyttöliittymä.
-|
 |----------------------------------------------------------------------------
 | kayttoliittyma.Yhteenveto
 |	Tuottaa tekstimuotoisen yhteenvedon tilistä.
+|----------------------------------------------------------------------------
+|	Ajatuksia projektin laajentamisesta
+|----------------------------------------------------------------------------
+| Sovelluksessa on muutamia selviä laajennuspotentiaalisia kohteita.
 |
+| Tärkeimpänä toistuvien tilitapahtumien laajentaminen siten, että käyttäjä
+| voi määrittää niiden toistuvuuden tiheyden. Esimerkiksi siis kvartaalei-
+| ttain, puolivuosittain, viikoittain, joka toinen viikko, tai N päivän
+| välein.
+|
+| Toinen laajennuspotentiaalinen kohde on useamman tilin yhtäaikainen
+| muokkaaminen siten, että käyttäliittymä näyttää useamman tilin eri väli-
+| lehdissä.
+|
+| Lisäksi tilistä luotavia erilaisia yhteenvetoja ja raportteja voisi
+| syventää ja laajentaa, sekä mahdollisest luoda erillinen "tulosta raportti"
+| toiminto.
 \----------------------------------------------------------------------------
