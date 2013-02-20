@@ -930,20 +930,13 @@ public class GUI extends javax.swing.JFrame implements Runnable {
         ArrayList<ToistuvaTilitapahtuma> toistuvatTapahtumat = tili.getToistuvatTilitapahtumatAjalta(alku, loppu);
         ArrayList<YksittainenTilitapahtuma> yksittaisetTapahtumat = tili.getTilitapahtumatAjalta(alku, loppu);
         
-        if (!toistuvatTapahtumat.isEmpty()){
-            tapahtumat.add("          Toistuvat tilitapahtumat");
-        }
+        tapahtumat.add("          Toistuvat tilitapahtumat");
         tapahtumat.addAll(toistuvatTapahtumat);
-        if (!toistuvatTapahtumat.isEmpty() && !yksittaisetTapahtumat.isEmpty()){
-            tapahtumat.add(" ");
-        }
-        if (!yksittaisetTapahtumat.isEmpty()){
-            tapahtumat.add("          Yksittäiset tilitapahtumat");
-        }
+        tapahtumat.add(" ");
+        tapahtumat.add("          Yksittäiset tilitapahtumat");
         tapahtumat.addAll(yksittaisetTapahtumat);
         
         listausList.setListData(tapahtumat.toArray());
-        
         paivitaYhteenveto();
     }
 
