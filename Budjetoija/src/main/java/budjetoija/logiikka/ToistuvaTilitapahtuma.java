@@ -94,8 +94,9 @@ public class ToistuvaTilitapahtuma extends Tilitapahtuma{
     }
     
     /**
-     * Muuntaa toistuvan tilitapahtuman yksittäisiksi tilitapahtumiksi yläaikarajalla.
-     * @param loppupvm  Viimeinen hyväksytty päivämäärä.
+     * Muuntaa toistuvan tilitapahtuman yksittäisiksi tilitapahtumiksi syötetyn aikavälin osalta.
+     * @param alkupvm   Aikavälin alkupäivämäärä.
+     * @param loppupvm  Aikavälin loppupäivämäärä.
      * @return ArrayList-muotoinen listaus konvertoiduista tilitapahtumista.
      */
     public ArrayList<YksittainenTilitapahtuma> konvertoiYksittaisiksiTapahtumiksi(Paivamaara alkupvm, Paivamaara loppupvm){

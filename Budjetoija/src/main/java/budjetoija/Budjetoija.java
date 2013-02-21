@@ -7,9 +7,12 @@ import budjetoija.util.TallentajaLataaja;
 /**
  * Budjetoijan main-luokka, josta ohjelma itsessään käynnistyy.
  */
-
 public class Budjetoija {
 
+    /**
+     * Ohjelman käynnistävä main-metodi.
+     * @param args Ohjelman argumentit (tyhjä).
+     */
     public static void main(String[] args) {
         Tili tili = new Tili("");        
         TallentajaLataaja io = new TallentajaLataaja();

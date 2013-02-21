@@ -142,7 +142,8 @@ public class Tili {
     
     /**
      * Palauttaa kaikkien tiettyjen päivämäärien välillä tapahtuvien tilitapahtumien listauksen.
-     * Listaus sisältää kaikki aikavälin yksittäiset tilitapahtumat sekä toistuvien tilitapahtumien aikavälin sisään jäävät kerrat yksittäisinä tilitapahtumina.
+     * Listaus sisältää kaikki aikavälin yksittäiset tilitapahtumat sekä toistuvien
+     * tilitapahtumien aikavälin sisään jäävät kerrat yksittäisinä tilitapahtumina.
      * Listaus on järjestetty tapahtumien päivämäärien mukaan.
      * @param   alkupvm     Ensimmäinen hyväksyttävä päivämäärä.
      * @param   loppupvm    Viimeinen hyväksyttävä päivämäärä.
@@ -191,7 +192,8 @@ public class Tili {
      * sijoittuvat tapahtumakerrat yksittäisiksi tilitapahtumiksi ja poistaa
      * toistuvan tilitapahtuman.
      * @param   tapahtuma   Muunnettava ja poistettava toistuva tilitapahtuma.
-     * @param   loppupvm    Päivämäärä jonka jälkeisiä toistuvan tilitapahtuman tapahtumakertoja ei kovenvertoida.
+     * @param   alkupvm     Päivämäärä jota aikaisempia tapahtumakertoja ei muunneta.
+     * @param   loppupvm    Päivämäärä jonka jälkeisiä tapahtumakertoja ei muunneta.
      * @return  Suorituksen onnistumista kuvaava boolean.
      */
     public boolean konvertoiJaPoistaToistuvaTilitapahtuma(ToistuvaTilitapahtuma tapahtuma, Paivamaara alkupvm, Paivamaara loppupvm){

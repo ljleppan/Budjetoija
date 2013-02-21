@@ -2,12 +2,17 @@ package budjetoija.logiikka;
 
 /**
  * Kuvaa yksittäistä, sellaisenaan toistumatonta tilitapahtumaa, kuten kauppakäyntiä.
- * 
  */
-
 public class YksittainenTilitapahtuma extends Tilitapahtuma {
+    /** Tilitapahtuman aikaleima. */
     private Paivamaara aikaleima;
     
+    /**
+     * Luokan konstruktori.
+     * @param kuvaus Tilitapahtuman kuvaus.
+     * @param summa Tapahtuman summa.
+     * @param aikaleima Tapahtuman aikaleima.
+     */
     public YksittainenTilitapahtuma(String kuvaus, Summa summa, Paivamaara aikaleima){
         this.kuvaus = kuvaus;
         this.summa = summa;
@@ -20,7 +25,6 @@ public class YksittainenTilitapahtuma extends Tilitapahtuma {
 
     /**
      * Asettaa tilitapahtumalle uuden aikaleiman.
-     * 
      * @param   aikaleima   tapahtuman uusi aikaleima.
      */    
     public void setAikaleima(Paivamaara aikaleima){

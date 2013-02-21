@@ -9,7 +9,7 @@ public class Summa {
     int summa;
     
     /**
-     * Luoka konstuktori.
+     * Luokan konstuktori.
      * @param summa rahamäärä sentteinä.
      */
     public Summa(int summa){
@@ -19,6 +19,7 @@ public class Summa {
     /**
      * Luokan konstruktori.
      * @param summa Rahamäärää kuvaava String.
+     * Summan täytyy olla setSummaString():n hyväksymää muotoa.".
      */
     public Summa(String summa){
         if (!setSummaString(summa)){
@@ -53,6 +54,10 @@ public class Summa {
 
     /**
      * Vaihtaa rahasumman String-muotoisena annetun syötteen mukaiseksi.
+     * Hyväksyy syötteen joka on muodoltaan jotain seuraavista:
+     * 1) [-]?[0-9]*[,][0-9]{2,}$
+     * 2) [-]?[0-9]*[,][0-9]$
+     * 3) [-]?[0-9]+[,]?$
      * @param   summa   String-muotoinen kuvaus summasta.
      */
     public boolean setSummaString(String summa){

@@ -42,7 +42,6 @@ public class Tiedostonkasittelija {
             lukija.close();
         }
         catch(IOException e){
-            System.out.println("Virhe luettaessa tiedostoa:" + e);
             return data;
         }
         return data;
@@ -69,7 +68,6 @@ public class Tiedostonkasittelija {
             return true;
         }
         catch(IOException e){
-            System.out.println("Virhe kirjoittaessa tiedostoa:" +e);
             return false;
         }
     }
@@ -84,7 +82,6 @@ public class Tiedostonkasittelija {
             return true;
         }
         catch(IOException e){
-            System.out.println("Virhe alustaessa tiedostoa:" + e);
             return false;
         }
     }

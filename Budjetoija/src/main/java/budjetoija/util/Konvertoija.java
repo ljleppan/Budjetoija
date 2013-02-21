@@ -73,8 +73,11 @@ public class Konvertoija {
      * @param csv ArrayList-muotoinen listaus csv-muotoisista stringeistä.
      * @return Palautettu tili.
      */
-    public Tili csv2tili(ArrayList<String> csv){        
+    public Tili csv2tili(ArrayList<String> csv){
         Tili tili = new Tili("");
+        if (csv.isEmpty()){
+            return tili;
+        }
         tili.setNimi(csv.get(0));
         
         for (String rivi : csv){
@@ -92,7 +95,7 @@ public class Konvertoija {
     
     /**
      * Muuntaa csv:stä johdetun string[]:n toistuvaksi tilitapahtumaksi.
-     * @param rivi  csv-rivi eroteltuna listaan.
+     * @param riviPalasina  csv-rivi eroteltuna listaan.
      * @return  Muunnettu toistuva tilitapahtuma.
      */
     public ToistuvaTilitapahtuma csv2toistuvaTilitapahtuma(String[] riviPalasina){
@@ -118,7 +121,7 @@ public class Konvertoija {
     
     /**
      * Muuntaa csv:stä johdetun string[]:n tilitapahtumaksi.
-     * @param rivi csv-rivi eroteltuna listaan.
+     * @param riviPalasina csv-rivi eroteltuna listaan.
      * @return Muunnettu tilitapahtuma.
      */
     public YksittainenTilitapahtuma csv2tilitapahtuma(String[] riviPalasina){

@@ -16,7 +16,6 @@ public class Yhteenveto {
 
     /**
      * Luokan konstruktori.
-     *
      * @param tili tili josta yhteenveto tehdään.
      * @see Tili
      */
@@ -34,7 +33,6 @@ public class Yhteenveto {
 
     /**
      * Palauttaa String-muotoisen yhteenvedon tilin tapahtumista.
-     *
      * @param alku Aikavälin alku.
      * @param loppu Aikavälin loppu.
      * @return String-muotoinen yhteenveto.
@@ -71,7 +69,6 @@ public class Yhteenveto {
 
     /**
      * Laskee tilin saldon tietyltä aikaväliltä. Palaute Summa-oliona.
-     *
      * @param alku Aikavälin alku
      * @param loppu Aikavälin loppu
      * @return Summa-muotoinen saldo
@@ -87,7 +84,6 @@ public class Yhteenveto {
 
     /**
      * Laskee tilin saldon tiettyyn päivämäärään saakka.
-     *
      * @param loppu Viimeinen päivämäärä joka otetaan huomioon.
      * @return Summa-muotoinen saldo.
      */
@@ -100,7 +96,6 @@ public class Yhteenveto {
 
     /**
      * Laskee yksittäisten tilitapahtumien saldon ennen syötettyä päivämäärää.
-     *
      * @param loppu Viimeinen mukaan otettava päivämäärä.
      * @return Int-muotoinen saldo.
      */
@@ -118,7 +113,6 @@ public class Yhteenveto {
     /**
      * Laskee toistuvien tilitapahtumien kokonaissaldon ennen syötettyä
      * päivämäärää.
-     *
      * @param loppu Viimeinen mukaan otettava päivämäärä.
      * @return Int-muotoinen saldo.
      */
