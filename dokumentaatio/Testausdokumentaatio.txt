@@ -1,0 +1,7 @@
+Ohjelmalle on varsin kattavat JUnit-testit, joilla testataan logiikka- ja util-paketteja. Molempien pakettien line-coverage on lähes 100%, poislukien muutama exception-hallinta rivi, joiden testaamista JUnitilla allekirjoittanut ei saanut toimimaan. Lisäksi Käyttöliittymän osalta JUnit-testeillä testataan Yhteenveto-luokkaa.
+
+Käyttöliittymä on testattu kattavasti syöttämällä kaikkiin kenttiin laittomia arvoja: esim. positiivisia kokonaislukuja odottaviin kenttiin kirjaimia tai negatiivisia lukuja jne.
+
+Tiedostonluku on rakennettu sikäli kestäväksi, että ohjelman ei pitäisi kaatua missään tilanteessa tiedostoa ladattaessa: tiedostossa oleva korruptoitunut data tosin jää ymmärtämättä tai tulkitaan väärin.
+
+Muutoinkin ohjelmaa on pyritty manuaalisesti rikkomaan käyttämällä sitä väärin. Myös ulkopuolinen testihenkilö on testannut ohjelmaa ohjeistuksella "yritä rikkoa se". Mitään bugeja ei kuitenkaan huomattu.
