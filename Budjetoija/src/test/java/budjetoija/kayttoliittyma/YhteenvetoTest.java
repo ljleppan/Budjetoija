@@ -132,7 +132,6 @@ public class YhteenvetoTest {
     @Test
     public void maaritaEdellisenJaksonAlkuToimiiTaydellaKuukaudella(){
         Paivamaara edellisenAlku = yv.maaritaEdellisenJaksonAlku(new Paivamaara(2013,1,1), new Paivamaara(2013,1,31));
-        System.out.println(edellisenAlku);
         assertEquals("01.01.2013", edellisenAlku.toString());
     }
     
@@ -170,7 +169,6 @@ public class YhteenvetoTest {
         
         Yhteenveto yv2 = new Yhteenveto(tili2);
         String tuloste = yv.yhteenvetoAikavalilta(new Paivamaara(2013,0,1), new Paivamaara(2013,0,15));
-        System.out.println(tuloste);
         assertEquals("Tili                   Nykyinen jakso            Edellinen jakso\n" +
                     "              01.01.2013 - 15.01.2013    17.12.2012 - 31.12.2012\n" +
                     "Alkusaldo:                       1,00                       0,00\n" +
