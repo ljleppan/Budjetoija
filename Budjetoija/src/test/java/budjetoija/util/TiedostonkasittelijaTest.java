@@ -74,11 +74,6 @@ public class TiedostonkasittelijaTest {
         assertTrue(kasittelija.tiedostoOlemassa());
     }
     
-//    @Test
-//    public void luoTiedostoPalauttaaFalseJosTiedostonLuontiEiOnnistu() throws IOException{
-//
-//    }
-    
     @Test
     public void lueTiedostoPalauttaaTyhjanJosTiedostoaEiOleOlemassa(){
         kasittelija.setTiedosto(new File("testi.txt"));
@@ -92,11 +87,6 @@ public class TiedostonkasittelijaTest {
         assertTrue(kasittelija.tallenna(testiArray));
         assertTrue(kasittelija.lue().get(0).equals("testi"));
     }
-    
-//    @Test
-//    public void lueTiedostoPalauttaaNullJosLuettaessaTapahtuuVirhe(){
-//        
-//    }
     
     @Test
     public void tallennaTiedostoLuoTiedostonJosSeEiOleJoOlemassa(){
